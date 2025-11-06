@@ -1,201 +1,307 @@
 #include "ScrumBoard.h"
 #include <iostream>
 
-ScrumBoard::ScrumBoard() {
-    sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
-    tasks.resize(4);
+ScrumBoard::ScrumBoard() 
+    : todoScrollOffset(0.0f), inProgressScrollOffset(0.0f), doneScrollOffset(0.0f),
+      maxScrollOffset(0.0f), isDragging(false), draggedColumn(-1) {
 }
 
 bool ScrumBoard::initialize() {
-    const char* fontPaths[] = {
-        "Roboto_Condensed-Regular.ttf",
-        "Roboto-Regular.ttf", 
-        "C:/Windows/Fonts/arial.ttf",
-        "C:/Windows/Fonts/tahoma.ttf",
-        nullptr
-    };
-    
-    bool fontLoaded = false;
-    for (int i = 0; fontPaths[i]; i++) {
-        if (font.loadFromFile(fontPaths[i])) {
-            fontLoaded = true;
-            std::cout << "Шрифт загружен: " << fontPaths[i] << std::endl;
-            break;
-        }
-    }
-    
-    if (!fontLoaded) {
-        std::cout << "Не удалось загрузить шрифт!" << std::endl;
+    // Загрузка шрифта
+    if (!font.loadFromFile("Roboto-Regular.ttf")) {
+        std::cerr << "Ошибка загрузки шрифта!" << std::endl;
         return false;
     }
     
-    createTitle();
-    createSections();
-    createArrows();
-    createSampleTasks();
-    waveAnimation.initialize(450, 450); // Новые координаты для волн
+    // Настройка колонок
+    setupColumn(todoColumn, 100.0f, sf::Color(173, 216, 230)); // Светло-голубой
+    setupColumn(inProgressColumn, 700.0f, sf::Color(255, 255, 224)); // Светло-желтый
+    setupColumn(doneColumn, 1300.0f, sf::Color(144, 238, 144)); // Светло-зеленый
+    
+    // Настройка текста
+    setupText(todoText, "TO DO", 100.0f);
+    setupText(inProgressText, "IN PROGRESS", 700.0f);
+    setupText(doneText, "DONE", 1300.0f);
+    
+    // Создание тестовых задач
+    tasks.clear();
+    
+    // Задачи для TO DO
+    for (int i = 0; i < 8; ++i) {
+        Task task;
+        task.initialize("Задача " + std::to_string(i+1), "Описание задачи " + std::to_string(i+1), font);
+        task.setStatus(Task::TO_DO);
+        tasks.push_back(task);
+    }
+    
+    // Задачи для IN PROGRESS
+    for (int i = 0; i < 6; ++i) {
+        Task task;
+        task.initialize("В работе " + std::to_string(i+1), "Описание в работе " + std::to_string(i+1), font);
+        task.setStatus(Task::IN_PROGRESS);
+        tasks.push_back(task);
+    }
+    
+    // Задачи для DONE
+    for (int i = 0; i < 10; ++i) {
+        Task task;
+        task.initialize("Выполнено " + std::to_string(i+1), "Описание выполненной " + std::to_string(i+1), font);
+        task.setStatus(Task::DONE);
+        tasks.push_back(task);
+    }
+    
+    updateTaskPositions();
     
     return true;
 }
 
-void ScrumBoard::createTitle() {
-    titleText.setString("Scrum Board - Управление задачами");
-    titleText.setFont(font);
-    titleText.setCharacterSize(32);
-    titleText.setFillColor(sf::Color(25, 25, 112));
-    titleText.setStyle(sf::Text::Bold);
-    titleText.setPosition(550, 20);
+void ScrumBoard::setupColumn(sf::RectangleShape& column, float x, sf::Color color) {
+    column.setSize(sf::Vector2f(500.0f, 800.0f));
+    column.setPosition(x, 150.0f);
+    column.setFillColor(color);
+    column.setOutlineThickness(2.0f);
+    column.setOutlineColor(sf::Color(200, 200, 200));
 }
 
-void ScrumBoard::createSections() {
-    // Новые нежные цвета - убрали красный и сделали все в пастельных тонах
-    sf::Color sectionColors[] = {
-        sf::Color(173, 216, 230), // Нежно-голубой
-        sf::Color(221, 160, 221), // Светло-фиолетовый (заменяем красный)
-        sf::Color(255, 218, 185), // Персиковый (заменяем зеленый)  
-        sf::Color(152, 251, 152)  // Светло-зеленый
-    };
+void ScrumBoard::setupText(sf::Text& text, const std::string& content, float x) {
+    text.setFont(font);
+    text.setString(content);
+    text.setCharacterSize(36);
+    text.setFillColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold);
     
-    sf::Color outlineColors[] = {
-        sf::Color(70, 130, 180),   // Стальной синий
-        sf::Color(186, 85, 211),   // Средний фиолетовый
-        sf::Color(210, 180, 140),  // Бронзовый
-        sf::Color(60, 179, 113)    // Морской зеленый
-    };
-    
-    for (int i = 0; i < 4; i++) {
-        // Увеличиваем размеры разделов для большого окна
-        sf::RectangleShape section;
-        section.setSize(sf::Vector2f(320, 650));
-        section.setFillColor(sectionColors[i]);
-        section.setOutlineColor(outlineColors[i]);
-        section.setOutlineThickness(4);
-        section.setPosition(80 + i * 360, 100); // Новые позиции
-        sections.push_back(section);
-        
-        // Текст названия раздела
-        sf::Text text;
-        text.setString(sectionNames[i]);
-        text.setFont(font);
-        text.setCharacterSize(24);
-        text.setFillColor(sf::Color(25, 25, 112));
-        text.setStyle(sf::Text::Bold);
-        
-        // Центрируем текст
-        sf::FloatRect textBounds = text.getLocalBounds();
-        text.setPosition(80 + i * 360 + (320 - textBounds.width) / 2, 65);
-        sectionTexts.push_back(text);
-    }
-}
-
-void ScrumBoard::createArrows() {
-    // Новые позиции стрелок для большого окна
-    for (int i = 0; i < 3; i++) {
-        arrows.push_back(Arrow(420 + i * 360, 450, true)); // Исправленные координаты
-    }
-}
-
-void ScrumBoard::createSampleTasks() {
-    // Очищаем старые задачи
-    for (int i = 0; i < 4; i++) {
-        tasks[i].clear();
-    }
-    
-    // Задачи для первого раздела "Назначено"
-    addTask("Создать дизайн интерфейса", 0);
-    addTask("Написать основной код", 0);
-    addTask("Протестировать функционал", 0);
-    addTask("Добавить анимации", 0);
-    
-    // Задачи для второго раздела "В процессе" 
-    addTask("Реализовать перетаскивание", 1);
-    addTask("Настроить цвета", 1);
-    
-    // Задачи для третьего раздела "Блокировано"
-    addTask("Исправить баги", 2);
-    addTask("Оптимизировать код", 2);
-    
-    // Задачи для четвертого раздела "Готово"
-    addTask("Создать проект", 3);
-    addTask("Настроить сборку", 3);
-}
-
-void ScrumBoard::addTask(const std::string& taskName, int section) {
-    if (section >= 0 && section < 4) {
-        float x = 100 + section * 360;
-        float y = 120 + tasks[section].size() * 80; // Больше расстояние между задачами
-        Task newTask(taskName, font, x, y);
-        tasks[section].push_back(newTask);
-    }
+    sf::FloatRect textBounds = text.getLocalBounds();
+    text.setPosition(x + 250.0f - textBounds.width / 2.0f, 80.0f);
 }
 
 void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        sf::Vector2f mousePos = sf::Vector2f(event.mouseButton.x, event.mouseButton.y);
+    // Обработка прокрутки колесиком мыши
+    if (event.type == sf::Event::MouseWheelScrolled) {
+        float mouseX = event.mouseWheelScroll.x;
+        float scrollDelta = -event.mouseWheelScroll.delta * 20.0f; // Чувствительность прокрутки
         
-        for (auto& arrow : arrows) {
-            if (arrow.bounds.contains(mousePos)) {
-                arrow.toggle();
-                
-                if (&arrow == &arrows[0]) {
-                    waveAnimation.start();
-                }
-            }
+        // Определяем, над какой колонкой находится курсор
+        if (todoColumn.getGlobalBounds().contains(mouseX, event.mouseWheelScroll.y)) {
+            todoScrollOffset += scrollDelta;
+            todoScrollOffset = std::max(0.0f, std::min(todoScrollOffset, calculateMaxScrollOffset(tasks)));
+        }
+        else if (inProgressColumn.getGlobalBounds().contains(mouseX, event.mouseWheelScroll.y)) {
+            inProgressScrollOffset += scrollDelta;
+            inProgressScrollOffset = std::max(0.0f, std::min(inProgressScrollOffset, calculateMaxScrollOffset(tasks)));
+        }
+        else if (doneColumn.getGlobalBounds().contains(mouseX, event.mouseWheelScroll.y)) {
+            doneScrollOffset += scrollDelta;
+            doneScrollOffset = std::max(0.0f, std::min(doneScrollOffset, calculateMaxScrollOffset(tasks)));
         }
         
-        for (int i = 0; i < 4; i++) {
-            for (auto& task : tasks[i]) {
-                if (task.shape.getGlobalBounds().contains(mousePos)) {
-                    task.isMoving = true;
-                }
+        updateTaskPositions();
+    }
+    
+    // Обработка перетаскивания для прокрутки
+    if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+            sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+            
+            // Проверяем, находится ли курсор в пределах какой-либо колонки
+            if (todoColumn.getGlobalBounds().contains(mousePos)) {
+                isDragging = true;
+                draggedColumn = 0;
+                dragStartPosition = mousePos;
+                dragStartScrollOffset = todoScrollOffset;
+            }
+            else if (inProgressColumn.getGlobalBounds().contains(mousePos)) {
+                isDragging = true;
+                draggedColumn = 1;
+                dragStartPosition = mousePos;
+                dragStartScrollOffset = inProgressScrollOffset;
+            }
+            else if (doneColumn.getGlobalBounds().contains(mousePos)) {
+                isDragging = true;
+                draggedColumn = 2;
+                dragStartPosition = mousePos;
+                dragStartScrollOffset = doneScrollOffset;
             }
         }
     }
     
-    if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-        for (int i = 0; i < 4; i++) {
-            for (auto& task : tasks[i]) {
-                task.isMoving = false;
-            }
+    if (event.type == sf::Event::MouseButtonReleased) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+            isDragging = false;
+            draggedColumn = -1;
         }
     }
     
     if (event.type == sf::Event::MouseMoved) {
-        for (int i = 0; i < 4; i++) {
-            for (auto& task : tasks[i]) {
-                if (task.isMoving) {
-                    task.setPosition(event.mouseMove.x - 105, event.mouseMove.y - 30);
-                }
+        if (isDragging) {
+            sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
+            float deltaY = mousePos.y - dragStartPosition.y;
+            
+            switch (draggedColumn) {
+                case 0: // TO DO
+                    todoScrollOffset = dragStartScrollOffset - deltaY;
+                    todoScrollOffset = std::max(0.0f, std::min(todoScrollOffset, calculateMaxScrollOffset(tasks)));
+                    break;
+                case 1: // IN PROGRESS
+                    inProgressScrollOffset = dragStartScrollOffset - deltaY;
+                    inProgressScrollOffset = std::max(0.0f, std::min(inProgressScrollOffset, calculateMaxScrollOffset(tasks)));
+                    break;
+                case 2: // DONE
+                    doneScrollOffset = dragStartScrollOffset - deltaY;
+                    doneScrollOffset = std::max(0.0f, std::min(doneScrollOffset, calculateMaxScrollOffset(tasks)));
+                    break;
             }
+            
+            updateTaskPositions();
         }
+    }
+    
+    // Передача событий задачам (для перетаскивания между колонками)
+    for (auto& task : tasks) {
+        task.handleEvent(event, window);
     }
 }
 
 void ScrumBoard::update(float deltaTime) {
-    waveAnimation.update(deltaTime);
+    for (auto& task : tasks) {
+        task.update(deltaTime);
+    }
 }
 
 void ScrumBoard::draw(sf::RenderWindow& window) {
-    window.draw(titleText);
+    // Рисуем колонки
+    window.draw(todoColumn);
+    window.draw(inProgressColumn);
+    window.draw(doneColumn);
     
-    for (const auto& section : sections) {
-        window.draw(section);
-    }
+    // Рисуем заголовки
+    window.draw(todoText);
+    window.draw(inProgressText);
+    window.draw(doneText);
     
-    for (const auto& text : sectionTexts) {
-        window.draw(text);
-    }
+    // Создаем область отсечения для каждой колонки
+    sf::FloatRect todoBounds = todoColumn.getGlobalBounds();
+    sf::FloatRect inProgressBounds = inProgressColumn.getGlobalBounds();
+    sf::FloatRect doneBounds = doneColumn.getGlobalBounds();
     
-    for (const auto& arrow : arrows) {
-        window.draw(arrow.shape);
-    }
+    // Рисуем задачи для TO DO с областью отсечения
+    sf::View originalView = window.getView();
     
-    for (int i = 0; i < 4; i++) {
-        for (const auto& task : tasks[i]) {
-            window.draw(task.shape);
-            window.draw(task.text);
+    sf::View todoView(sf::FloatRect(todoBounds.left, todoBounds.top, todoBounds.width, todoBounds.height));
+    todoView.setViewport(sf::FloatRect(
+        todoBounds.left / 1920.0f, 
+        todoBounds.top / 1080.0f,
+        todoBounds.width / 1920.0f, 
+        todoBounds.height / 1080.0f
+    ));
+    window.setView(todoView);
+    
+    for (const auto& task : tasks) {
+        if (task.getStatus() == Task::TO_DO) {
+            task.draw(window);
         }
     }
     
-    waveAnimation.draw(window);
+    // Рисуем задачи для IN PROGRESS с областью отсечения
+    sf::View inProgressView(sf::FloatRect(inProgressBounds.left, inProgressBounds.top, inProgressBounds.width, inProgressBounds.height));
+    inProgressView.setViewport(sf::FloatRect(
+        inProgressBounds.left / 1920.0f, 
+        inProgressBounds.top / 1080.0f,
+        inProgressBounds.width / 1920.0f, 
+        inProgressBounds.height / 1080.0f
+    ));
+    window.setView(inProgressView);
+    
+    for (const auto& task : tasks) {
+        if (task.getStatus() == Task::IN_PROGRESS) {
+            task.draw(window);
+        }
+    }
+    
+    // Рисуем задачи для DONE с областью отсечения
+    sf::View doneView(sf::FloatRect(doneBounds.left, doneBounds.top, doneBounds.width, doneBounds.height));
+    doneView.setViewport(sf::FloatRect(
+        doneBounds.left / 1920.0f, 
+        doneBounds.top / 1080.0f,
+        doneBounds.width / 1920.0f, 
+        doneBounds.height / 1080.0f
+    ));
+    window.setView(doneView);
+    
+    for (const auto& task : tasks) {
+        if (task.getStatus() == Task::DONE) {
+            task.draw(window);
+        }
+    }
+    
+    // Восстанавливаем оригинальный вид
+    window.setView(originalView);
+    
+    // Рисуем стрелки поверх всего
+    for (const auto& arrow : arrows) {
+        arrow.draw(window);
+    }
+}
+
+void ScrumBoard::updateTaskPositions() {
+    float startY = 180.0f; // Начальная позиция Y для первой задачи
+    float taskSpacing = 20.0f; // Расстояние между задачами
+    float taskHeight = 120.0f; // Высота одной задачи
+    
+    // Обновляем позиции для TO DO
+    float currentY = startY - todoScrollOffset;
+    for (auto& task : tasks) {
+        if (task.getStatus() == Task::TO_DO) {
+            task.setPosition(sf::Vector2f(120.0f, currentY));
+            currentY += taskHeight + taskSpacing;
+        }
+    }
+    
+    // Обновляем позиции для IN PROGRESS
+    currentY = startY - inProgressScrollOffset;
+    for (auto& task : tasks) {
+        if (task.getStatus() == Task::IN_PROGRESS) {
+            task.setPosition(sf::Vector2f(720.0f, currentY));
+            currentY += taskHeight + taskSpacing;
+        }
+    }
+    
+    // Обновляем позиции для DONE
+    currentY = startY - doneScrollOffset;
+    for (auto& task : tasks) {
+        if (task.getStatus() == Task::DONE) {
+            task.setPosition(sf::Vector2f(1320.0f, currentY));
+            currentY += taskHeight + taskSpacing;
+        }
+    }
+}
+
+float ScrumBoard::calculateMaxScrollOffset(const std::vector<Task>& tasksInColumn) {
+    float startY = 180.0f;
+    float taskSpacing = 20.0f;
+    float taskHeight = 120.0f;
+    float columnHeight = 800.0f;
+    
+    // Подсчитываем количество задач в каждой колонке
+    int todoCount = 0, inProgressCount = 0, doneCount = 0;
+    
+    for (const auto& task : tasks) {
+        switch (task.getStatus()) {
+            case Task::TO_DO: todoCount++; break;
+            case Task::IN_PROGRESS: inProgressCount++; break;
+            case Task::DONE: doneCount++; break;
+        }
+    }
+    
+    // Вычисляем максимальную высоту контента для каждой колонки
+    float todoContentHeight = todoCount * (taskHeight + taskSpacing) - taskSpacing;
+    float inProgressContentHeight = inProgressCount * (taskHeight + taskSpacing) - taskSpacing;
+    float doneContentHeight = doneCount * (taskHeight + taskSpacing) - taskSpacing;
+    
+    // Максимальное смещение - разница между высотой контента и высотой колонки
+    float maxTodoScroll = std::max(0.0f, todoContentHeight - columnHeight + 50.0f);
+    float maxInProgressScroll = std::max(0.0f, inProgressContentHeight - columnHeight + 50.0f);
+    float maxDoneScroll = std::max(0.0f, doneContentHeight - columnHeight + 50.0f);
+    
+    // Возвращаем максимальное значение для безопасности
+    return std::max(maxTodoScroll, std::max(maxInProgressScroll, maxDoneScroll));
 }

@@ -3,12 +3,12 @@
 WaveAnimation::WaveAnimation() : isActive(false), waveTime(0) {
     // Создаем 6 волн разного размера и цвета
     sf::Color waveColors[] = {
-        sf::Color(135, 206, 250, 150), // Светло-голубой
-        sf::Color(173, 216, 230, 120), // Голубой
-        sf::Color(176, 224, 230, 100), // Пудрово-голубой
-        sf::Color(175, 238, 238, 80),  // Бирюзовый
-        sf::Color(240, 255, 255, 60),  // Бледно-голубой
-        sf::Color(224, 255, 255, 40)   // Светло-голубой
+        sf::Color(135, 206, 250, 150),
+        sf::Color(173, 216, 230, 120),
+        sf::Color(176, 224, 230, 100),
+        sf::Color(175, 238, 238, 80),
+        sf::Color(240, 255, 255, 60),
+        sf::Color(224, 255, 255, 40)
     };
     
     for (int i = 0; i < 6; i++) {
@@ -35,7 +35,6 @@ void WaveAnimation::update(float deltaTime) {
         float scale = 1.0f + 0.15f * std::sin(waveTime * 2.0f + i * 0.8f);
         waves[i].setScale(scale, scale);
         
-        // Плавное изменение прозрачности
         sf::Color currentColor = waves[i].getOutlineColor();
         float alpha = 150 + 105 * std::sin(waveTime * 1.5f + i * 0.6f);
         currentColor.a = std::max(40, std::min(255, static_cast<int>(alpha)));

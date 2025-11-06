@@ -3,13 +3,16 @@
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    // Создаем окно во весь экран или большое окно
-    sf::RenderWindow window(sf::VideoMode(1600, 900), "Scrum Board - Управление задачами", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Scrum Board - Управление задачами", sf::Style::Default);
     
     ScrumBoard scrumBoard;
     if (!scrumBoard.initialize()) {
         return -1;
     }
+    
+    // Идеальный фон для голубых разделов - очень светлый серо-бежевый
+    sf::RectangleShape background(sf::Vector2f(1920, 1080));
+    background.setFillColor(sf::Color(245, 242, 240)); // #F5F2F0
     
     sf::Clock clock;
     
@@ -26,7 +29,10 @@ int main() {
         
         scrumBoard.update(deltaTime);
         
-        window.clear(sf::Color(240, 248, 255)); // Нежно-голубой фон
+        // Рисуем идеальный фон
+        window.draw(background);
+        
+        // Потом все остальное
         scrumBoard.draw(window);
         window.display();
     }
