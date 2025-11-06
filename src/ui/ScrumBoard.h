@@ -1,50 +1,34 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <string>
 #include "Task.h"
-#include "Arrow.h"
 
 class ScrumBoard {
-private:
-    std::vector<Task> tasks;
-    std::vector<Arrow> arrows;
-    
-    // Колонки Scrum доски
-    sf::RectangleShape todoColumn;
-    sf::RectangleShape inProgressColumn;
-    sf::RectangleShape doneColumn;
-    
-    // Заголовки колонок
-    sf::Text todoText;
-    sf::Text inProgressText;
-    sf::Text doneText;
-    
-    // Шрифт
-    sf::Font font;
-    
-    // Параметры прокрутки для каждой колонки
-    float todoScrollOffset;
-    float inProgressScrollOffset;
-    float doneScrollOffset;
-    float maxScrollOffset;
-    
-    // Переменные для перетаскивания
-    bool isDragging;
-    sf::Vector2f dragStartPosition;
-    float dragStartScrollOffset;
-    int draggedColumn; // -1: нет, 0: todo, 1: inProgress, 2: done
-    
 public:
+    std::vector<std::string> sectionNames;
+    std::vector<sf::RectangleShape> sections;
+    std::vector<sf::Text> sectionTexts;
+    std::vector<std::vector<Task>> tasks;
+    sf::Font font;
+    sf::Text titleText;
+    
+    // Для прокрутки
+    std::vector<float> scrollOffsets;
+    std::vector<bool> isDraggingScroll;
+    std::vector<sf::Vector2f> dragStartPositions;
+    int draggingTaskSection;
+    
     ScrumBoard();
     bool initialize();
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
+    void addTask(const std::string& taskName, int section);
+    void updateTaskPositions();
     
 private:
-    void setupColumn(sf::RectangleShape& column, float x, sf::Color color);
-    void setupText(sf::Text& text, const std::string& content, float x);
-    void updateTaskPositions();
-    float calculateMaxScrollOffset(const std::vector<Task>& tasksInColumn);
+    void createSections();
+    void createSampleTasks();
+    void createTitle();
 };
