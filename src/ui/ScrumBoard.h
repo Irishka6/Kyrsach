@@ -18,6 +18,7 @@ public:
     std::vector<bool> isDraggingScroll;
     std::vector<sf::Vector2f> dragStartPositions;
     int draggingTaskSection;
+    int draggingTaskIndex;
     
     ScrumBoard();
     bool initialize();

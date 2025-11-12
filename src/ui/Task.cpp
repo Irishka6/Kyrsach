@@ -21,8 +21,8 @@ void Task::updateTextPosition() {
     sf::FloatRect textBounds = text.getLocalBounds();
     sf::Vector2f shapePos = shape.getPosition();
     
-    float textX = shapePos.x + (shape.getSize().x - textBounds.width) / 2;
-    float textY = shapePos.y + (shape.getSize().y - textBounds.height) / 2 - 5;
+    float textX = shapePos.x + (380 - textBounds.width) / 2;
+    float textY = shapePos.y + (80 - textBounds.height) / 2;
     
     text.setPosition(textX, textY);
 }

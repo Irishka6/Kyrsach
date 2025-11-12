@@ -1,6 +1,11 @@
 #include "ScrumBoard.h"
 #include <iostream>
 
+const float WINDOW_WIDTH = 1920.0f;  //ширина окна
+const float WINDOW_HEIGHT = 1080.0f; //высота окна
+const float TASK_WIDTH = 380.0f;
+const float TASK_HEIGHT = 80.0f;
+
 ScrumBoard::ScrumBoard() {
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
     tasks.resize(4);
@@ -8,15 +13,14 @@ ScrumBoard::ScrumBoard() {
     isDraggingScroll.resize(4, false);
     dragStartPositions.resize(4, sf::Vector2f(0, 0));
     draggingTaskSection = -1;
+    draggingTaskIndex = -1;
 }
 
 bool ScrumBoard::initialize() {
-    if (!font.loadFromFile("Roboto-Regular.ttf")) {
+    if (!font.loadFromFile("ofont.ru_Pastry Chef.ttf")) {
         std::cout << "Не удалось загрузить шрифт Roboto-Regular.ttf!" << std::endl;
         return false;
     }
-    
-    std::cout << "Шрифт Roboto-Regular.ttf загружен успешно!" << std::endl;
     
     createTitle();
     createSections();
@@ -154,10 +158,11 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             
             // Проверяем клик по задачам
             for (int i = 0; i < 4; i++) {
-                for (auto& task : tasks[i]) {
-                    if (task.shape.getGlobalBounds().contains(mousePos)) {
-                        task.isMoving = true;
+                for (size_t j = 0; j < tasks[i].size(); j++) {
+                    if (tasks[i][j].shape.getGlobalBounds().contains(mousePos)) {
+                        tasks[i][j].isMoving = true;
                         draggingTaskSection = i;
+                        draggingTaskIndex = j;
                         return;
                     }
                 }
@@ -178,49 +183,48 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     if (event.type == sf::Event::MouseButtonReleased) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             // Обрабатываем перетаскивание задач
-            for (int i = 0; i < 4; i++) {
-                for (auto& task : tasks[i]) {
-                    if (task.isMoving) {
-                        task.isMoving = false;
-                        
-                        // Находим новую секцию для задачи
-                        sf::FloatRect taskBounds = task.shape.getGlobalBounds();
-                        sf::Vector2f taskCenter(
-                            taskBounds.left + taskBounds.width / 2,
-                            taskBounds.top + taskBounds.height / 2
-                        );
-                        
-                        for (int newSection = 0; newSection < 4; newSection++) {
-                            if (sections[newSection].getGlobalBounds().contains(taskCenter)) {
-                                if (newSection != i) {
-                                    // Перемещаем задачу в новую секцию
-                                    Task movedTask = task;
-                                    movedTask.currentSection = newSection;
-                                    movedTask.isMoving = false;
-                                    tasks[newSection].push_back(movedTask);
-                                    
-                                    // Удаляем из старой секции
-                                    for (auto it = tasks[i].begin(); it != tasks[i].end(); ++it) {
-                                        if (it->isMoving) {
-                                            tasks[i].erase(it);
-                                            break;
-                                        }
-                                    }
-                                    
-                                    // Сбрасываем прокрутку
-                                    scrollOffsets[i] = 0.0f;
-                                    scrollOffsets[newSection] = 0.0f;
-                                    
-                                    updateTaskPositions();
-                                    return;
-                                } else {
-                                    // Если вернули в ту же секцию
-                                    updateTaskPositions();
-                                }
-                            }
+            if (draggingTaskSection != -1 && draggingTaskIndex != -1) {
+                Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
+                draggedTask.isMoving = false;
+                
+                // Находим новую секцию для задачи
+                sf::FloatRect taskBounds = draggedTask.shape.getGlobalBounds();
+                sf::Vector2f taskCenter(
+                    taskBounds.left + taskBounds.width / 2,
+                    taskBounds.top + taskBounds.height / 2
+                );
+                
+                for (int newSection = 0; newSection < 4; newSection++) {
+                    if (sections[newSection].getGlobalBounds().contains(taskCenter)) {
+                        if (newSection != draggingTaskSection) {
+                            // Перемещаем задачу в новую секцию
+                            Task movedTask = draggedTask;
+                            movedTask.currentSection = newSection;
+                            movedTask.isMoving = false;
+                            tasks[newSection].push_back(movedTask);
+                            
+                            // Удаляем из старой секции
+                            tasks[draggingTaskSection].erase(tasks[draggingTaskSection].begin() + draggingTaskIndex);
+                            
+                            // Сбрасываем прокрутку
+                            scrollOffsets[draggingTaskSection] = 0.0f;
+                            scrollOffsets[newSection] = 0.0f;
+                            
+                            updateTaskPositions();
+                            break;
+                        } else {
+                            // Если вернули в ту же секцию
+                            updateTaskPositions();
                         }
                     }
                 }
+                
+                draggingTaskSection = -1;
+                draggingTaskIndex = -1;
+            }
+            
+            // Сбрасываем прокрутку
+            for (int i = 0; i < 4; i++) {
                 isDraggingScroll[i] = false;
             }
         }
@@ -229,11 +233,10 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     // Движение мыши
     if (event.type == sf::Event::MouseMoved) {
         // Перетаскивание задач
-        for (int i = 0; i < 4; i++) {
-            for (auto& task : tasks[i]) {
-                if (task.isMoving) {
-                    task.setPosition(event.mouseMove.x - 190, event.mouseMove.y - 40);
-                }
+        if (draggingTaskSection != -1 && draggingTaskIndex != -1) {
+            Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
+            if (draggedTask.isMoving) {
+                draggedTask.setPosition(event.mouseMove.x - 190, event.mouseMove.y - 40);
             }
         }
         
