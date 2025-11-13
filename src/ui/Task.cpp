@@ -4,14 +4,14 @@ Task::Task(const std::string& taskText, sf::Font& font, float x, float y)
     : description(taskText), currentSection(0), isMoving(false) {
     
     shape.setSize(sf::Vector2f(380, 80));
-    shape.setFillColor(sf::Color(255, 255, 255, 250));
+    shape.setFillColor(sf::Color(255, 255, 255)); // ÑÄÅËÀËÈ ÌÅÍÅÅ ÏĞÎÇĞÀ×ÍÛÌ (óáğàëè àëüôà-êàíàë)
     shape.setOutlineColor(sf::Color(200, 210, 220));
     shape.setOutlineThickness(2);
     shape.setPosition(x, y);
     
     text.setString(taskText);
     text.setFont(font);
-    text.setCharacterSize(16);
+    text.setCharacterSize(18); // ÓÂÅËÈ×ÈËÈ ĞÀÇÌÅĞ ØĞÈÔÒÀ Â ÇÀÄÀ×ÀÕ
     text.setFillColor(sf::Color(40, 40, 100));
     
     updateTextPosition();

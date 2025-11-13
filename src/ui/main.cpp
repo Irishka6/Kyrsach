@@ -10,7 +10,6 @@ int main() {
         return -1;
     }
     
-    // Идеальный фон для голубых разделов 
     sf::RectangleShape background(sf::Vector2f(1920, 1080));
     background.setFillColor(sf::Color(245, 242, 240)); 
     
@@ -29,10 +28,7 @@ int main() {
         
         scrumBoard.update(deltaTime);
         
-        // Рисуем идеальный фон
         window.draw(background);
-        
-        // Потом все остальное
         scrumBoard.draw(window);
         window.display();
     }
