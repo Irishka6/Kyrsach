@@ -26,7 +26,7 @@ public:
     sf::Text companyButtonText;
     bool showCompanyWindow;
     sf::RectangleShape companyWindow;
-    sf::RectangleShape dividerLine; // днаюбэре щрс ярпнйс
+    sf::RectangleShape dividerLine;
     std::vector<std::string> companies;
     std::vector<sf::RectangleShape> companyRects;
     std::vector<sf::Text> companyTexts;
