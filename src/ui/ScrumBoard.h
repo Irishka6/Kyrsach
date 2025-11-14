@@ -18,6 +18,18 @@ public:
     std::vector<bool> isDraggingScroll;
     std::vector<sf::Vector2f> dragStartPositions;
     int draggingTaskSection;
+    int draggingTaskIndex;
+    
+    // Для верхней панели и компаний
+    sf::RectangleShape topPanel;
+    sf::RectangleShape companyButton;
+    sf::Text companyButtonText;
+    bool showCompanyWindow;
+    sf::RectangleShape companyWindow;
+    sf::RectangleShape dividerLine;
+    std::vector<std::string> companies;
+    std::vector<sf::RectangleShape> companyRects;
+    std::vector<sf::Text> companyTexts;
     
     ScrumBoard();
     bool initialize();
@@ -31,4 +43,6 @@ private:
     void createSections();
     void createSampleTasks();
     void createTitle();
+    void createTopPanel();
+    void createCompanyWindow();
 };
