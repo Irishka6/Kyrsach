@@ -93,8 +93,8 @@ void ScrumBoard::createCompanyWindow() {
         sf::RectangleShape companyRect;
         companyRect.setSize(sf::Vector2f(companyWidth, companyHeight));
         companyRect.setFillColor(sf::Color(180, 210, 235));
-        companyRect.setOutlineColor(sf::Color(160, 190, 220));
-        companyRect.setOutlineThickness(1);
+        companyRect.setOutlineColor(sf::Color(100, 130, 160)); // ? ЦВЕТ ОБВОДКИ
+        companyRect.setOutlineThickness(3); // ? ТОЛЩИНА ОБВОДКИ
         companyRect.setPosition(startX + padding, startY + padding + i * companyHeight);
         companyRects.push_back(companyRect);
         
@@ -111,17 +111,6 @@ void ScrumBoard::createCompanyWindow() {
             startY + padding + i * companyHeight + (companyHeight - textBounds.height) / 2 - 3
         );
         companyTexts.push_back(companyText);
-        
-        if (i < companies.size() - 1) {
-            sf::RectangleShape dividerLine;
-            dividerLine.setSize(sf::Vector2f(companyWidth, 4));
-            dividerLine.setFillColor(sf::Color(100, 130, 160));
-            dividerLine.setPosition(
-                startX + padding,
-                startY + padding + (i + 1) * companyHeight - 2
-            );
-            dividerLines.push_back(dividerLine);
-        }
     }
 }
 
@@ -356,7 +345,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
 }
 
 void ScrumBoard::update(float deltaTime) {
-    // Логика обновления (можно оставить пустым)
 }
 
 void ScrumBoard::draw(sf::RenderWindow& window) {
@@ -400,12 +388,7 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         
         window.draw(companyWindow);
         
-        // Рисуем разделительные линии
-        for (const auto& line : dividerLines) {
-            window.draw(line);
-        }
-        
-        // Рисуем прямоугольники компаний
+        // Рисуем прямоугольники компаний С ОБВОДКОЙ
         for (const auto& rect : companyRects) {
             window.draw(rect);
         }
