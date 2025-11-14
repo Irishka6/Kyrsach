@@ -11,7 +11,7 @@ Task::Task(const std::string& taskText, sf::Font& font, float x, float y)
     
     text.setString(taskText);
     text.setFont(font);
-    text.setCharacterSize(24); 
+    text.setCharacterSize(24);
     text.setFillColor(sf::Color(40, 40, 100));
     
     updateTextPosition();
