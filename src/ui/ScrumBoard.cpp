@@ -36,7 +36,7 @@ void ScrumBoard::createTitle() {
     titleText.setCharacterSize(36);
     titleText.setFillColor(sf::Color(50, 50, 100));
     titleText.setStyle(sf::Text::Bold);
-    titleText.setPosition(800, 110);
+    titleText.setPosition(650, 110);
 }
 
 void ScrumBoard::createTopPanel() {
