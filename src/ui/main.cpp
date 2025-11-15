@@ -11,7 +11,7 @@ int main() {
     }
     
     sf::RectangleShape background(sf::Vector2f(1920, 1080));
-    background.setFillColor(sf::Color(245, 242, 240)); 
+    background.setFillColor(sf::Color(245, 242, 240));
     
     sf::Clock clock;
     

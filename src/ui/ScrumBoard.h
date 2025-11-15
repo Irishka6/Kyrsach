@@ -5,7 +5,10 @@
 #include "Task.h"
 
 class ScrumBoard {
-public:
+private:
+    const float WINDOW_WIDTH = 1920.0f;
+    const float WINDOW_HEIGHT = 1080.0f;
+    
     std::vector<std::string> sectionNames;
     std::vector<sf::RectangleShape> sections;
     std::vector<sf::Text> sectionTexts;
@@ -13,24 +16,23 @@ public:
     sf::Font font;
     sf::Text titleText;
     
-    // Для прокрутки
     std::vector<float> scrollOffsets;
     std::vector<bool> isDraggingScroll;
     std::vector<sf::Vector2f> dragStartPositions;
     int draggingTaskSection;
     int draggingTaskIndex;
     
-    // Для верхней панели и компаний
     sf::RectangleShape topPanel;
     sf::RectangleShape companyButton;
     sf::Text companyButtonText;
     bool showCompanyWindow;
     sf::RectangleShape companyWindow;
-    sf::RectangleShape dividerLine;
+    std::vector<sf::RectangleShape> dividerLines;
     std::vector<std::string> companies;
     std::vector<sf::RectangleShape> companyRects;
     std::vector<sf::Text> companyTexts;
-    
+
+public:
     ScrumBoard();
     bool initialize();
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
