@@ -3,12 +3,15 @@
 #include <vector>
 #include <string>
 #include "Task.h"
+#include "../core/Tasks.h"
 
 class ScrumBoard {
 private:
     const float WINDOW_WIDTH = 1920.0f;
     const float WINDOW_HEIGHT = 1080.0f;
+    const std::string TASKS_FILE = "../core/tasks.json";
     
+    std::vector<Tasks> tasksData;
     std::vector<std::string> sectionNames;
     std::vector<sf::RectangleShape> sections;
     std::vector<sf::Text> sectionTexts;
@@ -38,7 +41,7 @@ public:
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
-    void addTask(const std::string& taskName, int section);
+    void addTask(int id, const std::string& taskName, int section);
     void updateTaskPositions();
     
 private:
@@ -47,4 +50,6 @@ private:
     void createTitle();
     void createTopPanel();
     void createCompanyWindow();
+    void updateTaskStatusInData(int taskId, int newStatus);
+    void saveTasksData();
 };
