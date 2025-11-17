@@ -1,39 +1,67 @@
-#pragma once
+#ifndef SCRUMBOARD_H
+#define SCRUMBOARD_H
+
+#include "Task.h"
+#include "../core/Tasks.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
-#include "Task.h"
-#include "../core/Tasks.h"
 
 class ScrumBoard {
 private:
-    const float WINDOW_WIDTH = 1920.0f;
-    const float WINDOW_HEIGHT = 1080.0f;
-    const std::string TASKS_FILE = "../core/tasks.json";
-    
-    std::vector<Tasks> tasksData;
-    std::vector<std::string> sectionNames;
-    std::vector<sf::RectangleShape> sections;
-    std::vector<sf::Text> sectionTexts;
-    std::vector<std::vector<Task>> tasks;
+    // Графика и текст
     sf::Font font;
     sf::Text titleText;
     
+    // Верхняя панель управления
+    sf::RectangleShape topPanel;
+    sf::RectangleShape projectButton;
+    sf::Text projectButtonText;
+    sf::RectangleShape saveButton;
+    sf::Text saveButtonText;
+    sf::RectangleShape addButton;               // Кнопка открытия окна добавления новой задачи
+    sf::Text addButtonText;
+    
+    // Секции 4 колонки
+    std::vector<sf::RectangleShape> sections;
+    std::vector<sf::Text> sectionTexts;
+    std::vector<std::string> sectionNames;
+    
+    // Задачи по секциям
+    std::vector<std::vector<Task>> tasks;
+    
+    // Система прокрутки
     std::vector<float> scrollOffsets;
     std::vector<bool> isDraggingScroll;
     std::vector<sf::Vector2f> dragStartPositions;
+    
+    // Перетаскивание задач
     int draggingTaskSection;
     int draggingTaskIndex;
     
-    sf::RectangleShape topPanel;
-    sf::RectangleShape companyButton;
-    sf::Text companyButtonText;
-    bool showCompanyWindow;
-    sf::RectangleShape companyWindow;
-    std::vector<sf::RectangleShape> dividerLines;
-    std::vector<std::string> companies;
-    std::vector<sf::RectangleShape> companyRects;
-    std::vector<sf::Text> companyTexts;
+    // Окно проектов
+    bool showProjectWindow;
+    sf::RectangleShape projectWindow;
+    std::vector<sf::RectangleShape> projectRects;
+    std::vector<sf::Text> projectTexts;
+    std::vector<std::string> projects;
+    
+    // Окно добавления задач
+    bool showAddTaskWindow;                     // Флаг видимости окна добавления задачи
+    sf::RectangleShape addTaskWindow;           // Основное окно добавления задачи
+    sf::RectangleShape taskInputField;          // Поле ввода названия задачи
+    sf::Text taskInputText;                     // Текст в поле ввода
+    std::string currentTaskInput;               // Текущий введенный текст задачи
+    sf::Text sectionLabelText;                  // Текст "Выберите секцию"
+    std::vector<sf::RectangleShape> sectionOptionRects; // Кнопки выбора секций
+    std::vector<sf::Text> sectionOptionTexts;   // Тексты секций для выбора
+    sf::RectangleShape confirmAddButton;        // Кнопка подтверждения добавления
+    sf::Text confirmAddButtonText;              // Текст кнопки подтверждения
+    sf::RectangleShape cancelAddButton;         // Кнопка отмены добавления
+    sf::Text cancelAddButtonText;               // Текст кнопки отмены
+    
+    // Данные задач
+    std::vector<Tasks> tasksData;
 
 public:
     ScrumBoard();
@@ -41,15 +69,20 @@ public:
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
-    void addTask(int id, const std::string& taskName, int section);
-    void updateTaskPositions();
-    
+
 private:
-    void createSections();
-    void createSampleTasks();
-    void createTitle();
-    void createTopPanel();
-    void createCompanyWindow();
-    void updateTaskStatusInData(int taskId, int newStatus);
-    void saveTasksData();
+    void createTitle();                         // Создает и настраивает заголовок приложения
+    void createTopPanel();                      // Создает верхнюю панель с кнопками управления
+    void createSections();                      // Создает 4 секции для организации задач
+    void createSampleTasks();                   // Преобразует данные JSON в визуальные задачи
+    void createProjectWindow();                 // Создает всплывающее окно выбора проектов
+    void createAddTaskWindow();                 // Создает окно для добавления новой задачи
+
+    void addTask(int id, const std::string& taskName, int section); // Добавляет визуальную задачу в указанную секцию
+    void updateTaskPositions();                 // Пересчитывает позиции всех задач с учетом прокрутки
+    void updateTaskStatusInData(int taskId, int newStatus); // Обновляет статус задачи в данных при перемещении
+    void saveTasksData();                       // Сохраняет все изменения задач в JSON файл
+    void handleAddTaskInput(const sf::Event& event); // Обрабатывает ввод текста для новой задачи
+    void confirmAddTask(int selectedSection);   // Подтверждает добавление новой задачи в выбранную секцию
 };
+#endif 

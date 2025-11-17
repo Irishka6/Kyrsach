@@ -1,32 +1,26 @@
 [
     {
-        "creation_date": "2025-11-17 17:08:29",
-        "creation_date": "2025-11-17 18:12:52",
+        "creation_date": "2025-11-18 00:03:04",
         "id": 1,
         "programmer": "Vika",
         "project": "",
-        "status": 0,
-        "status": 3,
+        "status": 1,
         "title": "Implement login feature"
     },
     {
-        "creation_date": "2025-11-17 17:08:29",
-        "creation_date": "2025-11-17 18:12:52",
+        "creation_date": "2025-11-18 00:03:04",
         "id": 2,
         "programmer": "Vika",
         "project": "",
-        "status": 2,
-        "status": 3,
+        "status": 1,
         "title": "Bay cuctus"
     },
     {
-        "creation_date": "2025-11-17 17:08:29",
-        "creation_date": "2025-11-17 18:12:52",
+        "creation_date": "2025-11-18 00:03:04",
         "id": 3,
         "programmer": "Vika",
         "project": "",
-        "status": 0,
-        "status": 3,
+        "status": 1,
         "title": "nam end"
     }
 ]

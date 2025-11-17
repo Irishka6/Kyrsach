@@ -86,4 +86,4 @@ public:
     }
 };
 
-#endif // SCRUMBOARD_H
+#endif

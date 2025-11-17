@@ -4,6 +4,14 @@
 #include <iostream>
 #include <algorithm>
 
+// Путь к JSON файлу в папке core
+const std::string TASKS_JSON_PATH = "../core/tasks.json";
+
+// Константы окна
+const int WINDOW_WIDTH = 1920;
+const int WINDOW_HEIGHT = 1080;
+
+// Конструктор класса ScrumBoard - инициализирует все компоненты доски
 ScrumBoard::ScrumBoard() {
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
     tasks.resize(4);
@@ -12,15 +20,18 @@ ScrumBoard::ScrumBoard() {
     dragStartPositions.resize(4, sf::Vector2f(0, 0));
     draggingTaskSection = -1;
     draggingTaskIndex = -1;
-    showCompanyWindow = false;
+    showProjectWindow = false;  
+    showAddTaskWindow = false;  // Изначально окно добавления скрыто
+    currentTaskInput = "";      // Изначально поле ввода пустое
     
-    companies = {"Компания A", "Компания Б", "Компания С", "Компания Д"};
+    projects = {"Проект 1", "Проект 2", "Проект 3", "Проект 4", "Проект 5"};  
     
-    // Загружаем задачи из JSON
-    tasksData = getTasksFromJson(TASKS_FILE);
+    // Загружаем задачи из JSON в папке core
+    tasksData = getTasksFromJson(TASKS_JSON_PATH);
     std::cout << "Загружено задач: " << tasksData.size() << std::endl;
 }
 
+// Инициализирует ресурсы и создает интерфейс
 bool ScrumBoard::initialize() {
     if (!font.loadFromFile("ofont.ru_Pastry Chef.ttf")) {
         std::cout << "Не удалось загрузить шрифт!" << std::endl;
@@ -31,11 +42,13 @@ bool ScrumBoard::initialize() {
     createTopPanel();
     createSections();
     createSampleTasks();
-    createCompanyWindow();
+    createProjectWindow(); 
+    createAddTaskWindow(); // Создаем окно добавления задачи
     
     return true;
 }
 
+// Создает заголовок приложения
 void ScrumBoard::createTitle() {
     titleText.setString("Scrum Board - Управление задачами");
     titleText.setFont(font);
@@ -45,6 +58,7 @@ void ScrumBoard::createTitle() {
     titleText.setPosition(650, 110);
 }
 
+// Создает верхнюю панель с кнопками "Проекты", "Добавить" и "Сохранить"
 void ScrumBoard::createTopPanel() {
     // Панель
     topPanel.setSize(sf::Vector2f(1920, 60));
@@ -52,74 +66,229 @@ void ScrumBoard::createTopPanel() {
     topPanel.setOutlineThickness(0);
     topPanel.setPosition(0, 20);
 
-    // Кнопка компаний
-    companyButton.setSize(sf::Vector2f(200, 40));
-    companyButton.setFillColor(sf::Color(180, 210, 235));
-    companyButton.setOutlineThickness(0);
-    companyButton.setPosition(150, 30);
+    // Кнопка проектов
+    projectButton.setSize(sf::Vector2f(200, 40));
+    projectButton.setFillColor(sf::Color(180, 210, 235));
+    projectButton.setOutlineThickness(0);
+    projectButton.setPosition(150, 30);
 
-    // Текст кнопки
-    companyButtonText.setString("Компании");
-    companyButtonText.setFont(font);
-    companyButtonText.setCharacterSize(24);
-    companyButtonText.setFillColor(sf::Color(50, 50, 80));
-    companyButtonText.setStyle(sf::Text::Bold);
+    // Текст кнопки проектов
+    projectButtonText.setString("Проекты"); 
+    projectButtonText.setFont(font);
+    projectButtonText.setCharacterSize(24);
+    projectButtonText.setFillColor(sf::Color(50, 50, 80));
+    projectButtonText.setStyle(sf::Text::Bold);
     
-    // Центрирование текста
-    sf::FloatRect textBounds = companyButtonText.getLocalBounds();
-    companyButtonText.setPosition(
-        150 + (200 - textBounds.width) / 2,
-        30 + (40 - textBounds.height) / 2 - 5
+    // Центрирование текста кнопки проектов
+    sf::FloatRect projectTextBounds = projectButtonText.getLocalBounds(); 
+    projectButtonText.setPosition(
+        150 + (200 - projectTextBounds.width) / 2,
+        30 + (40 - projectTextBounds.height) / 2 - 5
+    );
+
+    // Кнопка добавления новой задачи
+    addButton.setSize(sf::Vector2f(200, 40));
+    addButton.setFillColor(sf::Color(180, 210, 235));
+    addButton.setOutlineThickness(0);
+    addButton.setPosition(400, 30); // Располагаем между кнопкой проектов и сохранения
+
+    // Текст кнопки добавления
+    addButtonText.setString("Добавить");
+    addButtonText.setFont(font);
+    addButtonText.setCharacterSize(24);
+    addButtonText.setFillColor(sf::Color(50, 50, 80));
+    addButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста кнопки добавления
+    sf::FloatRect addTextBounds = addButtonText.getLocalBounds();
+    addButtonText.setPosition(
+        400 + (200 - addTextBounds.width) / 2,
+        30 + (40 - addTextBounds.height) / 2 - 5
+    );
+
+    // Кнопка сохранения
+    saveButton.setSize(sf::Vector2f(200, 40));
+    saveButton.setFillColor(sf::Color(180, 210, 235));
+    saveButton.setOutlineThickness(0);
+    saveButton.setPosition(1570, 30); 
+
+    // Текст кнопки сохранения
+    saveButtonText.setString("Сохранить");
+    saveButtonText.setFont(font);
+    saveButtonText.setCharacterSize(24);
+    saveButtonText.setFillColor(sf::Color(50, 50, 80));
+    saveButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста кнопки сохранения
+    sf::FloatRect saveTextBounds = saveButtonText.getLocalBounds();
+    saveButtonText.setPosition(
+        1570 + (200 - saveTextBounds.width) / 2,
+        30 + (40 - saveTextBounds.height) / 2 - 5
     );
 }
 
-void ScrumBoard::createCompanyWindow() {
-    float companyHeight = 55.0f;
+// Создает окно выбора проектов
+void ScrumBoard::createProjectWindow() { 
+    float projectHeight = 55.0f;
     float padding = 15.0f;
     
     float windowWidth = 380.0f;
-    float windowHeight = companyHeight * companies.size() + padding * 2;
+    float windowHeight = projectHeight * projects.size() + padding * 2; 
     
     float startX = (WINDOW_WIDTH - windowWidth) / 2;
     float startY = (WINDOW_HEIGHT - windowHeight) / 2;
     
-    companyWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
-    companyWindow.setFillColor(sf::Color(180, 210, 235));
-    companyWindow.setOutlineColor(sf::Color(160, 190, 220));
-    companyWindow.setOutlineThickness(3);
-    companyWindow.setPosition(startX, startY);
+    projectWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
+    projectWindow.setFillColor(sf::Color(180, 210, 235));
+    projectWindow.setOutlineColor(sf::Color(160, 190, 220));
+    projectWindow.setOutlineThickness(3);
+    projectWindow.setPosition(startX, startY);
     
-    companyRects.clear();
-    companyTexts.clear();
-    dividerLines.clear();
+    projectRects.clear(); 
+    projectTexts.clear(); 
     
-    float companyWidth = windowWidth - padding * 2;
+    float projectWidth = windowWidth - padding * 2; 
     
-    for (size_t i = 0; i < companies.size(); i++) {
-        sf::RectangleShape companyRect;
-        companyRect.setSize(sf::Vector2f(companyWidth, companyHeight));
-        companyRect.setFillColor(sf::Color(180, 210, 235));
-        companyRect.setOutlineColor(sf::Color(100, 130, 160));
-        companyRect.setOutlineThickness(3);
-        companyRect.setPosition(startX + padding, startY + padding + i * companyHeight);
-        companyRects.push_back(companyRect);
+    for (size_t i = 0; i < projects.size(); i++) { 
+        sf::RectangleShape projectRect; 
+        projectRect.setSize(sf::Vector2f(projectWidth, projectHeight));
+        projectRect.setFillColor(sf::Color(180, 210, 235));
+        projectRect.setOutlineColor(sf::Color(100, 130, 160));
+        projectRect.setOutlineThickness(3);
+        projectRect.setPosition(startX + padding, startY + padding + i * projectHeight);
+        projectRects.push_back(projectRect);
         
-        sf::Text companyText;
-        companyText.setString(companies[i]);
-        companyText.setFont(font);
-        companyText.setCharacterSize(24);
-        companyText.setFillColor(sf::Color(50, 50, 80));
-        companyText.setStyle(sf::Text::Bold);
+        sf::Text projectText;
+        projectText.setString(projects[i]);
+        projectText.setFont(font);
+        projectText.setCharacterSize(24);
+        projectText.setFillColor(sf::Color(50, 50, 80));
+        projectText.setStyle(sf::Text::Bold);
         
-        sf::FloatRect textBounds = companyText.getLocalBounds();
-        companyText.setPosition(
-            startX + padding + (companyWidth - textBounds.width) / 2,
-            startY + padding + i * companyHeight + (companyHeight - textBounds.height) / 2 - 3
+        sf::FloatRect textBounds = projectText.getLocalBounds();
+        projectText.setPosition(
+            startX + padding + (projectWidth - textBounds.width) / 2,
+            startY + padding + i * projectHeight + (projectHeight - textBounds.height) / 2 - 3
         );
-        companyTexts.push_back(companyText);
+        projectTexts.push_back(projectText); 
     }
 }
 
+// Создает окно добавления новой задачи
+void ScrumBoard::createAddTaskWindow() {
+    float windowWidth = 500.0f;
+    float windowHeight = 400.0f;
+    float padding = 20.0f;
+    
+    float startX = (WINDOW_WIDTH - windowWidth) / 2;
+    float startY = (WINDOW_HEIGHT - windowHeight) / 2;
+    
+    // Основное окно
+    addTaskWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
+    addTaskWindow.setFillColor(sf::Color(180, 210, 235));
+    addTaskWindow.setOutlineColor(sf::Color(160, 190, 220));
+    addTaskWindow.setOutlineThickness(3);
+    addTaskWindow.setPosition(startX, startY);
+    
+    // Поле ввода названия задачи
+    taskInputField.setSize(sf::Vector2f(windowWidth - padding * 2, 50.0f));
+    taskInputField.setFillColor(sf::Color::White);
+    taskInputField.setOutlineColor(sf::Color(100, 130, 160));
+    taskInputField.setOutlineThickness(2);
+    taskInputField.setPosition(startX + padding, startY + padding);
+    
+    // Текст в поле ввода
+    taskInputText.setString("Введите название задачи...");
+    taskInputText.setFont(font);
+    taskInputText.setCharacterSize(20);
+    taskInputText.setFillColor(sf::Color(150, 150, 150)); // Серый цвет для placeholder
+    taskInputText.setPosition(startX + padding + 10, startY + padding + 15);
+    
+    // Текст "Выберите секцию:"
+    sectionLabelText.setString("Выберите секцию:");
+    sectionLabelText.setFont(font);
+    sectionLabelText.setCharacterSize(22);
+    sectionLabelText.setFillColor(sf::Color(50, 50, 80));
+    sectionLabelText.setStyle(sf::Text::Bold);
+    sectionLabelText.setPosition(startX + padding, startY + padding + 80);
+    
+    // Кнопки выбора секции
+    float sectionButtonWidth = (windowWidth - padding * 3) / 2;
+    float sectionButtonHeight = 50.0f;
+    
+    sectionOptionRects.clear();
+    sectionOptionTexts.clear();
+    
+    for (int i = 0; i < 4; i++) {
+        int row = i / 2;
+        int col = i % 2;
+        
+        sf::RectangleShape sectionRect;
+        sectionRect.setSize(sf::Vector2f(sectionButtonWidth, sectionButtonHeight));
+        sectionRect.setFillColor(sf::Color(200, 220, 240));
+        sectionRect.setOutlineColor(sf::Color(100, 130, 160));
+        sectionRect.setOutlineThickness(2);
+        sectionRect.setPosition(
+            startX + padding + col * (sectionButtonWidth + padding),
+            startY + padding + 120 + row * (sectionButtonHeight + padding)
+        );
+        sectionOptionRects.push_back(sectionRect);
+        
+        sf::Text sectionText;
+        sectionText.setString(sectionNames[i]);
+        sectionText.setFont(font);
+        sectionText.setCharacterSize(18);
+        sectionText.setFillColor(sf::Color(50, 50, 80));
+        sectionText.setStyle(sf::Text::Bold);
+        
+        sf::FloatRect textBounds = sectionText.getLocalBounds();
+        sectionText.setPosition(
+            startX + padding + col * (sectionButtonWidth + padding) + (sectionButtonWidth - textBounds.width) / 2,
+            startY + padding + 120 + row * (sectionButtonHeight + padding) + (sectionButtonHeight - textBounds.height) / 2 - 3
+        );
+        sectionOptionTexts.push_back(sectionText);
+    }
+    
+    // Кнопка подтверждения добавления
+    confirmAddButton.setSize(sf::Vector2f(150, 40));
+    confirmAddButton.setFillColor(sf::Color(120, 180, 120)); // Зеленый цвет
+    confirmAddButton.setOutlineColor(sf::Color(80, 140, 80));
+    confirmAddButton.setOutlineThickness(2);
+    confirmAddButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
+    
+    confirmAddButtonText.setString("Добавить");
+    confirmAddButtonText.setFont(font);
+    confirmAddButtonText.setCharacterSize(20);
+    confirmAddButtonText.setFillColor(sf::Color::White);
+    confirmAddButtonText.setStyle(sf::Text::Bold);
+    
+    sf::FloatRect confirmTextBounds = confirmAddButtonText.getLocalBounds();
+    confirmAddButtonText.setPosition(
+        startX + padding + (150 - confirmTextBounds.width) / 2,
+        startY + windowHeight - padding - 50 + (40 - confirmTextBounds.height) / 2 - 3
+    );
+    
+    // Кнопка отмены
+    cancelAddButton.setSize(sf::Vector2f(150, 40));
+    cancelAddButton.setFillColor(sf::Color(180, 120, 120)); // Красный цвет
+    cancelAddButton.setOutlineColor(sf::Color(140, 80, 80));
+    cancelAddButton.setOutlineThickness(2);
+    cancelAddButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
+    
+    cancelAddButtonText.setString("Отмена");
+    cancelAddButtonText.setFont(font);
+    cancelAddButtonText.setCharacterSize(20);
+    cancelAddButtonText.setFillColor(sf::Color::White);
+    cancelAddButtonText.setStyle(sf::Text::Bold);
+    
+    sf::FloatRect cancelTextBounds = cancelAddButtonText.getLocalBounds();
+    cancelAddButtonText.setPosition(
+        startX + windowWidth - padding - 150 + (150 - cancelTextBounds.width) / 2,
+        startY + windowHeight - padding - 50 + (40 - cancelTextBounds.height) / 2 - 3
+    );
+}
+
+// Создает секции для задач
 void ScrumBoard::createSections() {
     sf::Color sectionColors[] = {
         sf::Color(180, 210, 235),
@@ -157,24 +326,21 @@ void ScrumBoard::createSections() {
     }
 }
 
+// Создает визуальные задачи из загруженных данных JSON
 void ScrumBoard::createSampleTasks() {
     // Очищаем визуальные задачи
     for (int i = 0; i < 4; i++) {
         tasks[i].clear();
     }
-
-    std::cout << "Создание визуальных задач из данных..." << std::endl;
     
     // Создаем визуальные задачи из данных
     for (const auto& task : tasksData){
-        std::cout << "Добавляем задачу: '" << task.getTitle() 
-                  << "' в секцию " << task.getStatus() << std::endl;
         addTask(task.getId(), task.getTitle(), task.getStatus());
     }
-    
     updateTaskPositions();
 }
 
+// Добавляет задачу в указанную секцию
 void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
     if (section >= 0 && section < 4) {
         float totalWidth = 1820.0f;
@@ -189,33 +355,43 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         Task newTask(id, taskName, font, x, y);
         newTask.currentSection = section;
         newTask.shape.setSize(sf::Vector2f(taskWidth, 85));
+        
+        newTask.text.setCharacterSize(24);
+        newTask.text.setStyle(sf::Text::Bold);
+        
+        std::string displayText = taskName;
+        if (displayText.length() > 30) {
+            displayText = displayText.substr(0, 27) + "...";
+        }
+        newTask.text.setString(displayText);
+        
+        // Центрируем текст в задаче
+        sf::FloatRect textBounds = newTask.text.getLocalBounds();
+        newTask.text.setPosition(
+            x + (taskWidth - textBounds.width) / 2,
+            y + (85 - textBounds.height) / 2 - 5
+        );
+        
         tasks[section].push_back(newTask);
     }
 }
 
+// Обновляет статус задачи в данных при перемещении между секциями
 void ScrumBoard::updateTaskStatusInData(int taskId, int newStatus) {
-    std::cout << "ОБНОВЛЕНИЕ СТАТУСА: получен ID=" << taskId << ", новый статус=" << newStatus << std::endl;
-    
-    // ВРЕМЕННОЕ РЕШЕНИЕ: обновляем все задачи по названию
-    std::cout << "Обновляем все задачи в данных:" << std::endl;
-    
     for (auto& task : tasksData) {
-        std::cout << task.getId() << " " << taskId << std::endl;
         if (task.getId() == taskId){
             int oldStatus = task.getStatus();
             task.changeStatus(newStatus);
-            std::cout << "  ? '" << task.getTitle() 
-                    << "' (ID=" << task.getId() 
-                    << ") статус изменен с " << oldStatus << " на " << newStatus << std::endl;
         }
     }
 }
 
+// Сохраняет все задачи в JSON файл
 void ScrumBoard::saveTasksData() {
-    std::cout << "Сохранение данных..." << std::endl;
-    saveTasksToJson(tasksData, TASKS_FILE);
+    saveTasksToJson(tasksData, TASKS_JSON_PATH);
 }
 
+// Обновляет позиции всех задач на доске
 void ScrumBoard::updateTaskPositions() {
     float totalWidth = 1820.0f;
     float sectionWidth = (totalWidth - 120.0f) / 4.0f;
@@ -231,33 +407,167 @@ void ScrumBoard::updateTaskPositions() {
             float y = startY + i * 95 - scrollOffsets[section];
             tasks[section][i].setPosition(x, y);
             tasks[section][i].shape.setSize(sf::Vector2f(taskWidth, 85));
+            
+            // Обновляем позицию текста с центрированием
+            sf::FloatRect textBounds = tasks[section][i].text.getLocalBounds();
+            tasks[section][i].text.setPosition(
+                x + (taskWidth - textBounds.width) / 2,
+                y + (85 - textBounds.height) / 2 - 5
+            );
         }
     }
 }
 
+// Обрабатывает ввод текста для новой задачи
+void ScrumBoard::handleAddTaskInput(const sf::Event& event) {
+    if (event.type == sf::Event::TextEntered) {
+        // Обрабатываем только печатные символы
+        if (event.text.unicode < 128) {
+            char c = static_cast<char>(event.text.unicode);
+            
+            // Backspace
+            if (event.text.unicode == 8) { // Backspace
+                if (!currentTaskInput.empty()) {
+                    currentTaskInput.pop_back();
+                }
+            }
+            // Enter - игнорируем, так как у нас есть кнопка подтверждения
+            else if (event.text.unicode == 13) { // Enter
+                // Можно добавить функционал подтверждения по Enter
+            }
+            // Обычные символы
+            else if (c >= 32 && c <= 126) { // Печатные символы
+                currentTaskInput += c;
+            }
+            
+            // Обновляем отображаемый текст
+            if (currentTaskInput.empty()) {
+                taskInputText.setString("Введите название задачи...");
+                taskInputText.setFillColor(sf::Color(150, 150, 150));
+            } else {
+                taskInputText.setString(currentTaskInput);
+                taskInputText.setFillColor(sf::Color(50, 50, 80));
+            }
+        }
+    }
+}
+
+// Подтверждает добавление новой задачи в выбранную секцию
+void ScrumBoard::confirmAddTask(int selectedSection) {
+    if (!currentTaskInput.empty() && selectedSection >= 0 && selectedSection < 4) {
+        // Генерируем новый ID (максимальный существующий ID + 1)
+        int newId = 1;
+        for (const auto& task : tasksData) {
+            if (task.getId() >= newId) {
+                newId = task.getId() + 1;
+            }
+        }
+        
+        // Создаем новую задачу
+        Tasks newTask(newId, currentTaskInput, "Пользователь", "", selectedSection);
+        tasksData.push_back(newTask);
+        
+        // Добавляем визуальную задачу
+        addTask(newId, currentTaskInput, selectedSection);
+        
+        // Сохраняем в JSON
+        saveTasksData();
+        
+        // Сбрасываем состояние
+        currentTaskInput = "";
+        taskInputText.setString("Введите название задачи...");
+        taskInputText.setFillColor(sf::Color(150, 150, 150));
+        showAddTaskWindow = false;
+        
+        std::cout << "Добавлена новая задача: '" << newTask.getTitle() 
+                  << "' в секцию " << selectedSection << std::endl;
+    }
+}
+
+// Обрабатывает все события ввода (мышь и клавиатура)
 void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
+    // Обработка ввода текста для новой задачи
+    if (showAddTaskWindow) {
+        handleAddTaskInput(event);
+    }
+    
     if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
             
-            // Обработка клика по кнопке компаний
-            if (companyButton.getGlobalBounds().contains(mousePos)) {
-                showCompanyWindow = !showCompanyWindow;
+            // Обработка клика по кнопке проектов
+            if (projectButton.getGlobalBounds().contains(mousePos)) {
+                showProjectWindow = !showProjectWindow; 
                 return;
             }
             
-            // Обработка выбора компании
-            if (showCompanyWindow) {
-                for (size_t i = 0; i < companyRects.size(); i++) {
-                    if (companyRects[i].getGlobalBounds().contains(mousePos)) {
-                        std::cout << "Выбрана компания: " << companies[i] << std::endl;
-                        showCompanyWindow = false;
+            // Обработка клика по кнопке добавления задачи
+            if (addButton.getGlobalBounds().contains(mousePos)) {
+                showAddTaskWindow = !showAddTaskWindow;
+                if (showAddTaskWindow) {
+                    // Сбрасываем ввод при открытии окна
+                    currentTaskInput = "";
+                    taskInputText.setString("Введите название задачи...");
+                    taskInputText.setFillColor(sf::Color(150, 150, 150));
+                }
+                return;
+            }
+            
+            // Обработка клика по кнопке сохранения
+            if (saveButton.getGlobalBounds().contains(mousePos)) {
+                saveTasksData();
+                std::cout << "Данные сохранены!" << std::endl;
+                return;
+            }
+            
+            // Обработка выбора проекта
+            if (showProjectWindow) { 
+                for (size_t i = 0; i < projectRects.size(); i++) {
+                    if (projectRects[i].getGlobalBounds().contains(mousePos)) {
+                        std::cout << "Выбран проект: " << projects[i] << std::endl;
+                        showProjectWindow = false;
                         return;
                     }
                 }
-                if (!companyWindow.getGlobalBounds().contains(mousePos)) {
-                    showCompanyWindow = false;
+                if (!projectWindow.getGlobalBounds().contains(mousePos)) {
+                    showProjectWindow = false;
                 }
+            }
+            
+            // Обработка окна добавления задачи
+            if (showAddTaskWindow) {
+                // Проверяем клик по кнопкам секций
+                for (int i = 0; i < 4; i++) {
+                    if (sectionOptionRects[i].getGlobalBounds().contains(mousePos)) {
+                        confirmAddTask(i); // Подтверждаем добавление с выбранной секцией
+                        return;
+                    }
+                }
+                
+                // Проверяем клик по кнопке подтверждения
+                if (confirmAddButton.getGlobalBounds().contains(mousePos)) {
+                    // Если кнопка подтверждения нажата, добавляем в первую секцию по умолчанию
+                    confirmAddTask(0);
+                    return;
+                }
+                
+                // Проверяем клик по кнопке отмены
+                if (cancelAddButton.getGlobalBounds().contains(mousePos)) {
+                    showAddTaskWindow = false;
+                    currentTaskInput = "";
+                    taskInputText.setString("Введите название задачи...");
+                    taskInputText.setFillColor(sf::Color(150, 150, 150));
+                    return;
+                }
+                
+                // Если клик вне окна добавления - закрываем его
+                if (!addTaskWindow.getGlobalBounds().contains(mousePos)) {
+                    showAddTaskWindow = false;
+                    currentTaskInput = "";
+                    taskInputText.setString("Введите название задачи...");
+                    taskInputText.setFillColor(sf::Color(150, 150, 150));
+                }
+                return;
             }
             
             // Обработка начала перетаскивания задачи
@@ -267,8 +577,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         tasks[i][j].isMoving = true;
                         draggingTaskSection = i;
                         draggingTaskIndex = j;
-                        std::cout << "Начато перемещение: '" << tasks[i][j].text.getString().toAnsiString() 
-                                  << "' из секции " << i << std::endl;
                         return;
                     }
                 }
@@ -285,7 +593,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
         }
     }
     
-    // Обработка прокрутки колесиком
+    // Обработка прокрутки колесиком мыши
     if (event.type == sf::Event::MouseWheelScrolled) {
         float mouseX = event.mouseWheelScroll.x;
         
@@ -330,8 +638,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             // Удаляем из старой секции
                             tasks[draggingTaskSection].erase(tasks[draggingTaskSection].begin() + draggingTaskIndex);
                             
-                            // ОБНОВЛЯЕМ СТАТУС В ДАННЫХ
-                            
                             // Сохраняем изменения
                             saveTasksData();
                             
@@ -344,7 +650,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             updateTaskPositions();
                             break;
                         } else {
-                            // Задача осталась в той же секции
                             updateTaskPositions();
                         }
                     }
@@ -388,15 +693,19 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
 }
 
 void ScrumBoard::update(float deltaTime) {
-    // Логика обновления (если нужна)
 }
 
+// Отрисовывает все компоненты доски
 void ScrumBoard::draw(sf::RenderWindow& window) {
     window.draw(titleText);
     
     window.draw(topPanel);
-    window.draw(companyButton);
-    window.draw(companyButtonText);
+    window.draw(projectButton);      
+    window.draw(projectButtonText);  
+    window.draw(addButton);           // Рисуем кнопку "Добавить"
+    window.draw(addButtonText);       // Рисуем текст кнопки "Добавить"
+    window.draw(saveButton);
+    window.draw(saveButtonText);
     
     // Рисуем секции
     for (const auto& section : sections) {
@@ -423,23 +732,50 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         }
     }
     
-    // Рисуем окно компаний
-    if (showCompanyWindow) {
+    // Рисуем окно проектов
+    if (showProjectWindow) { 
         // Затемняем фон
         sf::RectangleShape overlay(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
         overlay.setFillColor(sf::Color(0, 0, 0, 150));
         window.draw(overlay);
         
-        window.draw(companyWindow);
+        window.draw(projectWindow); 
         
-        // Рисуем прямоугольники компаний
-        for (const auto& rect : companyRects) {
+        // Рисуем прямоугольники проектов
+        for (const auto& rect : projectRects) {  
             window.draw(rect);
         }
         
-        // Рисуем текст компаний
-        for (const auto& text : companyTexts) {
+        // Рисуем текст проектов
+        for (const auto& text : projectTexts) {  
             window.draw(text);
         }
+    }
+    
+    // Рисуем окно добавления задачи
+    if (showAddTaskWindow) {
+        // Затемняем фон
+        sf::RectangleShape overlay(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+        overlay.setFillColor(sf::Color(0, 0, 0, 150));
+        window.draw(overlay);
+        
+        window.draw(addTaskWindow);
+        window.draw(taskInputField);
+        window.draw(taskInputText);
+        window.draw(sectionLabelText);
+        
+        // Рисуем кнопки выбора секции
+        for (const auto& rect : sectionOptionRects) {
+            window.draw(rect);
+        }
+        for (const auto& text : sectionOptionTexts) {
+            window.draw(text);
+        }
+        
+        // Рисуем кнопки подтверждения и отмены
+        window.draw(confirmAddButton);
+        window.draw(confirmAddButtonText);
+        window.draw(cancelAddButton);
+        window.draw(cancelAddButtonText);
     }
 }
