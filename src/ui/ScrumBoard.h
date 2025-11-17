@@ -30,11 +30,6 @@ private:
     // Задачи по секциям
     std::vector<std::vector<Task>> tasks;
     
-    // Система прокрутки
-    std::vector<float> scrollOffsets;
-    std::vector<bool> isDraggingScroll;
-    std::vector<sf::Vector2f> dragStartPositions;
-    
     // Перетаскивание задач
     int draggingTaskSection;
     int draggingTaskIndex;
@@ -48,6 +43,7 @@ private:
     
     // Окно добавления задач
     bool showAddTaskWindow;                     // Флаг видимости окна добавления задачи
+    bool isTaskInputActive;                     // Флаг активности поля ввода
     sf::RectangleShape addTaskWindow;           // Основное окно добавления задачи
     sf::RectangleShape taskInputField;          // Поле ввода названия задачи
     sf::Text taskInputText;                     // Текст в поле ввода
@@ -79,10 +75,10 @@ private:
     void createAddTaskWindow();                 // Создает окно для добавления новой задачи
 
     void addTask(int id, const std::string& taskName, int section); // Добавляет визуальную задачу в указанную секцию
-    void updateTaskPositions();                 // Пересчитывает позиции всех задач с учетом прокрутки
+    void updateTaskPositions();                 // Пересчитывает позиции всех задач
     void updateTaskStatusInData(int taskId, int newStatus); // Обновляет статус задачи в данных при перемещении
     void saveTasksData();                       // Сохраняет все изменения задач в JSON файл
     void handleAddTaskInput(const sf::Event& event); // Обрабатывает ввод текста для новой задачи
     void confirmAddTask(int selectedSection);   // Подтверждает добавление новой задачи в выбранную секцию
 };
-#endif 
+#endif

@@ -11,18 +11,15 @@ const std::string TASKS_JSON_PATH = "../core/tasks.json";
 const int WINDOW_WIDTH = 1920;
 const int WINDOW_HEIGHT = 1080;
 
-// Конструктор класса ScrumBoard - инициализирует все компоненты доски
 ScrumBoard::ScrumBoard() {
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
     tasks.resize(4);
-    scrollOffsets.resize(4, 0.0f);
-    isDraggingScroll.resize(4, false);
-    dragStartPositions.resize(4, sf::Vector2f(0, 0));
     draggingTaskSection = -1;
     draggingTaskIndex = -1;
     showProjectWindow = false;  
-    showAddTaskWindow = false;  // Изначально окно добавления скрыто
-    currentTaskInput = "";      // Изначально поле ввода пустое
+    showAddTaskWindow = false;
+    currentTaskInput = "";
+    isTaskInputActive = false;
     
     projects = {"Проект 1", "Проект 2", "Проект 3", "Проект 4", "Проект 5"};  
     
@@ -43,7 +40,7 @@ bool ScrumBoard::initialize() {
     createSections();
     createSampleTasks();
     createProjectWindow(); 
-    createAddTaskWindow(); // Создаем окно добавления задачи
+    createAddTaskWindow();
     
     return true;
 }
@@ -58,7 +55,7 @@ void ScrumBoard::createTitle() {
     titleText.setPosition(650, 110);
 }
 
-// Создает верхнюю панель с кнопками "Проекты", "Добавить" и "Сохранить"
+// Создает верхнюю панель с кнопками
 void ScrumBoard::createTopPanel() {
     // Панель
     topPanel.setSize(sf::Vector2f(1920, 60));
@@ -86,31 +83,11 @@ void ScrumBoard::createTopPanel() {
         30 + (40 - projectTextBounds.height) / 2 - 5
     );
 
-    // Кнопка добавления новой задачи
-    addButton.setSize(sf::Vector2f(200, 40));
-    addButton.setFillColor(sf::Color(180, 210, 235));
-    addButton.setOutlineThickness(0);
-    addButton.setPosition(400, 30); // Располагаем между кнопкой проектов и сохранения
-
-    // Текст кнопки добавления
-    addButtonText.setString("Добавить");
-    addButtonText.setFont(font);
-    addButtonText.setCharacterSize(24);
-    addButtonText.setFillColor(sf::Color(50, 50, 80));
-    addButtonText.setStyle(sf::Text::Bold);
-    
-    // Центрирование текста кнопки добавления
-    sf::FloatRect addTextBounds = addButtonText.getLocalBounds();
-    addButtonText.setPosition(
-        400 + (200 - addTextBounds.width) / 2,
-        30 + (40 - addTextBounds.height) / 2 - 5
-    );
-
     // Кнопка сохранения
     saveButton.setSize(sf::Vector2f(200, 40));
     saveButton.setFillColor(sf::Color(180, 210, 235));
     saveButton.setOutlineThickness(0);
-    saveButton.setPosition(1570, 30); 
+    saveButton.setPosition(1570, 30);
 
     // Текст кнопки сохранения
     saveButtonText.setString("Сохранить");
@@ -124,6 +101,26 @@ void ScrumBoard::createTopPanel() {
     saveButtonText.setPosition(
         1570 + (200 - saveTextBounds.width) / 2,
         30 + (40 - saveTextBounds.height) / 2 - 5
+    );
+
+    // Кнопка добавления новой задачи
+    addButton.setSize(sf::Vector2f(200, 40));
+    addButton.setFillColor(sf::Color(180, 210, 235));
+    addButton.setOutlineThickness(0);
+    addButton.setPosition(1350, 30);
+
+    // Текст кнопки добавления
+    addButtonText.setString("Добавить");
+    addButtonText.setFont(font);
+    addButtonText.setCharacterSize(24);
+    addButtonText.setFillColor(sf::Color(50, 50, 80));
+    addButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста кнопки добавления
+    sf::FloatRect addTextBounds = addButtonText.getLocalBounds();
+    addButtonText.setPosition(
+        1350 + (200 - addTextBounds.width) / 2,
+        30 + (40 - addTextBounds.height) / 2 - 5
     );
 }
 
@@ -198,10 +195,10 @@ void ScrumBoard::createAddTaskWindow() {
     taskInputField.setPosition(startX + padding, startY + padding);
     
     // Текст в поле ввода
-    taskInputText.setString("Введите название задачи...");
+    taskInputText.setString("Введите задачу на английском");
     taskInputText.setFont(font);
     taskInputText.setCharacterSize(20);
-    taskInputText.setFillColor(sf::Color(150, 150, 150)); // Серый цвет для placeholder
+    taskInputText.setFillColor(sf::Color(150, 150, 150));
     taskInputText.setPosition(startX + padding + 10, startY + padding + 15);
     
     // Текст "Выберите секцию:"
@@ -251,7 +248,7 @@ void ScrumBoard::createAddTaskWindow() {
     
     // Кнопка подтверждения добавления
     confirmAddButton.setSize(sf::Vector2f(150, 40));
-    confirmAddButton.setFillColor(sf::Color(120, 180, 120)); // Зеленый цвет
+    confirmAddButton.setFillColor(sf::Color(120, 180, 120));
     confirmAddButton.setOutlineColor(sf::Color(80, 140, 80));
     confirmAddButton.setOutlineThickness(2);
     confirmAddButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
@@ -270,7 +267,7 @@ void ScrumBoard::createAddTaskWindow() {
     
     // Кнопка отмены
     cancelAddButton.setSize(sf::Vector2f(150, 40));
-    cancelAddButton.setFillColor(sf::Color(180, 120, 120)); // Красный цвет
+    cancelAddButton.setFillColor(sf::Color(180, 120, 120));
     cancelAddButton.setOutlineColor(sf::Color(140, 80, 80));
     cancelAddButton.setOutlineThickness(2);
     cancelAddButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
@@ -350,7 +347,7 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         float taskWidth = sectionWidth - 30.0f;
         
         float x = startX + section * (sectionWidth + spacing) + (sectionWidth - taskWidth) / 2;
-        float y = 270 + tasks[section].size() * 90 - scrollOffsets[section];
+        float y = 270 + tasks[section].size() * 90;
         
         Task newTask(id, taskName, font, x, y);
         newTask.currentSection = section;
@@ -399,12 +396,11 @@ void ScrumBoard::updateTaskPositions() {
     float startX = 50.0f;
     float taskWidth = sectionWidth - 30.0f;
     
-    // Только обновляем позиции, не меняем статусы
     for (int section = 0; section < 4; section++) {
         float startY = 270.0f;
         for (size_t i = 0; i < tasks[section].size(); i++) {
             float x = startX + section * (sectionWidth + spacing) + (sectionWidth - taskWidth) / 2;
-            float y = startY + i * 95 - scrollOffsets[section];
+            float y = startY + i * 95;
             tasks[section][i].setPosition(x, y);
             tasks[section][i].shape.setSize(sf::Vector2f(taskWidth, 85));
             
@@ -425,24 +421,26 @@ void ScrumBoard::handleAddTaskInput(const sf::Event& event) {
         if (event.text.unicode < 128) {
             char c = static_cast<char>(event.text.unicode);
             
-            // Backspace
-            if (event.text.unicode == 8) { // Backspace
+            if (event.text.unicode == 8) {
                 if (!currentTaskInput.empty()) {
                     currentTaskInput.pop_back();
                 }
             }
-            // Enter - игнорируем, так как у нас есть кнопка подтверждения
-            else if (event.text.unicode == 13) { // Enter
-                // Можно добавить функционал подтверждения по Enter
+            // Enter - добавляем задачу
+            else if (event.text.unicode == 13) {
+                if (!currentTaskInput.empty()) {
+                    confirmAddTask(0);
+                    return;
+                }
             }
             // Обычные символы
-            else if (c >= 32 && c <= 126) { // Печатные символы
+            else if (c >= 32 && c <= 126) {
                 currentTaskInput += c;
             }
             
             // Обновляем отображаемый текст
             if (currentTaskInput.empty()) {
-                taskInputText.setString("Введите название задачи...");
+                taskInputText.setString("");
                 taskInputText.setFillColor(sf::Color(150, 150, 150));
             } else {
                 taskInputText.setString(currentTaskInput);
@@ -463,8 +461,7 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
             }
         }
         
-        // Создаем новую задачу
-        Tasks newTask(newId, currentTaskInput, "Пользователь", "", selectedSection);
+        Tasks newTask(newId, currentTaskInput, selectedSection);
         tasksData.push_back(newTask);
         
         // Добавляем визуальную задачу
@@ -475,8 +472,10 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         
         // Сбрасываем состояние
         currentTaskInput = "";
-        taskInputText.setString("Введите название задачи...");
+        isTaskInputActive = false;
+        taskInputText.setString("Введите задачу на английском");
         taskInputText.setFillColor(sf::Color(150, 150, 150));
+        taskInputField.setOutlineColor(sf::Color(100, 130, 160));
         showAddTaskWindow = false;
         
         std::cout << "Добавлена новая задача: '" << newTask.getTitle() 
@@ -487,7 +486,7 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
 // Обрабатывает все события ввода (мышь и клавиатура)
 void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     // Обработка ввода текста для новой задачи
-    if (showAddTaskWindow) {
+    if (showAddTaskWindow && isTaskInputActive) {
         handleAddTaskInput(event);
     }
     
@@ -505,10 +504,11 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             if (addButton.getGlobalBounds().contains(mousePos)) {
                 showAddTaskWindow = !showAddTaskWindow;
                 if (showAddTaskWindow) {
-                    // Сбрасываем ввод при открытии окна
                     currentTaskInput = "";
-                    taskInputText.setString("Введите название задачи...");
+                    taskInputText.setString("Введите задачу на английском");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
+                    isTaskInputActive = false;
+                    taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                 }
                 return;
             }
@@ -536,17 +536,27 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             
             // Обработка окна добавления задачи
             if (showAddTaskWindow) {
+                // Проверяем клик по полю ввода
+                if (taskInputField.getGlobalBounds().contains(mousePos)) {
+                    isTaskInputActive = true;
+                    taskInputField.setOutlineColor(sf::Color(50, 100, 200));
+                    if (currentTaskInput.empty()) {
+                        taskInputText.setString("");
+                        taskInputText.setFillColor(sf::Color(50, 50, 80));
+                    }
+                    return;
+                }
+                
                 // Проверяем клик по кнопкам секций
                 for (int i = 0; i < 4; i++) {
                     if (sectionOptionRects[i].getGlobalBounds().contains(mousePos)) {
-                        confirmAddTask(i); // Подтверждаем добавление с выбранной секцией
+                        confirmAddTask(i);
                         return;
                     }
                 }
                 
                 // Проверяем клик по кнопке подтверждения
                 if (confirmAddButton.getGlobalBounds().contains(mousePos)) {
-                    // Если кнопка подтверждения нажата, добавляем в первую секцию по умолчанию
                     confirmAddTask(0);
                     return;
                 }
@@ -554,18 +564,32 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 // Проверяем клик по кнопке отмены
                 if (cancelAddButton.getGlobalBounds().contains(mousePos)) {
                     showAddTaskWindow = false;
+                    isTaskInputActive = false;
                     currentTaskInput = "";
-                    taskInputText.setString("Введите название задачи...");
+                    taskInputText.setString("Введите задачу на английском");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
+                    taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                     return;
+                }
+                
+                // Если клик вне поля ввода
+                if (!taskInputField.getGlobalBounds().contains(mousePos)) {
+                    isTaskInputActive = false;
+                    taskInputField.setOutlineColor(sf::Color(100, 130, 160));
+                    if (currentTaskInput.empty()) {
+                        taskInputText.setString("Введите задачу на английском");
+                        taskInputText.setFillColor(sf::Color(150, 150, 150));
+                    }
                 }
                 
                 // Если клик вне окна добавления - закрываем его
                 if (!addTaskWindow.getGlobalBounds().contains(mousePos)) {
                     showAddTaskWindow = false;
+                    isTaskInputActive = false;
                     currentTaskInput = "";
-                    taskInputText.setString("Введите название задачи...");
+                    taskInputText.setString("Введите задачу на английском");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
+                    taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                 }
                 return;
             }
@@ -580,32 +604,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         return;
                     }
                 }
-            }
-            
-            // Обработка начала прокрутки
-            for (int i = 0; i < 4; i++) {
-                if (sections[i].getGlobalBounds().contains(mousePos)) {
-                    isDraggingScroll[i] = true;
-                    dragStartPositions[i] = mousePos;
-                    break;
-                }
-            }
-        }
-    }
-    
-    // Обработка прокрутки колесиком мыши
-    if (event.type == sf::Event::MouseWheelScrolled) {
-        float mouseX = event.mouseWheelScroll.x;
-        
-        for (int i = 0; i < 4; i++) {
-            if (sections[i].getGlobalBounds().contains(mouseX, event.mouseWheelScroll.y)) {
-                float scrollDelta = -event.mouseWheelScroll.delta * 30.0f;
-                float maxScroll = std::max(0.0f, (tasks[i].size() * 90.0f) - 650.0f);
-                
-                scrollOffsets[i] += scrollDelta;
-                scrollOffsets[i] = std::max(0.0f, std::min(scrollOffsets[i], maxScroll));
-                updateTaskPositions();
-                break;
             }
         }
     }
@@ -641,10 +639,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             // Сохраняем изменения
                             saveTasksData();
                             
-                            // Сбрасываем скролл
-                            scrollOffsets[draggingTaskSection] = 0.0f;
-                            scrollOffsets[newSection] = 0.0f;
-                            
                             std::cout << "Задача перемещена в секцию " << newSection << std::endl;
                             
                             updateTaskPositions();
@@ -658,11 +652,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 draggingTaskSection = -1;
                 draggingTaskIndex = -1;
             }
-            
-            // Завершаем прокрутку
-            for (int i = 0; i < 4; i++) {
-                isDraggingScroll[i] = false;
-            }
         }
     }
     
@@ -673,20 +662,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
             if (draggedTask.isMoving) {
                 draggedTask.setPosition(event.mouseMove.x - 190, event.mouseMove.y - 40);
-            }
-        }
-        
-        // Прокрутка перетаскиванием
-        for (int i = 0; i < 4; i++) {
-            if (isDraggingScroll[i]) {
-                sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
-                float deltaY = dragStartPositions[i].y - mousePos.y;
-                float maxScroll = std::max(0.0f, (tasks[i].size() * 90.0f) - 650.0f);
-                
-                scrollOffsets[i] += deltaY;
-                scrollOffsets[i] = std::max(0.0f, std::min(scrollOffsets[i], maxScroll));
-                dragStartPositions[i] = mousePos;
-                updateTaskPositions();
             }
         }
     }
@@ -702,10 +677,10 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
     window.draw(topPanel);
     window.draw(projectButton);      
     window.draw(projectButtonText);  
-    window.draw(addButton);           // Рисуем кнопку "Добавить"
-    window.draw(addButtonText);       // Рисуем текст кнопки "Добавить"
     window.draw(saveButton);
     window.draw(saveButtonText);
+    window.draw(addButton);
+    window.draw(addButtonText);
     
     // Рисуем секции
     for (const auto& section : sections) {
