@@ -1,23 +1,23 @@
 [
     {
-        "creation_date": "2025-11-17 02:56:28",
+        "creation_date": "2025-11-17 17:08:29",
         "id": 1,
         "programmer": "Vika",
         "project": "",
-        "status": 3,
+        "status": 0,
         "title": "Implement login feature"
     },
     {
-        "creation_date": "2025-11-17 02:56:28",
+        "creation_date": "2025-11-17 17:08:29",
         "id": 2,
         "programmer": "Vika",
         "project": "",
-        "status": 3,
+        "status": 2,
         "title": "Bay cuctus"
     },
     {
-        "creation_date": "2025-11-17 02:56:28",
-        "id": 2,
+        "creation_date": "2025-11-17 17:08:29",
+        "id": 3,
         "programmer": "Vika",
         "project": "",
         "status": 0,

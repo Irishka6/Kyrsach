@@ -194,36 +194,19 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
 }
 
 void ScrumBoard::updateTaskStatusInData(int taskId, int newStatus) {
-    std::cout << "ОБНОВЛЕНИЕ СТАТУСА: ищем задачу ID=" << taskId << " в данных..." << std::endl;
+    std::cout << "ОБНОВЛЕНИЕ СТАТУСА: получен ID=" << taskId << ", новый статус=" << newStatus << std::endl;
     
-    // Если ID неправильный, попробуем найти задачу по названию
-    bool found = false;
+    // ВРЕМЕННОЕ РЕШЕНИЕ: обновляем все задачи по названию
+    std::cout << "Обновляем все задачи в данных:" << std::endl;
     
-    // Сначала ищем по ID
     for (auto& task : tasksData) {
-        if (task.getId() == taskId) {
+        std::cout << task.getId() << " " << taskId << std::endl;
+        if (task.getId() == taskId){
             int oldStatus = task.getStatus();
             task.changeStatus(newStatus);
-            std::cout << "  ? УСПЕХ (по ID): '" << task.getTitle() 
-                      << "' статус изменен с " << oldStatus << " на " << newStatus << std::endl;
-            found = true;
-            break;
-        }
-    }
-    
-    if (!found) {
-        std::cout << "  ? Задача с ID " << taskId << " не найдена. Используем ID=2 для тестирования." << std::endl;
-        
-        // Временно используем ID=2 для тестирования
-        for (auto& task : tasksData) {
-            if (task.getId() == 2) {
-                int oldStatus = task.getStatus();
-                task.changeStatus(newStatus);
-                std::cout << "  ? УСПЕХ (тестовый ID=2): '" << task.getTitle() 
-                          << "' статус изменен с " << oldStatus << " на " << newStatus << std::endl;
-                found = true;
-                break;
-            }
+            std::cout << "  ? '" << task.getTitle() 
+                    << "' (ID=" << task.getId() 
+                    << ") статус изменен с " << oldStatus << " на " << newStatus << std::endl;
         }
     }
 }
@@ -342,12 +325,12 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             movedTask.currentSection = newSection;
                             movedTask.isMoving = false;
                             tasks[newSection].push_back(movedTask);
+                            updateTaskStatusInData(tasks[draggingTaskSection][draggingTaskIndex].id, newSection);
                             
                             // Удаляем из старой секции
                             tasks[draggingTaskSection].erase(tasks[draggingTaskSection].begin() + draggingTaskIndex);
                             
                             // ОБНОВЛЯЕМ СТАТУС В ДАННЫХ
-                            updateTaskStatusInData(draggedTask.id, newSection);
                             
                             // Сохраняем изменения
                             saveTasksData();

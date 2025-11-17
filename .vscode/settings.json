@@ -60,5 +60,6 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "list": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach/src/core"
 }
