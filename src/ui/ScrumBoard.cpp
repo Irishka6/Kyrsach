@@ -329,6 +329,8 @@ void ScrumBoard::createSampleTasks() {
     for (int i = 0; i < 4; i++) {
         tasks[i].clear();
     }
+
+    std::cout << "Создание визуальных задач из данных..." << std::endl;
     
     // Создаем визуальные задачи из данных
     for (const auto& task : tasksData){
