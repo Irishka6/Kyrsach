@@ -1,6 +1,6 @@
 [
     {
-        "creation_date": "2025-11-18 23:06:09",
+        "creation_date": "2025-11-19 16:49:24",
         "id": 1,
         "programmer": "Vika",
         "project": "",
@@ -8,35 +8,35 @@
         "title": "Implement login feature"
     },
     {
-        "creation_date": "2025-11-18 23:06:09",
+        "creation_date": "2025-11-19 16:49:24",
         "id": 2,
         "programmer": "Vika",
         "project": "",
-        "status": 2,
+        "status": 3,
         "title": "Bay cuctus"
     },
     {
-        "creation_date": "2025-11-18 23:06:09",
+        "creation_date": "2025-11-19 16:49:24",
         "id": 3,
         "programmer": "Vika",
         "project": "",
-        "status": 1,
+        "status": 2,
         "title": "nam end"
     },
     {
-        "creation_date": "2025-11-18 23:06:09",
-        "id": 4,
-        "programmer": "Vika",
-        "project": "",
-        "status": 2,
-        "title": "vse bydet chorosho"
-    },
-    {
-        "creation_date": "2025-11-18 23:06:09",
+        "creation_date": "2025-11-19 16:49:24",
         "id": 5,
         "programmer": "Vika",
         "project": "",
         "status": 1,
         "title": "may"
+    },
+    {
+        "creation_date": "2025-11-19 16:49:49",
+        "id": 6,
+        "programmer": "Vika",
+        "project": "",
+        "status": 1,
+        "title": "my molodtsy"
     }
 ]

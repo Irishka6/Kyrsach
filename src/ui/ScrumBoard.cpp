@@ -13,39 +13,43 @@ const int WINDOW_HEIGHT = 1080;
 
 // Конструктор класса ScrumBoard - инициализирует все переменные
 ScrumBoard::ScrumBoard() {
-    // Названия секций (колонок) доски
+    // Названия секций
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
     
-    // Инициализация вектора задач (4 секции)
     tasks.resize(4);
     
     // Переменные для перетаскивания задач
-    draggingTaskSection = -1;  // Индекс секции перетаскиваемой задачи
-    draggingTaskIndex = -1;    // Индекс перетаскиваемой задачи в секции
+    draggingTaskSection = -1; 
+    draggingTaskIndex = -1;   
     
     // Флаги отображения окон
-    showProjectWindow = false;   // Окно выбора проекта
-    showAddTaskWindow = false;   // Окно добавления задачи
-    showEditMode = false;        // Режим редактирования
+    showProjectWindow = false;  
+    showAddTaskWindow = false; 
+    showEditMode = false;       
+    showTaskEditWindow = false;  
     
     // Переменные для ввода текста
-    currentTaskInput = "";       // Текст новой задачи
-    currentEditTaskInput = "";   // Текст редактируемой задачи
+    currentTaskInput = "";    
+    currentEditTaskInput = ""; 
     
     // Флаги активности полей ввода
-    isTaskInputActive = false;    // Поле ввода новой задачи активно
-    isEditTaskInputActive = false; // Поле редактирования задачи активно
+    isTaskInputActive = false;  
+    isEditTaskInputActive = false; 
     
     // Переменные для редактирования задачи
-    editingTaskSection = -1;     // Секция редактируемой задачи
-    editingTaskIndex = -1;       // Индекс редактируемой задачи в секции
+    editingTaskSection = -1;    
+    editingTaskIndex = -1;      
+    
+    // Инициализация курсора
+    cursorVisible = true;
+    cursor.setSize(sf::Vector2f(2, 30));
+    cursor.setFillColor(sf::Color::Black);
     
     // Список проектов
     projects = {"Проект 1", "Проект 2", "Проект 3", "Проект 4", "Проект 5"};  
     
     // Загружаем задачи из JSON файла
     tasksData = getTasksFromJson(TASKS_JSON_PATH);
-    std::cout << "Загружено задач: " << tasksData.size() << std::endl;
 }
 
 // Инициализация ресурсов и создание интерфейса
@@ -56,14 +60,13 @@ bool ScrumBoard::initialize() {
         return false;
     }
     
-    // Создание всех компонентов интерфейса
-    createTitle();           // Заголовок приложения
-    createTopPanel();        // Верхняя панель с кнопками
-    createSections();        // 4 секции для задач
-    createSampleTasks();     // Загрузка задач из JSON
-    createProjectWindow();   // Окно выбора проекта
-    createAddTaskWindow();   // Окно добавления задачи
-    createEditModeWindow();  // Окно редактирования задач
+    // Создание всех компоне
+    createTopPanel();       
+    createSections();       
+    createSampleTasks();     
+    createProjectWindow(); 
+    createAddTaskWindow();   
+    createTaskEditWindow(); 
     
     return true;
 }
@@ -105,11 +108,11 @@ void ScrumBoard::createTopPanel() {
         30 + (40 - projectTextBounds.height) / 2 - 5
     );
 
-    // Кнопка "Изменить" (открывает режим редактирования)
-    editButton.setSize(sf::Vector2f(200, 40));
+    // Кнопка "Редактировать задачу"
+    editButton.setSize(sf::Vector2f(250, 40));
     editButton.setFillColor(sf::Color(180, 210, 235));
     editButton.setOutlineThickness(0);
-    editButton.setPosition(1570, 30);
+    editButton.setPosition(1520, 30);
 
     editButtonText.setString("Редактировать");
     editButtonText.setFont(font);
@@ -120,7 +123,7 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     sf::FloatRect editTextBounds = editButtonText.getLocalBounds();
     editButtonText.setPosition(
-        1570 + (200 - editTextBounds.width) / 2,
+        1520 + (250 - editTextBounds.width) / 2,
         30 + (40 - editTextBounds.height) / 2 - 5
     );
 
@@ -128,7 +131,7 @@ void ScrumBoard::createTopPanel() {
     addButton.setSize(sf::Vector2f(200, 40));
     addButton.setFillColor(sf::Color(180, 210, 235));
     addButton.setOutlineThickness(0);
-    addButton.setPosition(1350, 30);
+    addButton.setPosition(1300, 30);
 
     addButtonText.setString("Добавить");
     addButtonText.setFont(font);
@@ -139,7 +142,7 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     sf::FloatRect addTextBounds = addButtonText.getLocalBounds();
     addButtonText.setPosition(
-        1350 + (200 - addTextBounds.width) / 2,
+        1300 + (200 - addTextBounds.width) / 2,
         30 + (40 - addTextBounds.height) / 2 - 5
     );
 }
@@ -246,10 +249,10 @@ void ScrumBoard::createAddTaskWindow() {
     sectionOptionRects.clear();
     sectionOptionTexts.clear();
     
-    // Создание 4 кнопок для выбора секции (2x2)
+    // Создание 4 кнопок для выбора секции
     for (int i = 0; i < 4; i++) {
-        int row = i / 2;  // Номер ряда (0 или 1)
-        int col = i % 2;  // Номер колонки (0 или 1)
+        int row = i / 2;  // Номер ряда
+        int col = i % 2;  // Номер колонки
         
         // Прямоугольник кнопки секции
         sf::RectangleShape sectionRect;
@@ -321,10 +324,10 @@ void ScrumBoard::createAddTaskWindow() {
     );
 }
 
-// Создание окна редактирования задач
-void ScrumBoard::createEditModeWindow() {
-    float windowWidth = 1800.0f;    // Ширина окна (почти на весь экран)
-    float windowHeight = 900.0f;    // Высота окна
+// Создание окна редактирования задачи
+void ScrumBoard::createTaskEditWindow() {
+    float windowWidth = 500.0f;     // Ширина окна
+    float windowHeight = 300.0f;    // Высота окна
     float padding = 20.0f;          // Отступы
     
     // Позиционирование по центру экрана
@@ -339,78 +342,33 @@ void ScrumBoard::createEditModeWindow() {
     editModeWindow.setPosition(startX, startY);
     
     // Заголовок окна редактирования
-    editTitleText.setString("Выберите задачу для редактирования");
+    editTitleText.setString("Редактировать");
     editTitleText.setFont(font);
-    editTitleText.setCharacterSize(32);
+    editTitleText.setCharacterSize(28);
     editTitleText.setFillColor(sf::Color(50, 50, 80));
     editTitleText.setStyle(sf::Text::Bold);
     editTitleText.setPosition(startX + padding, startY + padding);
     
-    // Очистка предыдущих элементов
-    editSections.clear();
-    editSectionTexts.clear();
-    
-    // Расчет размеров секций внутри окна редактирования
-    float sectionWidth = (windowWidth - padding * 5) / 4.0f;
-    float sectionStartX = startX + padding;
-    float sectionStartY = startY + 80;
-    
-    // Цвета для секций
-    sf::Color sectionColors[] = {
-        sf::Color(180, 210, 235),  // Назначено
-        sf::Color(160, 195, 225),  // В процессе
-        sf::Color(140, 180, 215),  // Блокировано
-        sf::Color(120, 165, 205)   // Готово
-    };
-    
-    // Создание 4 секций внутри окна редактирования
-    for (int i = 0; i < 4; i++) {
-        // Прямоугольник секции
-        sf::RectangleShape section;
-        section.setSize(sf::Vector2f(sectionWidth, 600));
-        section.setFillColor(sectionColors[i]);
-        section.setOutlineThickness(2);
-        section.setOutlineColor(sf::Color(100, 130, 160));
-        section.setPosition(sectionStartX + i * (sectionWidth + padding), sectionStartY);
-        editSections.push_back(section);
-        
-        // Текст названия секции
-        sf::Text text;
-        text.setString(sectionNames[i]);
-        text.setFont(font);
-        text.setCharacterSize(28);
-        text.setFillColor(sf::Color(50, 50, 80));
-        text.setStyle(sf::Text::Bold);
-        
-        // Центрирование текста над секцией
-        sf::FloatRect textBounds = text.getLocalBounds();
-        text.setPosition(
-            sectionStartX + i * (sectionWidth + padding) + (sectionWidth - textBounds.width) / 2,
-            sectionStartY - 40
-        );
-        editSectionTexts.push_back(text);
-    }
-    
     // Поле ввода для редактирования названия задачи
-    editTaskInputField.setSize(sf::Vector2f(600, 50));
+    editTaskInputField.setSize(sf::Vector2f(windowWidth - padding * 2, 50.0f));
     editTaskInputField.setFillColor(sf::Color::White);
     editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
     editTaskInputField.setOutlineThickness(2);
-    editTaskInputField.setPosition(startX + padding, startY + 700);
+    editTaskInputField.setPosition(startX + padding, startY + 80);
     
     // Подсказка в поле ввода
-    editTaskInputText.setString("Выберите задачу для редактирования");
+    editTaskInputText.setString("Введите текст на английском");
     editTaskInputText.setFont(font);
     editTaskInputText.setCharacterSize(20);
     editTaskInputText.setFillColor(sf::Color(150, 150, 150));
-    editTaskInputText.setPosition(startX + padding + 10, startY + 715);
+    editTaskInputText.setPosition(startX + padding + 10, startY + 95);
     
     // Кнопка сохранения изменений
     saveEditButton.setSize(sf::Vector2f(150, 40));
     saveEditButton.setFillColor(sf::Color(120, 180, 120));
     saveEditButton.setOutlineColor(sf::Color(80, 140, 80));
     saveEditButton.setOutlineThickness(2);
-    saveEditButton.setPosition(startX + 650, startY + 700);
+    saveEditButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
     
     saveEditButtonText.setString("Сохранить");
     saveEditButtonText.setFont(font);
@@ -423,7 +381,7 @@ void ScrumBoard::createEditModeWindow() {
     deleteTaskButton.setFillColor(sf::Color(200, 100, 100));
     deleteTaskButton.setOutlineColor(sf::Color(160, 60, 60));
     deleteTaskButton.setOutlineThickness(2);
-    deleteTaskButton.setPosition(startX + 820, startY + 700);
+    deleteTaskButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
     
     deleteTaskButtonText.setString("Удалить");
     deleteTaskButtonText.setFont(font);
@@ -431,23 +389,9 @@ void ScrumBoard::createEditModeWindow() {
     deleteTaskButtonText.setFillColor(sf::Color::White);
     deleteTaskButtonText.setStyle(sf::Text::Bold);
     
-    // Кнопка закрытия окна редактирования
-    cancelEditButton.setSize(sf::Vector2f(150, 40));
-    cancelEditButton.setFillColor(sf::Color(180, 120, 120));
-    cancelEditButton.setOutlineColor(sf::Color(140, 80, 80));
-    cancelEditButton.setOutlineThickness(2);
-    cancelEditButton.setPosition(startX + 990, startY + 700);
-    
-    cancelEditButtonText.setString("Закрыть");
-    cancelEditButtonText.setFont(font);
-    cancelEditButtonText.setCharacterSize(20);
-    cancelEditButtonText.setFillColor(sf::Color::White);
-    cancelEditButtonText.setStyle(sf::Text::Bold);
-    
     // Центрирование текста на кнопках
     centerTextInButton(saveEditButtonText, saveEditButton);
     centerTextInButton(deleteTaskButtonText, deleteTaskButton);
-    centerTextInButton(cancelEditButtonText, cancelEditButton);
 }
 
 // Вспомогательная функция для центрирования текста в кнопке
@@ -464,10 +408,10 @@ void ScrumBoard::centerTextInButton(sf::Text& text, const sf::RectangleShape& bu
 void ScrumBoard::createSections() {
     // Цвета для секций
     sf::Color sectionColors[] = {
-        sf::Color(180, 210, 235),  // Назначено
-        sf::Color(160, 195, 225),  // В процессе
-        sf::Color(140, 180, 215),  // Блокировано
-        sf::Color(120, 165, 205)   // Готово
+        sf::Color(180, 210, 235),  
+        sf::Color(160, 195, 225),
+        sf::Color(140, 180, 215),  
+        sf::Color(120, 165, 205)   
     };
     
     // Расчет размеров и позиций секций
@@ -594,7 +538,7 @@ void ScrumBoard::updateTaskPositions() {
         for (size_t i = 0; i < tasks[section].size(); i++) {
             // Расчет позиции задачи
             float x = startX + section * (sectionWidth + spacing) + (sectionWidth - taskWidth) / 2;
-            float y = startY + i * 95;  // Каждая следующая задача на 95 пикселей ниже
+            float y = startY + i * 95;  
             
             // Установка позиции задачи
             tasks[section][i].setPosition(x, y);
@@ -626,7 +570,7 @@ void ScrumBoard::handleAddTaskInput(const sf::Event& event) {
             // Обработка Enter (добавление задачи)
             else if (event.text.unicode == 13) {
                 if (!currentTaskInput.empty()) {
-                    confirmAddTask(0);  // Добавление в первую секцию по умолчанию
+                    confirmAddTask(0);  
                     return;
                 }
             }
@@ -643,6 +587,10 @@ void ScrumBoard::handleAddTaskInput(const sf::Event& event) {
                 taskInputText.setString(currentTaskInput);
                 taskInputText.setFillColor(sf::Color(50, 50, 80));
             }
+            
+            // Сброс таймера курсора при вводе
+            cursorClock.restart();
+            cursorVisible = true;
         }
     }
 }
@@ -678,6 +626,10 @@ void ScrumBoard::handleEditTaskInput(const sf::Event& event) {
                 editTaskInputText.setString(currentEditTaskInput);
                 editTaskInputText.setFillColor(sf::Color(50, 50, 80));
             }
+            
+            // Сброс таймера курсора при вводе
+            cursorClock.restart();
+            cursorVisible = true;
         }
     }
 }
@@ -711,6 +663,7 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         taskInputText.setFillColor(sf::Color(150, 150, 150));
         taskInputField.setOutlineColor(sf::Color(100, 130, 160));
         showAddTaskWindow = false;
+        cursorVisible = false; // Скрываем курсор
         
         std::cout << "Добавлена новая задача: '" << newTask.getTitle() 
                   << "' в секцию " << selectedSection << std::endl;
@@ -719,14 +672,49 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
 
 // Открытие режима редактирования
 void ScrumBoard::openEditMode() {
-    showEditMode = true;
-    currentEditTaskInput = "";
-    editTaskInputText.setString("Выберите задачу для редактирования");
-    editTaskInputText.setFillColor(sf::Color(150, 150, 150));
-    isEditTaskInputActive = false;
-    editingTaskSection = -1;
-    editingTaskIndex = -1;
-    editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
+    showEditMode = !showEditMode;
+    
+    if (showEditMode) {
+        // Делаем кнопку серой когда режим редактирования активен
+        editButton.setFillColor(sf::Color(150, 150, 150));
+        editButtonText.setString("Режим редактирования...");
+    } else {
+        // Возвращаем обычный цвет когда режим не активен
+        editButton.setFillColor(sf::Color(180, 210, 235));
+        editButtonText.setString("Редактировать");
+        // Закрываем окно редактирования если оно было открыто
+        closeTaskEditWindow();
+    }
+    
+    // Центрирование текста на кнопке
+    sf::FloatRect editTextBounds = editButtonText.getLocalBounds();
+    editButtonText.setPosition(
+        1520 + (250 - editTextBounds.width) / 2,
+        30 + (40 - editTextBounds.height) / 2 - 5
+    );
+}
+
+// Открытие окна редактирования задачи
+void ScrumBoard::openTaskEditWindow() {
+    showTaskEditWindow = true;
+    isEditTaskInputActive = true;
+    editTaskInputField.setOutlineColor(sf::Color(50, 100, 200));
+    
+    // Получаем полный текст выбранной задачи
+    if (editingTaskSection != -1 && editingTaskIndex != -1) {
+        for (const auto& taskData : tasksData) {
+            if (taskData.getId() == tasks[editingTaskSection][editingTaskIndex].id) {
+                currentEditTaskInput = taskData.getTitle();
+                break;
+            }
+        }
+        editTaskInputText.setString(currentEditTaskInput);
+        editTaskInputText.setFillColor(sf::Color(50, 50, 80));
+    }
+    
+    // Сброс курсора
+    cursorClock.restart();
+    cursorVisible = true;
 }
 
 // Выбор задачи для редактирования
@@ -736,24 +724,8 @@ void ScrumBoard::selectTaskForEditing(int section, int index) {
         editingTaskSection = section;
         editingTaskIndex = index;
         
-        // Получение выбранной задачи
-        Task& task = tasks[section][index];
-        
-        // Поиск полного текста задачи в данных
-        for (const auto& taskData : tasksData) {
-            if (taskData.getId() == task.id) {
-                currentEditTaskInput = taskData.getTitle();
-                break;
-            }
-        }
-        
-        // Обновление поля ввода
-        editTaskInputText.setString(currentEditTaskInput);
-        editTaskInputText.setFillColor(sf::Color(50, 50, 80));
-        isEditTaskInputActive = true;
-        editTaskInputField.setOutlineColor(sf::Color(50, 100, 200));
-        
-        std::cout << "Выбрана задача для редактирования: '" << currentEditTaskInput << "'" << std::endl;
+        // Открываем окно редактирования
+        openTaskEditWindow();
     }
 }
 
@@ -789,16 +761,8 @@ void ScrumBoard::saveEditedTask() {
         // Сохранение в JSON
         saveTasksData();
         
-        // Сброс состояния редактирования
-        editingTaskSection = -1;
-        editingTaskIndex = -1;
-        currentEditTaskInput = "";
-        editTaskInputText.setString("");
-        editTaskInputText.setFillColor(sf::Color(150, 150, 150));
-        isEditTaskInputActive = false;
-        editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
-        
-        std::cout << "Задача обновлена: '" << currentEditTaskInput << "'" << std::endl;
+        // Закрытие окна редактирования
+        closeTaskEditWindow();
     }
 }
 
@@ -826,14 +790,8 @@ void ScrumBoard::deleteCurrentTask() {
         // Обновление позиций оставшихся задач
         updateTaskPositions();
         
-        // Сброс состояния редактирования
-        editingTaskSection = -1;
-        editingTaskIndex = -1;
-        currentEditTaskInput = "";
-        editTaskInputText.setString("");
-        editTaskInputText.setFillColor(sf::Color(150, 150, 150));
-        isEditTaskInputActive = false;
-        editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
+        // Закрытие окна редактирования
+        closeTaskEditWindow();
         
         std::cout << "Задача удалена: ID " << taskId << std::endl;
     }
@@ -842,11 +800,30 @@ void ScrumBoard::deleteCurrentTask() {
 // Закрытие режима редактирования
 void ScrumBoard::closeEditMode() {
     showEditMode = false;
+    editButton.setFillColor(sf::Color(180, 210, 235));
+    editButtonText.setString("Редактировать");
+    
+    // Центрирование текста на кнопке
+    sf::FloatRect editTextBounds = editButtonText.getLocalBounds();
+    editButtonText.setPosition(
+        1520 + (250 - editTextBounds.width) / 2,
+        30 + (40 - editTextBounds.height) / 2 - 5
+    );
+    
+    closeTaskEditWindow();
+}
+
+// Закрытие окна редактирования задачи
+void ScrumBoard::closeTaskEditWindow() {
+    showTaskEditWindow = false;
     isEditTaskInputActive = false;
     currentEditTaskInput = "";
     editingTaskSection = -1;
     editingTaskIndex = -1;
     editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
+    editTaskInputText.setString("Введите текст на английском");
+    editTaskInputText.setFillColor(sf::Color(150, 150, 150));
+    cursorVisible = false; // Скрываем курсор
 }
 
 // Обработка всех событий ввода
@@ -857,7 +834,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     }
     
     // Обработка ввода текста при редактировании
-    if (showEditMode && isEditTaskInputActive) {
+    if (showTaskEditWindow && isEditTaskInputActive) {
         handleEditTaskInput(event);
     }
     
@@ -881,11 +858,12 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
                     isTaskInputActive = false;
                     taskInputField.setOutlineColor(sf::Color(100, 130, 160));
+                    cursorVisible = false;
                 }
                 return;
             }
             
-            // Обработка клика по кнопке изменения
+            // Обработка клика по кнопке редактирования
             if (editButton.getGlobalBounds().contains(mousePos)) {
                 openEditMode();
                 return;
@@ -916,6 +894,9 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         taskInputText.setString("");
                         taskInputText.setFillColor(sf::Color(50, 50, 80));
                     }
+                    // Сброс курсора
+                    cursorClock.restart();
+                    cursorVisible = true;
                     return;
                 }
                 
@@ -941,6 +922,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     taskInputText.setString("Введите задачу на английском");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
                     taskInputField.setOutlineColor(sf::Color(100, 130, 160));
+                    cursorVisible = false;
                     return;
                 }
                 
@@ -952,6 +934,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         taskInputText.setString("Введите задачу на английском");
                         taskInputText.setFillColor(sf::Color(150, 150, 150));
                     }
+                    cursorVisible = false;
                 }
                 
                 // Закрытие окна при клике вне его
@@ -962,16 +945,20 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     taskInputText.setString("Введите задачу на английском");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
                     taskInputField.setOutlineColor(sf::Color(100, 130, 160));
+                    cursorVisible = false;
                 }
                 return;
             }
             
-            // Обработка режима редактирования
-            if (showEditMode) {
+            // Обработка окна редактирования задачи
+            if (showTaskEditWindow) {
                 // Клик по полю ввода редактирования
                 if (editTaskInputField.getGlobalBounds().contains(mousePos)) {
                     isEditTaskInputActive = true;
                     editTaskInputField.setOutlineColor(sf::Color(50, 100, 200));
+                    // Сброс курсора
+                    cursorClock.restart();
+                    cursorVisible = true;
                     return;
                 }
                 
@@ -987,13 +974,15 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     return;
                 }
                 
-                // Клик по кнопке отмены
-                if (cancelEditButton.getGlobalBounds().contains(mousePos)) {
-                    closeEditMode();
-                    return;
+                // Закрытие окна при клике вне его
+                if (!editModeWindow.getGlobalBounds().contains(mousePos)) {
+                    closeTaskEditWindow();
                 }
-                
-                // Выбор задачи для редактирования
+                return;
+            }
+            
+            // Обработка выбора задачи для редактирования
+            if (showEditMode && !showTaskEditWindow) {
                 for (int i = 0; i < 4; i++) {
                     for (size_t j = 0; j < tasks[i].size(); j++) {
                         if (tasks[i][j].shape.getGlobalBounds().contains(mousePos)) {
@@ -1003,17 +992,13 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     }
                 }
                 
-                // Деактивация поля ввода при клике вне его
-                if (!editTaskInputField.getGlobalBounds().contains(mousePos)) {
-                    isEditTaskInputActive = false;
-                    editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
-                }
-                
+                // Клик вне задач - закрываем режим редактирования
+                closeEditMode();
                 return;
             }
             
             // Обработка начала перетаскивания задачи (только если не открыты другие окна)
-            if (!showEditMode && !showAddTaskWindow && !showProjectWindow) {
+            if (!showEditMode && !showAddTaskWindow && !showProjectWindow && !showTaskEditWindow) {
                 for (int i = 0; i < 4; i++) {
                     for (size_t j = 0; j < tasks[i].size(); j++) {
                         if (tasks[i][j].shape.getGlobalBounds().contains(mousePos)) {
@@ -1062,8 +1047,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             // Сохранение изменений
                             saveTasksData();
                             
-                            std::cout << "Задача перемещена в секцию " << newSection << std::endl;
-                            
                             // Обновление позиций задач
                             updateTaskPositions();
                             break;
@@ -1094,13 +1077,17 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     }
 }
 
-// Обновление состояния (не используется, но требуется для интерфейса)
+// Обновление состояния
 void ScrumBoard::update(float deltaTime) {
-    // Метод может быть использован для анимаций или других временных обновлений
+    // Логика мигания курсора (мигание каждые 0.5 секунды)
+    if (cursorClock.getElapsedTime().asSeconds() > 0.5f) {
+        cursorVisible = !cursorVisible;
+        cursorClock.restart();
+    }
 }
 
-// Отрисовка окна редактирования
-void ScrumBoard::drawEditMode(sf::RenderWindow& window) {
+// Отрисовка окна редактирования задачи
+void ScrumBoard::drawTaskEditWindow(sf::RenderWindow& window) {
     // Затемнение фона
     sf::RectangleShape overlay(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
@@ -1109,65 +1096,12 @@ void ScrumBoard::drawEditMode(sf::RenderWindow& window) {
     // Основное окно редактирования
     window.draw(editModeWindow);
     window.draw(editTitleText);
-    
-    // Секции внутри окна редактирования
-    for (const auto& section : editSections) {
-        window.draw(section);
-    }
-    
-    // Заголовки секций
-    for (const auto& text : editSectionTexts) {
-        window.draw(text);
-    }
-    
-    // Расчет размеров для позиционирования задач
-    float sectionWidth = (1800.0f - 20.0f * 5) / 4.0f;
-    float startX = (WINDOW_WIDTH - 1800.0f) / 2 + 20.0f;
-    float startY = (WINDOW_HEIGHT - 900.0f) / 2 + 80.0f;
-    
-    // Отрисовка задач внутри окна редактирования
-    for (int section = 0; section < 4; section++) {
-        float sectionX = startX + section * (sectionWidth + 20.0f);
-        
-        for (size_t i = 0; i < tasks[section].size(); i++) {
-            // Создание копии задачи для отрисовки в окне редактирования
-            Task task = tasks[section][i];
-            
-            // Позиционирование задачи внутри секции окна редактирования
-            float x = sectionX + (sectionWidth - (sectionWidth - 30.0f)) / 2;
-            float y = startY + i * 95;
-            
-            task.shape.setPosition(x, y);
-            task.shape.setSize(sf::Vector2f(sectionWidth - 30.0f, 85));
-            task.shape.setOutlineThickness(2);
-            task.shape.setOutlineColor(sf::Color(80, 110, 140));
-            
-            // Обновление позиции текста
-            sf::FloatRect textBounds = task.text.getLocalBounds();
-            task.text.setPosition(
-                x + ((sectionWidth - 30.0f) - textBounds.width) / 2,
-                y + (85 - textBounds.height) / 2 - 5
-            );
-            
-            // Подсветка выбранной задачи
-            if (editingTaskSection == section && editingTaskIndex == i) {
-                task.shape.setFillColor(sf::Color(255, 255, 200)); // Желтый фон
-            }
-            
-            window.draw(task.shape);
-            window.draw(task.text);
-        }
-    }
-    
-    // Элементы управления редактированием
     window.draw(editTaskInputField);
     window.draw(editTaskInputText);
     window.draw(saveEditButton);
     window.draw(saveEditButtonText);
     window.draw(deleteTaskButton);
     window.draw(deleteTaskButtonText);
-    window.draw(cancelEditButton);
-    window.draw(cancelEditButtonText);
 }
 
 // Основной метод отрисовки
@@ -1254,10 +1188,30 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         window.draw(confirmAddButtonText);
         window.draw(cancelAddButton);
         window.draw(cancelAddButtonText);
+        
+        // Отрисовка курсора для поля ввода новой задачи
+        if (isTaskInputActive && cursorVisible) {
+            // Расчет позиции курсора в конце текста
+            sf::FloatRect textBounds = taskInputText.getLocalBounds();
+            float cursorX = taskInputField.getPosition().x + textBounds.width + 15;
+            float cursorY = taskInputField.getPosition().y + 10;
+            cursor.setPosition(cursorX, cursorY);
+            window.draw(cursor);
+        }
     }
     
-    // Режим редактирования
-    if (showEditMode) {
-        drawEditMode(window);
+    // Окно редактирования задачи
+    if (showTaskEditWindow) {
+        drawTaskEditWindow(window);
+        
+        // Отрисовка курсора для поля редактирования задачи
+        if (isEditTaskInputActive && cursorVisible) {
+            // Расчет позиции курсора в конце текста
+            sf::FloatRect textBounds = editTaskInputText.getLocalBounds();
+            float cursorX = editTaskInputField.getPosition().x + textBounds.width + 15;
+            float cursorY = editTaskInputField.getPosition().y + 10;
+            cursor.setPosition(cursorX, cursorY);
+            window.draw(cursor);
+        }
     }
 }

@@ -57,6 +57,7 @@ private:
     
     // Окно редактирования задач
     bool showEditMode;                                                              // Флаг режима редактирования
+    bool showTaskEditWindow;                                                        // Флаг показа окна редактирования задачи
     sf::RectangleShape editModeWindow;                                              // Окно редактирования
     sf::RectangleShape editTaskInputField;                                          // Поле ввода для редактирования
     sf::Text editTaskInputText;                                                     // Текст в поле редактирования
@@ -70,11 +71,12 @@ private:
     sf::Text cancelEditButtonText;                                                  // Текст кнопки отмены
     sf::RectangleShape deleteTaskButton;                                            // Кнопка удаления
     sf::Text deleteTaskButtonText;                                                  // Текст кнопки удаления
-    
-    // Дополнительные элементы для окна редактирования
     sf::Text editTitleText;                                                         // Заголовок окна редактирования
-    std::vector<sf::RectangleShape> editSections;                                   // Секции внутри окна редактирования
-    std::vector<sf::Text> editSectionTexts;                                         // Тексты секций в окне редактирования
+    
+    // Курсор для полей ввода
+    sf::RectangleShape cursor;                                                      // Курсор ввода текста
+    sf::Clock cursorClock;                                                          // Таймер для мигания курсора
+    bool cursorVisible;                                                             // Видимость курсора
     
     // Данные задач
     std::vector<Tasks> tasksData;                                                   
@@ -93,7 +95,7 @@ private:
     void createSampleTasks();                                                       // Создание задач из данных JSON
     void createProjectWindow();                                                     // Создание окна выбора проектов
     void createAddTaskWindow();                                                     // Создание окна добавления задачи
-    void createEditModeWindow();                                                    // Создание окна редактирования задач
+    void createTaskEditWindow();                                                    // Создание окна редактирования задачи
 
     void addTask(int id, const std::string& taskName, int section);                 // Добавление визуальной задачи в секцию
     void updateTaskPositions();                                                     // Обновление позиций всех задач
@@ -103,13 +105,15 @@ private:
     void handleEditTaskInput(const sf::Event& event);                               // Обработка ввода текста при редактировании
     void confirmAddTask(int selectedSection);                                       // Подтверждение добавления новой задачи
     void openEditMode();                                                            // Открытие режима редактирования
+    void openTaskEditWindow();                                                      // Открытие окна редактирования задачи
     void selectTaskForEditing(int section, int index);                              // Выбор задачи для редактирования
     void saveEditedTask();                                                          // Сохранение изменений задачи
     void deleteCurrentTask();                                                       // Удаление текущей задачи
     void closeEditMode();                                                           // Закрытие режима редактирования
+    void closeTaskEditWindow();                                                     // Закрытие окна редактирования задачи
     
     // Методы для работы с окном редактирования
     void centerTextInButton(sf::Text& text, const sf::RectangleShape& button);      // Центрирование текста в кнопке
-    void drawEditMode(sf::RenderWindow& window);                                    // Отрисовка окна редактирования
+    void drawTaskEditWindow(sf::RenderWindow& window);                              // Отрисовка окна редактирования задачи
 };
 #endif
