@@ -12,7 +12,11 @@ const int WINDOW_WIDTH = 1920;
 const int WINDOW_HEIGHT = 1080;
 
 // Конструктор класса ScrumBoard - инициализирует все переменные
-ScrumBoard::ScrumBoard() {
+ScrumBoard::ScrumBoard() :
+    isLoggedIn(false),
+    currentUser(""),
+    showLogoutButton(false)  
+{
     // Названия секций
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
     
@@ -23,16 +27,21 @@ ScrumBoard::ScrumBoard() {
     draggingTaskIndex = -1;   
     
     // Флаги отображения окон
+    showLoginWindow = false;    
     showProjectWindow = false;  
     showAddTaskWindow = false; 
     showEditMode = false;       
     showTaskEditWindow = false;  
     
     // Переменные для ввода текста
+    currentUsernameInput = "";   
+    currentPasswordInput = "";   
     currentTaskInput = "";    
     currentEditTaskInput = ""; 
     
     // Флаги активности полей ввода
+    isUsernameInputActive = false;  // Поле логина активно
+    isPasswordInputActive = false;  // Поле пароля активно
     isTaskInputActive = false;  
     isEditTaskInputActive = false; 
     
@@ -60,15 +69,47 @@ bool ScrumBoard::initialize() {
         return false;
     }
     
-    // Создание всех компоне
+    // Создание всех компонентов
+    createTitle();           
     createTopPanel();       
     createSections();       
     createSampleTasks();     
+    createLoginWindow();    
     createProjectWindow(); 
     createAddTaskWindow();   
     createTaskEditWindow(); 
+    createUserInfo();      
     
     return true;
+}
+
+// Создание элемента информации о пользователе
+void ScrumBoard::createUserInfo() {
+    // Кнопка с именем пользователя
+    userInfoButton.setSize(sf::Vector2f(200, 40));
+    userInfoButton.setFillColor(sf::Color(180, 210, 235));
+    userInfoButton.setOutlineThickness(0);
+    userInfoButton.setPosition(150, 30);
+
+    userInfoText.setString(""); 
+    userInfoText.setFont(font);
+    userInfoText.setCharacterSize(20);
+    userInfoText.setFillColor(sf::Color(50, 50, 80));
+    userInfoText.setStyle(sf::Text::Bold);
+    
+    // Кнопка выхода
+    logoutButton.setSize(sf::Vector2f(120, 40));
+    logoutButton.setFillColor(sf::Color(180, 210, 235));
+    logoutButton.setOutlineThickness(0);
+    logoutButton.setPosition(20, 30);
+
+    logoutButtonText.setString("Выйти");
+    logoutButtonText.setFont(font);
+    logoutButtonText.setCharacterSize(22);
+    logoutButtonText.setFillColor(sf::Color(50, 50, 80));
+    logoutButtonText.setStyle(sf::Text::Bold);
+    
+    centerTextInButton(logoutButtonText, logoutButton);
 }
 
 // Создание заголовка приложения
@@ -89,11 +130,30 @@ void ScrumBoard::createTopPanel() {
     topPanel.setOutlineThickness(0);
     topPanel.setPosition(0, 20);
 
+    // Кнопка "Войти" 
+    loginButton.setSize(sf::Vector2f(200, 40));
+    loginButton.setFillColor(sf::Color(180, 210, 235));
+    loginButton.setOutlineThickness(0);
+    loginButton.setPosition(150, 30);
+
+    loginButtonText.setString("Войти"); 
+    loginButtonText.setFont(font);
+    loginButtonText.setCharacterSize(24);
+    loginButtonText.setFillColor(sf::Color(50, 50, 80));
+    loginButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста на кнопке
+    sf::FloatRect loginTextBounds = loginButtonText.getLocalBounds(); 
+    loginButtonText.setPosition(
+        150 + (200 - loginTextBounds.width) / 2,
+        30 + (40 - loginTextBounds.height) / 2 - 5
+    );
+
     // Кнопка "Проекты"
     projectButton.setSize(sf::Vector2f(200, 40));
     projectButton.setFillColor(sf::Color(180, 210, 235));
     projectButton.setOutlineThickness(0);
-    projectButton.setPosition(150, 30);
+    projectButton.setPosition(370, 30);  // 150 + 200 + 20 = 370
 
     projectButtonText.setString("Проекты"); 
     projectButtonText.setFont(font);
@@ -104,11 +164,11 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     sf::FloatRect projectTextBounds = projectButtonText.getLocalBounds(); 
     projectButtonText.setPosition(
-        150 + (200 - projectTextBounds.width) / 2,
+        370 + (200 - projectTextBounds.width) / 2,
         30 + (40 - projectTextBounds.height) / 2 - 5
     );
 
-    // Кнопка "Редактировать задачу"
+    // Кнопка "Редактировать"
     editButton.setSize(sf::Vector2f(250, 40));
     editButton.setFillColor(sf::Color(180, 210, 235));
     editButton.setOutlineThickness(0);
@@ -127,7 +187,7 @@ void ScrumBoard::createTopPanel() {
         30 + (40 - editTextBounds.height) / 2 - 5
     );
 
-    // Кнопка "Добавить" (открывает окно добавления задачи)
+    // Кнопка "Добавить"
     addButton.setSize(sf::Vector2f(200, 40));
     addButton.setFillColor(sf::Color(180, 210, 235));
     addButton.setOutlineThickness(0);
@@ -145,6 +205,98 @@ void ScrumBoard::createTopPanel() {
         1300 + (200 - addTextBounds.width) / 2,
         30 + (40 - addTextBounds.height) / 2 - 5
     );
+}
+
+// Создание окна входа
+void ScrumBoard::createLoginWindow() {
+    float windowWidth = 400.0f;     // Ширина окна
+    float windowHeight = 300.0f;    // Высота окна
+    float padding = 20.0f;          // Отступы
+    
+    // Позиционирование по центру экрана
+    float startX = (WINDOW_WIDTH - windowWidth) / 2;
+    float startY = (WINDOW_HEIGHT - windowHeight) / 2;
+    
+    // Основное окно
+    loginWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
+    loginWindow.setFillColor(sf::Color(180, 210, 235));
+    loginWindow.setOutlineColor(sf::Color(160, 190, 220));
+    loginWindow.setOutlineThickness(3); // Толщина обводки 3 пикселя
+    loginWindow.setPosition(startX, startY);
+    
+    // Метка "Имя пользователя"
+    usernameLabel.setString("Имя пользователя:");
+    usernameLabel.setFont(font);
+    usernameLabel.setCharacterSize(20);
+    usernameLabel.setFillColor(sf::Color(50, 50, 80));
+    usernameLabel.setStyle(sf::Text::Bold);
+    usernameLabel.setPosition(startX + padding, startY + padding);
+    
+    // Поле ввода имени пользователя
+    usernameField.setSize(sf::Vector2f(windowWidth - padding * 2, 40.0f));
+    usernameField.setFillColor(sf::Color::White);
+    usernameField.setOutlineColor(sf::Color(100, 130, 160));
+    usernameField.setOutlineThickness(2);
+    usernameField.setPosition(startX + padding, startY + padding + 30);
+    
+    // Текст в поле имени пользователя
+    usernameText.setString("Введите имя пользователя");
+    usernameText.setFont(font);
+    usernameText.setCharacterSize(18);
+    usernameText.setFillColor(sf::Color(150, 150, 150));
+    usernameText.setPosition(startX + padding + 10, startY + padding + 40);
+    
+    // Метка "Пароль"
+    passwordLabel.setString("Пароль:");
+    passwordLabel.setFont(font);
+    passwordLabel.setCharacterSize(20);
+    passwordLabel.setFillColor(sf::Color(50, 50, 80));
+    passwordLabel.setStyle(sf::Text::Bold);
+    passwordLabel.setPosition(startX + padding, startY + padding + 90);
+    
+    // Поле ввода пароля
+    passwordField.setSize(sf::Vector2f(windowWidth - padding * 2, 40.0f));
+    passwordField.setFillColor(sf::Color::White);
+    passwordField.setOutlineColor(sf::Color(100, 130, 160));
+    passwordField.setOutlineThickness(2);
+    passwordField.setPosition(startX + padding, startY + padding + 120);
+    
+    // Текст в поле пароля
+    passwordText.setString("Введите пароль");
+    passwordText.setFont(font);
+    passwordText.setCharacterSize(18);
+    passwordText.setFillColor(sf::Color(150, 150, 150));
+    passwordText.setPosition(startX + padding + 10, startY + padding + 130);
+    
+    // Кнопка подтверждения входа
+    confirmLoginButton.setSize(sf::Vector2f(120, 40));
+    confirmLoginButton.setFillColor(sf::Color(120, 180, 120));
+    confirmLoginButton.setOutlineColor(sf::Color(80, 140, 80));
+    confirmLoginButton.setOutlineThickness(2);
+    confirmLoginButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
+    
+    confirmLoginButtonText.setString("Войти");
+    confirmLoginButtonText.setFont(font);
+    confirmLoginButtonText.setCharacterSize(20);
+    confirmLoginButtonText.setFillColor(sf::Color::White);
+    confirmLoginButtonText.setStyle(sf::Text::Bold);
+    
+    // Кнопка отмены
+    cancelLoginButton.setSize(sf::Vector2f(120, 40));
+    cancelLoginButton.setFillColor(sf::Color(180, 120, 120));
+    cancelLoginButton.setOutlineColor(sf::Color(140, 80, 80));
+    cancelLoginButton.setOutlineThickness(2);
+    cancelLoginButton.setPosition(startX + windowWidth - padding - 120, startY + windowHeight - padding - 50);
+    
+    cancelLoginButtonText.setString("Отмена");
+    cancelLoginButtonText.setFont(font);
+    cancelLoginButtonText.setCharacterSize(20);
+    cancelLoginButtonText.setFillColor(sf::Color::White);
+    cancelLoginButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста на кнопках
+    centerTextInButton(confirmLoginButtonText, confirmLoginButton);
+    centerTextInButton(cancelLoginButtonText, cancelLoginButton);
 }
 
 // Создание окна выбора проекта
@@ -364,7 +516,7 @@ void ScrumBoard::createTaskEditWindow() {
     editTaskInputText.setPosition(startX + padding + 10, startY + 95);
     
     // Кнопка сохранения изменений
-    saveEditButton.setSize(sf::Vector2f(150, 40));
+    saveEditButton.setSize(sf::Vector2f(120, 40));
     saveEditButton.setFillColor(sf::Color(120, 180, 120));
     saveEditButton.setOutlineColor(sf::Color(80, 140, 80));
     saveEditButton.setOutlineThickness(2);
@@ -377,11 +529,11 @@ void ScrumBoard::createTaskEditWindow() {
     saveEditButtonText.setStyle(sf::Text::Bold);
     
     // Кнопка удаления задачи
-    deleteTaskButton.setSize(sf::Vector2f(150, 40));
+    deleteTaskButton.setSize(sf::Vector2f(120, 40));
     deleteTaskButton.setFillColor(sf::Color(200, 100, 100));
     deleteTaskButton.setOutlineColor(sf::Color(160, 60, 60));
     deleteTaskButton.setOutlineThickness(2);
-    deleteTaskButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
+    deleteTaskButton.setPosition(startX + padding + 130, startY + windowHeight - padding - 50);
     
     deleteTaskButtonText.setString("Удалить");
     deleteTaskButtonText.setFont(font);
@@ -389,12 +541,26 @@ void ScrumBoard::createTaskEditWindow() {
     deleteTaskButtonText.setFillColor(sf::Color::White);
     deleteTaskButtonText.setStyle(sf::Text::Bold);
     
+    // Кнопка отмены редактирования
+    cancelEditButton.setSize(sf::Vector2f(120, 40));
+    cancelEditButton.setFillColor(sf::Color(180, 120, 120));
+    cancelEditButton.setOutlineColor(sf::Color(140, 80, 80));
+    cancelEditButton.setOutlineThickness(2);
+    cancelEditButton.setPosition(startX + windowWidth - padding - 120, startY + windowHeight - padding - 50);
+    
+    cancelEditButtonText.setString("Отмена");
+    cancelEditButtonText.setFont(font);
+    cancelEditButtonText.setCharacterSize(20);
+    cancelEditButtonText.setFillColor(sf::Color::White);
+    cancelEditButtonText.setStyle(sf::Text::Bold);
+    
     // Центрирование текста на кнопках
     centerTextInButton(saveEditButtonText, saveEditButton);
     centerTextInButton(deleteTaskButtonText, deleteTaskButton);
+    centerTextInButton(cancelEditButtonText, cancelEditButton);
 }
 
-// Вспомогательная функция для центрирования текста в кнопке
+// Вспомогательная функция для центрирования текста
 void ScrumBoard::centerTextInButton(sf::Text& text, const sf::RectangleShape& button) {
     sf::FloatRect textBounds = text.getLocalBounds();
     sf::FloatRect buttonBounds = button.getGlobalBounds();
@@ -608,7 +774,7 @@ void ScrumBoard::handleEditTaskInput(const sf::Event& event) {
                     currentEditTaskInput.pop_back();
                 }
             }
-            // Обработка Enter (сохранение изменений)
+            // Обработка Enter
             else if (event.text.unicode == 13) {
                 saveEditedTask();
                 return;
@@ -625,6 +791,63 @@ void ScrumBoard::handleEditTaskInput(const sf::Event& event) {
             } else {
                 editTaskInputText.setString(currentEditTaskInput);
                 editTaskInputText.setFillColor(sf::Color(50, 50, 80));
+            }
+            
+            // Сброс таймера курсора при вводе
+            cursorClock.restart();
+            cursorVisible = true;
+        }
+    }
+}
+
+// Обработка ввода текста для входа
+void ScrumBoard::handleLoginInput(const sf::Event& event) {
+    if (event.type == sf::Event::TextEntered) {
+        // Обработка только ASCII символов
+        if (event.text.unicode < 128) {
+            char c = static_cast<char>(event.text.unicode);
+            
+            // Обработка Backspace
+            if (event.text.unicode == 8) {
+                if (isUsernameInputActive && !currentUsernameInput.empty()) {
+                    currentUsernameInput.pop_back();
+                } else if (isPasswordInputActive && !currentPasswordInput.empty()) {
+                    currentPasswordInput.pop_back();
+                }
+            }
+            // Обработка Enter
+            else if (event.text.unicode == 13) {
+                confirmLogin();
+                return;
+            }
+            // Обработка печатных символов
+            else if (c >= 32 && c <= 126) {
+                if (isUsernameInputActive) {
+                    currentUsernameInput += c;
+                } else if (isPasswordInputActive) {
+                    currentPasswordInput += c;
+                }
+            }
+            
+            // Обновление отображаемого текста
+            if (isUsernameInputActive) {
+                if (currentUsernameInput.empty()) {
+                    usernameText.setString("Введите имя пользователя");
+                    usernameText.setFillColor(sf::Color(150, 150, 150));
+                } else {
+                    usernameText.setString(currentUsernameInput);
+                    usernameText.setFillColor(sf::Color(50, 50, 80));
+                }
+            } else if (isPasswordInputActive) {
+                if (currentPasswordInput.empty()) {
+                    passwordText.setString("Введите пароль");
+                    passwordText.setFillColor(sf::Color(150, 150, 150));
+                } else {
+                    // Скрываем пароль звездочками
+                    std::string hiddenPassword(currentPasswordInput.length(), '*');
+                    passwordText.setString(hiddenPassword);
+                    passwordText.setFillColor(sf::Color(50, 50, 80));
+                }
             }
             
             // Сброс таймера курсора при вводе
@@ -662,12 +885,40 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         taskInputText.setString("Введите задачу на английском");
         taskInputText.setFillColor(sf::Color(150, 150, 150));
         taskInputField.setOutlineColor(sf::Color(100, 130, 160));
-        showAddTaskWindow = false;
+        showAddTaskWindow = false; // Закрываем окно только после успешного добавления
         cursorVisible = false; // Скрываем курсор
         
         std::cout << "Добавлена новая задача: '" << newTask.getTitle() 
                   << "' в секцию " << selectedSection << std::endl;
     }
+}
+
+// Подтверждение входа
+void ScrumBoard::confirmLogin() {
+    // Проверка наличия логина и пароля
+    if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
+        std::cout << "Вход выполнен успешно!" << std::endl;
+        isLoggedIn = true;
+        currentUser = currentUsernameInput;
+        showLogoutButton = true; 
+        closeLoginWindow();
+        
+        // Обновляем текст кнопки пользователя
+        userInfoText.setString(currentUser);
+        centerTextInButton(userInfoText, userInfoButton);
+        
+        std::cout << "Пользователь: " << currentUser << " вошел в систему" << std::endl;
+    } else {
+        std::cout << "Введите логин и пароль!" << std::endl;
+    }
+}
+
+// Выход из системы
+void ScrumBoard::logout() {
+    isLoggedIn = false;
+    currentUser = "";
+    showLogoutButton = false; // СКРЫВАЕМ КНОПКУ ВЫХОДА
+    std::cout << "Выход выполнен" << std::endl;
 }
 
 // Открытие режима редактирования
@@ -677,7 +928,7 @@ void ScrumBoard::openEditMode() {
     if (showEditMode) {
         // Делаем кнопку серой когда режим редактирования активен
         editButton.setFillColor(sf::Color(150, 150, 150));
-        editButtonText.setString("Режим редактирования...");
+        editButtonText.setString("Режим редактирования");
     } else {
         // Возвращаем обычный цвет когда режим не активен
         editButton.setFillColor(sf::Color(180, 210, 235));
@@ -826,8 +1077,43 @@ void ScrumBoard::closeTaskEditWindow() {
     cursorVisible = false; // Скрываем курсор
 }
 
+// Закрытие окна входа
+void ScrumBoard::closeLoginWindow() {
+    showLoginWindow = false;
+    isUsernameInputActive = false;
+    isPasswordInputActive = false;
+    currentUsernameInput = "";
+    currentPasswordInput = "";
+    usernameField.setOutlineColor(sf::Color(100, 130, 160));
+    passwordField.setOutlineColor(sf::Color(100, 130, 160));
+    usernameText.setString("Введите имя пользователя");
+    usernameText.setFillColor(sf::Color(150, 150, 150));
+    passwordText.setString("Введите пароль");
+    passwordText.setFillColor(sf::Color(150, 150, 150));
+    cursorVisible = false; // Скрываем курсор
+}
+
 // Обработка всех событий ввода
 void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
+    // Обработка движения мыши для перетаскивания задач
+    if (event.type == sf::Event::MouseMoved) {
+        sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
+        
+        // Перетаскивание задачи
+        if (draggingTaskSection != -1 && draggingTaskIndex != -1) {
+            Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
+            if (draggedTask.isMoving) {
+                // Обновление позиции перетаскиваемой задачи
+                draggedTask.setPosition(event.mouseMove.x - 190, event.mouseMove.y - 40);
+            }
+        }
+    }
+    
+    // Обработка ввода текста для входа
+    if (showLoginWindow && (isUsernameInputActive || isPasswordInputActive)) {
+        handleLoginInput(event);
+    }
+    
     // Обработка ввода текста для новой задачи
     if (showAddTaskWindow && isTaskInputActive) {
         handleAddTaskInput(event);
@@ -842,6 +1128,24 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+            
+            // Обработка кнопки выхода (всегда видна после входа)
+            if (isLoggedIn && logoutButton.getGlobalBounds().contains(mousePos)) {
+                logout();
+                return;
+            }
+            
+            // Обработка информации о пользователе (если вошел)
+            if (isLoggedIn && userInfoButton.getGlobalBounds().contains(mousePos)) {
+                // Ничего не делаем при клике на имя пользователя
+                return;
+            }
+            
+            // Обработка клика по кнопке "Войти" (только если не вошел)
+            if (!isLoggedIn && loginButton.getGlobalBounds().contains(mousePos)) {
+                showLoginWindow = !showLoginWindow; 
+                return;
+            }
             
             // Обработка клика по кнопке проектов
             if (projectButton.getGlobalBounds().contains(mousePos)) {
@@ -866,6 +1170,60 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             // Обработка клика по кнопке редактирования
             if (editButton.getGlobalBounds().contains(mousePos)) {
                 openEditMode();
+                return;
+            }
+            
+            // Обработка окна входа
+            if (showLoginWindow) {
+                // Клик по полю ввода имени пользователя
+                if (usernameField.getGlobalBounds().contains(mousePos)) {
+                    isUsernameInputActive = true;
+                    isPasswordInputActive = false;
+                    usernameField.setOutlineColor(sf::Color(50, 100, 200));
+                    passwordField.setOutlineColor(sf::Color(100, 130, 160));
+                    if (currentUsernameInput.empty()) {
+                        usernameText.setString("");
+                        usernameText.setFillColor(sf::Color(50, 50, 80));
+                    }
+                    // Сброс курсора
+                    cursorClock.restart();
+                    cursorVisible = true;
+                    return;
+                }
+                
+                // Клик по полю ввода пароля
+                if (passwordField.getGlobalBounds().contains(mousePos)) {
+                    isUsernameInputActive = false;
+                    isPasswordInputActive = true;
+                    usernameField.setOutlineColor(sf::Color(100, 130, 160));
+                    passwordField.setOutlineColor(sf::Color(50, 100, 200));
+                    if (currentPasswordInput.empty()) {
+                        passwordText.setString("");
+                        passwordText.setFillColor(sf::Color(50, 50, 80));
+                    }
+                    // Сброс курсора
+                    cursorClock.restart();
+                    cursorVisible = true;
+                    return;
+                }
+                
+                // Клик по кнопке подтверждения входа
+                if (confirmLoginButton.getGlobalBounds().contains(mousePos)) {
+                    confirmLogin();
+                    return;
+                }
+                
+                // Клик по кнопке отмены входа
+                if (cancelLoginButton.getGlobalBounds().contains(mousePos)) {
+                    closeLoginWindow();
+                    return;
+                }
+                
+                // Закрытие окна при клике вне его
+                if (!loginWindow.getGlobalBounds().contains(mousePos)) {
+                    closeLoginWindow();
+                    return;
+                }
                 return;
             }
             
@@ -974,6 +1332,12 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     return;
                 }
                 
+                // Клик по кнопке отмены
+                if (cancelEditButton.getGlobalBounds().contains(mousePos)) {
+                    closeTaskEditWindow();
+                    return;
+                }
+                
                 // Закрытие окна при клике вне его
                 if (!editModeWindow.getGlobalBounds().contains(mousePos)) {
                     closeTaskEditWindow();
@@ -998,7 +1362,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             }
             
             // Обработка начала перетаскивания задачи (только если не открыты другие окна)
-            if (!showEditMode && !showAddTaskWindow && !showProjectWindow && !showTaskEditWindow) {
+            if (!showEditMode && !showAddTaskWindow && !showProjectWindow && !showTaskEditWindow && !showLoginWindow) {
                 for (int i = 0; i < 4; i++) {
                     for (size_t j = 0; j < tasks[i].size(); j++) {
                         if (tasks[i][j].shape.getGlobalBounds().contains(mousePos)) {
@@ -1063,26 +1427,54 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             }
         }
     }
-    
-    // Обработка движения мыши
-    if (event.type == sf::Event::MouseMoved) {
-        // Перетаскивание задачи
-        if (draggingTaskSection != -1 && draggingTaskIndex != -1) {
-            Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
-            if (draggedTask.isMoving) {
-                // Обновление позиции перетаскиваемой задачи
-                draggedTask.setPosition(event.mouseMove.x - 190, event.mouseMove.y - 40);
-            }
-        }
-    }
 }
 
 // Обновление состояния
 void ScrumBoard::update(float deltaTime) {
-    // Логика мигания курсора (мигание каждые 0.5 секунды)
+    // Мигание курсора
     if (cursorClock.getElapsedTime().asSeconds() > 0.5f) {
         cursorVisible = !cursorVisible;
         cursorClock.restart();
+    }
+}
+
+// Отрисовка окна входа
+void ScrumBoard::drawLoginWindow(sf::RenderWindow& window) {
+    // Затемнение фона
+    sf::RectangleShape overlay(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+    window.draw(overlay);
+    
+    // Основное окно входа
+    window.draw(loginWindow);
+    window.draw(usernameLabel);
+    window.draw(usernameField);
+    window.draw(usernameText);
+    window.draw(passwordLabel);
+    window.draw(passwordField);
+    window.draw(passwordText);
+    window.draw(confirmLoginButton);
+    window.draw(confirmLoginButtonText);
+    window.draw(cancelLoginButton);
+    window.draw(cancelLoginButtonText);
+    
+    // Отрисовка курсора для полей ввода
+    if ((isUsernameInputActive || isPasswordInputActive) && cursorVisible) {
+        sf::FloatRect textBounds;
+        float cursorX, cursorY;
+        
+        if (isUsernameInputActive) {
+            textBounds = usernameText.getLocalBounds();
+            cursorX = usernameField.getPosition().x + textBounds.width + 15;
+            cursorY = usernameField.getPosition().y + 5;
+        } else {
+            textBounds = passwordText.getLocalBounds();
+            cursorX = passwordField.getPosition().x + textBounds.width + 15;
+            cursorY = passwordField.getPosition().y + 5;
+        }
+        
+        cursor.setPosition(cursorX, cursorY);
+        window.draw(cursor);
     }
 }
 
@@ -1102,14 +1494,29 @@ void ScrumBoard::drawTaskEditWindow(sf::RenderWindow& window) {
     window.draw(saveEditButtonText);
     window.draw(deleteTaskButton);
     window.draw(deleteTaskButtonText);
+    window.draw(cancelEditButton);
+    window.draw(cancelEditButtonText);
 }
 
 // Основной метод отрисовки
 void ScrumBoard::draw(sf::RenderWindow& window) {
     // Отрисовка основных элементов доски
     window.draw(titleText);
-    
     window.draw(topPanel);
+    
+    // Отрисовка кнопки входа или информации о пользователе
+    if (isLoggedIn) {
+        // Сначала рисуем кнопку выхода, затем имя пользователя
+        window.draw(logoutButton);
+        window.draw(logoutButtonText);
+        
+        window.draw(userInfoButton);
+        window.draw(userInfoText);
+    } else {
+        window.draw(loginButton);
+        window.draw(loginButtonText);
+    }
+    
     window.draw(projectButton);      
     window.draw(projectButtonText);  
     window.draw(editButton);         
@@ -1134,13 +1541,18 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         for (const auto& task : tasks[i]) {
             sf::FloatRect taskBounds = task.shape.getGlobalBounds();
             
-            // Отрисовка только видимых задач (в пределах секции)
+            // Отрисовка только видимых задач
             if (taskBounds.top + taskBounds.height >= sectionBounds.top && 
                 taskBounds.top <= sectionBounds.top + sectionBounds.height) {
                 window.draw(task.shape);
                 window.draw(task.text);
             }
         }
+    }
+    
+    // Окно входа
+    if (showLoginWindow) {
+        drawLoginWindow(window);
     }
     
     // Окно проектов

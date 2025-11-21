@@ -12,8 +12,11 @@ private:
     // Графика и текст
     sf::Font font;                                                                  
     sf::Text titleText;                                                            
+    
     // Верхняя панель управления
     sf::RectangleShape topPanel;                                                   
+    sf::RectangleShape loginButton;                                               
+    sf::Text loginButtonText;                                                      
     sf::RectangleShape projectButton;                                              
     sf::Text projectButtonText;                                                   
     sf::RectangleShape editButton;                                                 
@@ -32,6 +35,24 @@ private:
     // Перетаскивание задач
     int draggingTaskSection;                                                   
     int draggingTaskIndex;                                                         
+    
+    // Окно входа
+    bool showLoginWindow;                                                          // Флаг показа окна входа
+    sf::RectangleShape loginWindow;                                                // Основное окно входа
+    sf::RectangleShape usernameField;                                              // Поле ввода имени пользователя
+    sf::Text usernameText;                                                         // Текст в поле имени пользователя
+    sf::RectangleShape passwordField;                                              // Поле ввода пароля
+    sf::Text passwordText;                                                         // Текст в поле пароля
+    sf::Text usernameLabel;                                                        // Метка "Имя пользователя"
+    sf::Text passwordLabel;                                                        // Метка "Пароль"
+    sf::RectangleShape confirmLoginButton;                                         // Кнопка "Войти"
+    sf::Text confirmLoginButtonText;                                               // Текст кнопки входа
+    sf::RectangleShape cancelLoginButton;                                          // Кнопка "Отмена"
+    sf::Text cancelLoginButtonText;                                                // Текст кнопки отмены
+    std::string currentUsernameInput;                                              // Текущий введенный логин
+    std::string currentPasswordInput;                                              // Текущий введенный пароль
+    bool isUsernameInputActive;                                                    // Флаг активности поля логина
+    bool isPasswordInputActive;                                                    // Флаг активности поля пароля
     
     // Окно проектов
     bool showProjectWindow;                                                         // Флаг показа окна проектов
@@ -81,6 +102,15 @@ private:
     // Данные задач
     std::vector<Tasks> tasksData;                                                   
 
+    // Переменные для управления пользователем
+    bool isLoggedIn;
+    std::string currentUser;
+    sf::RectangleShape userInfoButton;
+    sf::Text userInfoText;
+    sf::RectangleShape logoutButton;
+    sf::Text logoutButtonText;
+    bool showLogoutButton;
+
 public:
     ScrumBoard();                                                                   // Конструктор - инициализация переменных
     bool initialize();                                                              // Инициализация ресурсов и интерфейса
@@ -93,9 +123,11 @@ private:
     void createTopPanel();                                                          // Создание верхней панели с кнопками
     void createSections();                                                          // Создание 4 секций для задач
     void createSampleTasks();                                                       // Создание задач из данных JSON
+    void createLoginWindow();                                                       // Создание окна входа
     void createProjectWindow();                                                     // Создание окна выбора проектов
     void createAddTaskWindow();                                                     // Создание окна добавления задачи
     void createTaskEditWindow();                                                    // Создание окна редактирования задачи
+    void createUserInfo();                                                          // Создание элемента информации о пользователе
 
     void addTask(int id, const std::string& taskName, int section);                 // Добавление визуальной задачи в секцию
     void updateTaskPositions();                                                     // Обновление позиций всех задач
@@ -103,7 +135,10 @@ private:
     void saveTasksData();                                                           // Сохранение задач в JSON файл
     void handleAddTaskInput(const sf::Event& event);                                // Обработка ввода текста для новой задачи
     void handleEditTaskInput(const sf::Event& event);                               // Обработка ввода текста при редактировании
+    void handleLoginInput(const sf::Event& event);                                  // Обработка ввода текста для входа
     void confirmAddTask(int selectedSection);                                       // Подтверждение добавления новой задачи
+    void confirmLogin();                                                            // Подтверждение входа
+    void logout();                                                                  // Выход из системы
     void openEditMode();                                                            // Открытие режима редактирования
     void openTaskEditWindow();                                                      // Открытие окна редактирования задачи
     void selectTaskForEditing(int section, int index);                              // Выбор задачи для редактирования
@@ -111,9 +146,11 @@ private:
     void deleteCurrentTask();                                                       // Удаление текущей задачи
     void closeEditMode();                                                           // Закрытие режима редактирования
     void closeTaskEditWindow();                                                     // Закрытие окна редактирования задачи
+    void closeLoginWindow();                                                        // Закрытие окна входа
     
     // Методы для работы с окном редактирования
     void centerTextInButton(sf::Text& text, const sf::RectangleShape& button);      // Центрирование текста в кнопке
     void drawTaskEditWindow(sf::RenderWindow& window);                              // Отрисовка окна редактирования задачи
+    void drawLoginWindow(sf::RenderWindow& window);                                 // Отрисовка окна входа
 };
 #endif
