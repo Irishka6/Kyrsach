@@ -1,4 +1,6 @@
 #include "Project.h"
+#include "Developer.h"  // Теперь включаем здесь
+#include "Tasks.h" 
 #include <fstream>
 #include <iostream>
 #include <stdexcept>

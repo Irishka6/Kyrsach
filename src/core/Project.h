@@ -1,10 +1,10 @@
 #ifndef PROJECT_H
 #define PROJECT_H
-
+#pragma once
 #include <string>
 #include <vector>
 #include <algorithm>
-#include "Tasks.h"
+#include "CommonType.h"
 #include "json.hpp"
 using json = nlohmann::json;
 

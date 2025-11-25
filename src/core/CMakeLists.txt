@@ -3,4 +3,5 @@ project(MyJsonProject)
 
 set(CMAKE_CXX_STANDARD 11)
 
+
 add_executable(my_app main.cpp)

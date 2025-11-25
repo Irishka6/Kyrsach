@@ -3,6 +3,7 @@
 
 #include "Task.h"
 #include "../core/Tasks.h"
+#include "../core/Project.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>

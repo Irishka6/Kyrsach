@@ -1,4 +1,6 @@
 #include "Developer.h"
+#include "Project.h"  // Теперь включаем здесь
+#include "Tasks.h" 
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -24,13 +26,11 @@ void Developer::setLogin(const std::string& newLogin) {
     login = newLogin;
 }
 
-std::vector<Project> Developer::getProject() const {
+std::vector<Project> Developer::getProjects() const {
     std::vector<Project> projects;
     
-    // Загружаем все проекты из файла
     auto allProjects = Project::getProjectsFromJson();
     
-    // Фильтруем только те проекты, где есть этот разработчик
     for (const auto& project : allProjects) {
         if (project.hasDeveloper(this->id)) {
             projects.push_back(project);
@@ -39,14 +39,21 @@ std::vector<Project> Developer::getProject() const {
     
     return projects;
 }
-bool Developer::validateProject(int projectID) const {
-    for (auto& proj : projectIds){
-        if (proj == projectID){
-            return true;
-        }
-        return false;
-    }
 
+bool Developer::validateTask(int taskID) const {
+    // Получаем все проекты разработчика
+    auto developerProjects = this->getProjects();
+    
+    // Ищем задачу во всех проектах разработчика
+    for (const auto& project : developerProjects) {
+        for (const auto& task : project.getTasks()) {
+            if (task.getId() == taskID) {
+                return true; // Задача найдена в одном из проектов разработчика
+            }
+        }
+    }
+    
+    return false; // Задача не найдена ни в одном проекте разработчика
 }
 
 void Developer::setPassword(const std::string& newPassword) {
@@ -128,11 +135,20 @@ void saveDevelopersToJson(const std::vector<Developer>& developers, const std::s
 std::vector<Developer> getDevelopersFromJson(const std::string& filename) {
     std::vector<Developer> developers;
     
-    std::ifstream file_in(filename, std::ios::binary);
+    std::ifstream file_in(filename);
     if (!file_in.good()) {
         std::cout << "Файл " << filename << " не найден. Будет создан новый." << std::endl;
+        return developers; // возвращаем пустой вектор
+    }
+    
+    // Проверяем, не пустой ли файл
+    file_in.seekg(0, std::ios::end);
+    if (file_in.tellg() == 0) {
+        std::cout << "Файл " << filename << " пустой." << std::endl;
+        file_in.close();
         return developers;
     }
+    file_in.seekg(0, std::ios::beg); // возвращаемся в начало файла
     
     try {
         json j_array;
@@ -143,11 +159,20 @@ std::vector<Developer> getDevelopersFromJson(const std::string& filename) {
                 developers.push_back(Developer::fromJson(j_dev));
             }
             std::cout << "Загружено разработчиков: " << developers.size() << std::endl;
+        } else {
+            std::cerr << "Ошибка: JSON не является массивом" << std::endl;
         }
     } catch (const std::exception& e) {
         std::cerr << "Ошибка при чтении файла разработчиков: " << e.what() << std::endl;
+        // Можно также вывести содержимое файла для отладки
+        file_in.clear();
+        file_in.seekg(0, std::ios::beg);
+        std::string content((std::istreambuf_iterator<char>(file_in)), 
+                           std::istreambuf_iterator<char>());
+        std::cerr << "Содержимое файла: '" << content << "'" << std::endl;
     }
     
+    file_in.close();
     return developers;
 }
 
@@ -169,12 +194,11 @@ bool validateDeveloperCredentials(const std::vector<Developer>& developers, cons
     return false;
 }
 
-Developer* findDeveloperByLogin(std::vector<Developer> developers, const std::string& login, const std::string& password){
-    for (auto& dev : developers){
-        if (dev.getLogin() == login && dev.getPassword() == password){
+Developer* findDeveloperByLogin(std::vector<Developer>& developers, const std::string& login, const std::string& password) {
+    for (auto& dev : developers) {
+        if (dev.getLogin() == login && dev.getPassword() == password) {
             return &dev;
-        } else {
-            return nullptr;
         }
     }
+    return nullptr;  // Возвращаем nullptr после цикла
 }

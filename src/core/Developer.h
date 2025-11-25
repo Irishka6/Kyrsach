@@ -1,11 +1,12 @@
 #ifndef DEVELOPER_H
 #define DEVELOPER_H
-
+#pragma once
 #include <string>
 #include <vector>
 #include <algorithm>
 #include "json.hpp"
-#include "Project.h"
+#include "CommonType.h"
+
 using json = nlohmann::json;
 
 class Developer {
@@ -24,7 +25,7 @@ public:
     std::string getLogin() const { return login; }
     std::string getPassword() const { return password; }
     const std::vector<int>& getProjectIds() const { return projectIds; }
-    std::vector<Project> getProject() const;
+    std::vector<Project> getProjects() const;
     
     // Сеттеры
     void setLogin(const std::string& newLogin);
@@ -40,16 +41,16 @@ public:
     bool validateLogin(const std::string& login) const;
     bool validatePassword(const std::string& password) const;
     bool checkCredentials(const std::string& inputLogin, const std::string& inputPassword) const;
-    bool validateProject(int projectID) const;
+    bool validateTask(int taskID) const;
     
 private:
     bool validateName(const std::string& name) const;
 };
 
 // Функции для работы с файлом разработчиков
-void saveDevelopersToJson(const std::vector<Developer>& developers, const std::string& filename = "developers.json");
-std::vector<Developer> getDevelopersFromJson(const std::string& filename = "developers.json");
+void saveDevelopersToJson(const std::vector<Developer>& developers, const std::string& filename = "../core/developers.json");
+std::vector<Developer> getDevelopersFromJson(const std::string& filename = "../core/developers.json");
 Developer* findDeveloperById(std::vector<Developer>& developers, int id);
 bool validateDeveloperCredentials(const std::vector<Developer>& developers, const std::string& login, const std::string& password);
-Developer* findDeveloperByLogin(std::vector<Developer> developers, const std::string& login, const std::string& password);
+Developer* findDeveloperByLogin(std::vector<Developer>& developers, const std::string& login, const std::string& password);
 #endif // DEVELOPER_H

@@ -1,5 +1,7 @@
 #include "ScrumBoard.h"
 #include "../core/Tasks.h"
+#include "../core/Developer.h"
+#include "../core/Project.h"
 #include "Task.h"
 #include <iostream>
 #include <algorithm>
@@ -896,29 +898,45 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
 // Подтверждение входа
 void ScrumBoard::confirmLogin() {
     // Проверка наличия логина и пароля
-    if (!currentUsernameInput.empty() && !currentPasswordInput.empty() && validateDeveloperCredentials(getDevelopersFromJson(), currentUsernameInput, currentPasswordInput)) {
-        std::cout << "Вход выполнен успешно!" << std::endl;
-        activeDeveloper = findDeveloperByLogin(getDevelopersFromJson(), currentUsernameInput, currentPasswordInput);
-        isLoggedIn = true;
-        currentUser = currentUsernameInput;
-        showLogoutButton = true; 
-        projects = (*activeDeveloper).getProject();
-        createProjectWindow();
-        closeLoginWindow();
+    if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
         
-        // Обновляем текст кнопки пользователя
-        userInfoText.setString(currentUser);
-        centerTextInButton(userInfoText, userInfoButton);
+        // Загружаем разработчиков один раз
+        std::vector<Developer> developers = getDevelopersFromJson();
+        std::cout << developers[0].getLogin() << std::endl;
         
-        std::cout << "Пользователь: " << currentUser << " вошел в систему" << std::endl;
-    } else if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
-        std::cout << "Неверный логин или пароль!" << std::endl;
-    }
-    else {
+        if (validateDeveloperCredentials(developers, currentUsernameInput, currentPasswordInput)) {
+            std::cout << "Вход выполнен успешно!" << std::endl;
+            
+            // Используем ту же копию developers
+            activeDeveloper = findDeveloperByLogin(developers, currentUsernameInput, currentPasswordInput);
+            
+            if (activeDeveloper != nullptr) {
+                isLoggedIn = true;
+                currentUser = currentUsernameInput;
+                showLogoutButton = true; 
+                
+                // Получаем проекты активного разработчика
+                projects = activeDeveloper->getProjects();
+                createProjectWindow();
+                closeLoginWindow();
+                
+                // Обновляем текст кнопки пользователя
+                userInfoText.setString(currentUser);
+                centerTextInButton(userInfoText, userInfoButton);
+                
+                std::cout << "Пользователь: " << currentUser << " вошел в систему" << std::endl;
+                std::cout << "Найдено проектов: " << projects.size() << std::endl;
+            } else {
+                std::cout << "Ошибка: не удалось найти разработчика!" << std::endl;
+            }
+            
+        } else {
+            std::cout << "Неверный логин или пароль!" << std::endl;
+        }
+    } else {
         std::cout << "Введите логин и пароль!" << std::endl;
     }
 }
-
 // Выход из системы
 void ScrumBoard::logout() {
     isLoggedIn = false;
@@ -963,7 +981,7 @@ void ScrumBoard::openTaskEditWindow() {
     // Получаем полный текст выбранной задачи
     if (editingTaskSection != -1 && editingTaskIndex != -1) {
         for (const auto& taskData : tasksData) {
-            if (taskData.getId() == tasks[editingTaskSection][editingTaskIndex].id && taskData.getId() && (*activeDeveloper).validateProject()) {
+            if (taskData.getId() == tasks[editingTaskSection][editingTaskIndex].id && taskData.getId() && (*activeDeveloper).validateTask(taskData.getId())){
                 currentEditTaskInput = taskData.getTitle();
                 break;
             }
