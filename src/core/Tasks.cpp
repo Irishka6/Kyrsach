@@ -8,7 +8,7 @@ using json = nlohmann::json;
 
 Tasks::Tasks(int id, const std::string& title, int status)
     : id(id), title(title), status(status),
-      assignedDeveloper(nullptr), creationDate(std::chrono::system_clock::now()),
+       creationDate(std::chrono::system_clock::now()),
       lastModifiedDate(creationDate) {}
 
 int Tasks::getId() const { return id; }
@@ -25,10 +25,10 @@ void Tasks::changeStatus(int newStatus) {
     lastModifiedDate = std::chrono::system_clock::now();
 }
 
-void Tasks::assignDeveloper(Developer* developer) {
-    assignedDeveloper = developer;
-    lastModifiedDate = std::chrono::system_clock::now();
-}
+void Tasks::setProject(const std::string& name){
+    this->prodject = name;
+} 
+
 
 std::string Tasks::getFormattedCreationDate() const {
     std::time_t time = std::chrono::system_clock::to_time_t(creationDate);
@@ -75,6 +75,8 @@ std::vector<Tasks> getTasksFromJson(const std::string& filename) {
     
     return tasks;
 }
+
+
 
 void saveTasksToJson(const std::vector<Tasks>& tasks, const std::string& filename) {
     json j_array = json::array();

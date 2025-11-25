@@ -19,7 +19,6 @@ ScrumBoard::ScrumBoard() :
 {
     // Названия секций
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
-    
     tasks.resize(4);
     
     // Переменные для перетаскивания задач
@@ -55,10 +54,11 @@ ScrumBoard::ScrumBoard() :
     cursor.setFillColor(sf::Color::Black);
     
     // Список проектов
-    projects = {"Проект 1", "Проект 2", "Проект 3", "Проект 4", "Проект 5"};  
+    projects = {};  
     
     // Загружаем задачи из JSON файла
-    tasksData = getTasksFromJson(TASKS_JSON_PATH);
+    // tasksData = getTasksFromJson(TASKS_JSON_PATH);
+    tasksData = {};
 }
 
 // Инициализация ресурсов и создание интерфейса
@@ -338,7 +338,7 @@ void ScrumBoard::createProjectWindow() {
         
         // Текст проекта
         sf::Text projectText;
-        projectText.setString(projects[i]);
+        projectText.setString(projects[i].getName());
         projectText.setFont(font);
         projectText.setCharacterSize(24);
         projectText.setFillColor(sf::Color(50, 50, 80));
@@ -860,7 +860,7 @@ void ScrumBoard::handleLoginInput(const sf::Event& event) {
 // Подтверждение добавления новой задачи в выбранную секцию
 void ScrumBoard::confirmAddTask(int selectedSection) {
     // Проверка наличия текста задачи и корректности секции
-    if (!currentTaskInput.empty() && selectedSection >= 0 && selectedSection < 4) {
+    if (!currentTaskInput.empty() && selectedSection >= 0 && selectedSection < 4 && activeDeveloper != nullptr) {
         // Генерация нового ID (максимальный существующий + 1)
         int newId = 1;
         for (const auto& task : tasksData) {
@@ -896,11 +896,14 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
 // Подтверждение входа
 void ScrumBoard::confirmLogin() {
     // Проверка наличия логина и пароля
-    if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
+    if (!currentUsernameInput.empty() && !currentPasswordInput.empty() && validateDeveloperCredentials(getDevelopersFromJson(), currentUsernameInput, currentPasswordInput)) {
         std::cout << "Вход выполнен успешно!" << std::endl;
+        activeDeveloper = findDeveloperByLogin(getDevelopersFromJson(), currentUsernameInput, currentPasswordInput);
         isLoggedIn = true;
         currentUser = currentUsernameInput;
         showLogoutButton = true; 
+        projects = (*activeDeveloper).getProject();
+        createProjectWindow();
         closeLoginWindow();
         
         // Обновляем текст кнопки пользователя
@@ -908,7 +911,10 @@ void ScrumBoard::confirmLogin() {
         centerTextInButton(userInfoText, userInfoButton);
         
         std::cout << "Пользователь: " << currentUser << " вошел в систему" << std::endl;
-    } else {
+    } else if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
+        std::cout << "Неверный логин или пароль!" << std::endl;
+    }
+    else {
         std::cout << "Введите логин и пароль!" << std::endl;
     }
 }
@@ -917,6 +923,9 @@ void ScrumBoard::confirmLogin() {
 void ScrumBoard::logout() {
     isLoggedIn = false;
     currentUser = "";
+    activeDeveloper = nullptr;
+    projects = {};
+    createProjectWindow();
     showLogoutButton = false; // СКРЫВАЕМ КНОПКУ ВЫХОДА
     std::cout << "Выход выполнен" << std::endl;
 }
@@ -954,7 +963,7 @@ void ScrumBoard::openTaskEditWindow() {
     // Получаем полный текст выбранной задачи
     if (editingTaskSection != -1 && editingTaskIndex != -1) {
         for (const auto& taskData : tasksData) {
-            if (taskData.getId() == tasks[editingTaskSection][editingTaskIndex].id) {
+            if (taskData.getId() == tasks[editingTaskSection][editingTaskIndex].id && taskData.getId() && (*activeDeveloper).validateProject()) {
                 currentEditTaskInput = taskData.getTitle();
                 break;
             }
@@ -1137,7 +1146,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             
             // Обработка информации о пользователе (если вошел)
             if (isLoggedIn && userInfoButton.getGlobalBounds().contains(mousePos)) {
-                // Ничего не делаем при клике на имя пользователя
+                activeDeveloper = nullptr;
                 return;
             }
             
@@ -1231,7 +1240,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             if (showProjectWindow) { 
                 for (size_t i = 0; i < projectRects.size(); i++) {
                     if (projectRects[i].getGlobalBounds().contains(mousePos)) {
-                        std::cout << "Выбран проект: " << projects[i] << std::endl;
+                        std::cout << "Выбран проект: " << projects[i].getName() << std::endl;
                         showProjectWindow = false;
                         return;
                     }

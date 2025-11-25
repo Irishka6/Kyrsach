@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <vector>
 #include "Developer.h"
-#include "Enums.h"
 
 class Tasks {
     public:
@@ -13,7 +13,8 @@ class Tasks {
     std::string getTitle() const;
     void setTitle(const std::string& title);
     void changeStatus(int status);
-    void assignDeveloper(Developer* developer);
+    void setProject(const std::string& name);
+    void assignDeveloper(std::string developer);
     std::string getFormattedCreationDate() const;
     int getStatus() const;
     std::string getProjekt() const;
@@ -23,7 +24,6 @@ class Tasks {
     std::string title;
     int status;
     std::string prodject;
-    Developer* assignedDeveloper;
     std::chrono::system_clock::time_point creationDate;
     std::chrono::system_clock::time_point lastModifiedDate;
 

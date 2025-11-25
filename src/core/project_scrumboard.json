@@ -1,0 +1,17 @@
+{
+    "id": 1,
+    "name": "ScrumBoard",
+    "deadline": "2025-12-31",
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Design database",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "title": "Implement UI",
+            "status": 1
+        }
+    ]
+}

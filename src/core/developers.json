@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "login": "ivanov",
+        "password": "pass123",
+        "project_ids": [
+            1
+        ]
+    },
+    {
+        "id": 2,
+        "login": "petrov",
+        "password": "qwerty",
+        "project_ids": [
+            1
+        ]
+    }
+]

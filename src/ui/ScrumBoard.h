@@ -59,7 +59,7 @@ private:
     sf::RectangleShape projectWindow;                                               // Основное окно проектов
     std::vector<sf::RectangleShape> projectRects;                                   // Кнопки проектов
     std::vector<sf::Text> projectTexts;                                             // Тексты на кнопках проектов
-    std::vector<std::string> projects;                                              // Список названий проектов
+    std::vector<Project> projects;                                              // Список названий проектов
     
     // Окно добавления задач
     bool showAddTaskWindow;                                                         // Флаг показа окна добавления
@@ -109,6 +109,7 @@ private:
     sf::Text userInfoText;
     sf::RectangleShape logoutButton;
     sf::Text logoutButtonText;
+    Developer* activeDeveloper = nullptr;
     bool showLogoutButton;
 
 public:
