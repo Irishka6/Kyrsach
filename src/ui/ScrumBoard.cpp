@@ -6,14 +6,13 @@
 #include <iostream>
 #include <algorithm>
 
-// Путь к JSON файлу в папке core
+// Путь к JSON
 const std::string TASKS_JSON_PATH = "../core/project_scrumboard.json";
 
-// Константы окна
 const int WINDOW_WIDTH = 1920;
 const int WINDOW_HEIGHT = 1080;
 
-// Конструктор класса ScrumBoard - инициализирует все переменные
+// Инициализирует все переменные
 ScrumBoard::ScrumBoard() :
     isLoggedIn(false),
     currentUser(""),
@@ -34,18 +33,22 @@ ScrumBoard::ScrumBoard() :
     showAddTaskWindow = false; 
     showEditMode = false;       
     showTaskEditWindow = false;  
+    showAddProjectWindow = false;
+    showAddDeveloperWindow = false;
     
     // Переменные для ввода текста
     currentUsernameInput = "";   
     currentPasswordInput = "";   
     currentTaskInput = "";    
     currentEditTaskInput = ""; 
+    currentProjectNameInput = "";
     
     // Флаги активности полей ввода
-    isUsernameInputActive = false;  // Поле логина активно
-    isPasswordInputActive = false;  // Поле пароля активно
+    isUsernameInputActive = false; 
+    isPasswordInputActive = false;  
     isTaskInputActive = false;  
     isEditTaskInputActive = false; 
+    isProjectNameInputActive = false;
     
     // Переменные для редактирования задачи
     editingTaskSection = -1;    
@@ -58,13 +61,13 @@ ScrumBoard::ScrumBoard() :
     
     // Список проектов
     projects = {};  
+    availableDevelopers = {};
     
     // Загружаем задачи из JSON файла
-    // tasksData = getTasksFromJson(TASKS_JSON_PATH);
     tasksData = {};
 }
 
-// Инициализация ресурсов и создание интерфейса
+// Создание интерфейса
 bool ScrumBoard::initialize() {
     // Загрузка шрифта
     if (!font.loadFromFile("ofont.ru_Pastry Chef.ttf")) {
@@ -75,6 +78,7 @@ bool ScrumBoard::initialize() {
     // Создание всех компонентов
     createTitle();           
     createTopPanel();       
+    createProjectManagementButtons();
     createSections();       
     createSampleTasks();     
     createLoginWindow();    
@@ -82,7 +86,8 @@ bool ScrumBoard::initialize() {
     createAddTaskWindow();   
     createTaskEditWindow(); 
     createUserInfo();      
-    
+    createAddProjectWindow();
+    createAddDeveloperWindow();
     return true;
 }
 
@@ -146,17 +151,13 @@ void ScrumBoard::createTopPanel() {
     loginButtonText.setStyle(sf::Text::Bold);
     
     // Центрирование текста на кнопке
-    sf::FloatRect loginTextBounds = loginButtonText.getLocalBounds(); 
-    loginButtonText.setPosition(
-        150 + (200 - loginTextBounds.width) / 2,
-        30 + (40 - loginTextBounds.height) / 2 - 5
-    );
+    centerTextInButton(loginButtonText, loginButton);
 
-    // Кнопка "Проекты"
+    // Кнопка "Проекты" (будет показываться только после входа)
     projectButton.setSize(sf::Vector2f(200, 40));
     projectButton.setFillColor(sf::Color(180, 210, 235));
     projectButton.setOutlineThickness(0);
-    projectButton.setPosition(370, 30);  // 150 + 200 + 20 = 370
+    projectButton.setPosition(370, 30);
 
     projectButtonText.setString("Проекты"); 
     projectButtonText.setFont(font);
@@ -165,17 +166,13 @@ void ScrumBoard::createTopPanel() {
     projectButtonText.setStyle(sf::Text::Bold);
     
     // Центрирование текста на кнопке
-    sf::FloatRect projectTextBounds = projectButtonText.getLocalBounds(); 
-    projectButtonText.setPosition(
-        370 + (200 - projectTextBounds.width) / 2,
-        30 + (40 - projectTextBounds.height) / 2 - 5
-    );
+    centerTextInButton(projectButtonText, projectButton);
 
-    // Кнопка "Редактировать"
+    // Кнопка "Редактировать" (сдвинута вправо)
     editButton.setSize(sf::Vector2f(250, 40));
     editButton.setFillColor(sf::Color(180, 210, 235));
     editButton.setOutlineThickness(0);
-    editButton.setPosition(1520, 30);
+    editButton.setPosition(1600, 30);
 
     editButtonText.setString("Редактировать");
     editButtonText.setFont(font);
@@ -184,37 +181,62 @@ void ScrumBoard::createTopPanel() {
     editButtonText.setStyle(sf::Text::Bold);
     
     // Центрирование текста на кнопке
-    sf::FloatRect editTextBounds = editButtonText.getLocalBounds();
-    editButtonText.setPosition(
-        1520 + (250 - editTextBounds.width) / 2,
-        30 + (40 - editTextBounds.height) / 2 - 5
-    );
+    centerTextInButton(editButtonText, editButton);
 
-    // Кнопка "Добавить"
-    addButton.setSize(sf::Vector2f(200, 40));
+    // Кнопка "Добавить задачу" (сдвинута вправо, текст изменен)
+    addButton.setSize(sf::Vector2f(220, 40));
     addButton.setFillColor(sf::Color(180, 210, 235));
     addButton.setOutlineThickness(0);
-    addButton.setPosition(1300, 30);
+    addButton.setPosition(1360, 30);
 
-    addButtonText.setString("Добавить");
+    addButtonText.setString("Добавить задачу");
     addButtonText.setFont(font);
-    addButtonText.setCharacterSize(24);
+    addButtonText.setCharacterSize(22);
     addButtonText.setFillColor(sf::Color(50, 50, 80));
     addButtonText.setStyle(sf::Text::Bold);
     
     // Центрирование текста на кнопке
-    sf::FloatRect addTextBounds = addButtonText.getLocalBounds();
-    addButtonText.setPosition(
-        1300 + (200 - addTextBounds.width) / 2,
-        30 + (40 - addTextBounds.height) / 2 - 5
-    );
+    centerTextInButton(addButtonText, addButton);
+}
+
+// Создание кнопок управления проектами
+void ScrumBoard::createProjectManagementButtons() {
+    // Кнопка "Добавить проект"
+    addProjectButton.setSize(sf::Vector2f(220, 40));
+    addProjectButton.setFillColor(sf::Color(180, 210, 235));
+    addProjectButton.setOutlineThickness(0);
+    addProjectButton.setPosition(590, 30);
+
+    addProjectButtonText.setString("Добавить проект");
+    addProjectButtonText.setFont(font);
+    addProjectButtonText.setCharacterSize(22);
+    addProjectButtonText.setFillColor(sf::Color(50, 50, 80));
+    addProjectButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста на кнопке
+    centerTextInButton(addProjectButtonText, addProjectButton);
+
+    // Кнопка "Добавить разработчика"
+    addDeveloperButton.setSize(sf::Vector2f(260, 40));
+    addDeveloperButton.setFillColor(sf::Color(180, 210, 235));
+    addDeveloperButton.setOutlineThickness(0);
+    addDeveloperButton.setPosition(820, 30);
+
+    addDeveloperButtonText.setString("Добавить разработчика");
+    addDeveloperButtonText.setFont(font);
+    addDeveloperButtonText.setCharacterSize(20);
+    addDeveloperButtonText.setFillColor(sf::Color(50, 50, 80));
+    addDeveloperButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста на кнопке
+    centerTextInButton(addDeveloperButtonText, addDeveloperButton);
 }
 
 // Создание окна входа
 void ScrumBoard::createLoginWindow() {
-    float windowWidth = 400.0f;     // Ширина окна
-    float windowHeight = 300.0f;    // Высота окна
-    float padding = 20.0f;          // Отступы
+    float windowWidth = 400.0f;
+    float windowHeight = 300.0f;
+    float padding = 20.0f;
     
     // Позиционирование по центру экрана
     float startX = (WINDOW_WIDTH - windowWidth) / 2;
@@ -224,7 +246,7 @@ void ScrumBoard::createLoginWindow() {
     loginWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
     loginWindow.setFillColor(sf::Color(180, 210, 235));
     loginWindow.setOutlineColor(sf::Color(160, 190, 220));
-    loginWindow.setOutlineThickness(3); // Толщина обводки 3 пикселя
+    loginWindow.setOutlineThickness(3);
     loginWindow.setPosition(startX, startY);
     
     // Метка "Имя пользователя"
@@ -304,12 +326,18 @@ void ScrumBoard::createLoginWindow() {
 
 // Создание окна выбора проекта
 void ScrumBoard::createProjectWindow() { 
-    float projectHeight = 55.0f;    // Высота кнопки проекта
-    float padding = 15.0f;          // Отступы
+    float projectHeight = 55.0f;
+    float padding = 15.0f;
     
-    // Расчет размеров окна
+    // Если нет проектов, создаем маленькое окно с сообщением
     float windowWidth = 380.0f;
-    float windowHeight = projectHeight * projects.size() + padding * 2; 
+    float windowHeight = 0;
+    
+    if (projects.empty()) {
+        windowHeight = 100.0f;
+    } else {
+        windowHeight = projectHeight * projects.size() + padding * 2; 
+    }
     
     // Позиционирование по центру экрана
     float startX = (WINDOW_WIDTH - windowWidth) / 2;
@@ -328,40 +356,57 @@ void ScrumBoard::createProjectWindow() {
     
     float projectWidth = windowWidth - padding * 2; 
     
-    // Создание кнопок для каждого проекта
-    for (size_t i = 0; i < projects.size(); i++) { 
-        // Прямоугольник кнопки проекта
-        sf::RectangleShape projectRect; 
-        projectRect.setSize(sf::Vector2f(projectWidth, projectHeight));
-        projectRect.setFillColor(sf::Color(180, 210, 235));
-        projectRect.setOutlineColor(sf::Color(100, 130, 160));
-        projectRect.setOutlineThickness(3);
-        projectRect.setPosition(startX + padding, startY + padding + i * projectHeight);
-        projectRects.push_back(projectRect);
+    if (projects.empty()) {
+        // Сообщение "Нет проектов"
+        sf::Text noProjectsText;
+        noProjectsText.setString("Нет доступных проектов");
+        noProjectsText.setFont(font);
+        noProjectsText.setCharacterSize(24);
+        noProjectsText.setFillColor(sf::Color(50, 50, 80));
+        noProjectsText.setStyle(sf::Text::Bold);
         
-        // Текст проекта
-        sf::Text projectText;
-        projectText.setString(projects[i].getName());
-        projectText.setFont(font);
-        projectText.setCharacterSize(24);
-        projectText.setFillColor(sf::Color(50, 50, 80));
-        projectText.setStyle(sf::Text::Bold);
-        
-        // Центрирование текста
-        sf::FloatRect textBounds = projectText.getLocalBounds();
-        projectText.setPosition(
-            startX + padding + (projectWidth - textBounds.width) / 2,
-            startY + padding + i * projectHeight + (projectHeight - textBounds.height) / 2 - 3
+        sf::FloatRect textBounds = noProjectsText.getLocalBounds();
+        noProjectsText.setPosition(
+            startX + (windowWidth - textBounds.width) / 2,
+            startY + padding
         );
-        projectTexts.push_back(projectText); 
+        projectTexts.push_back(noProjectsText);
+    } else {
+        // Создание кнопок для каждого проекта
+        for (size_t i = 0; i < projects.size(); i++) { 
+            // Прямоугольник кнопки проекта
+            sf::RectangleShape projectRect; 
+            projectRect.setSize(sf::Vector2f(projectWidth, projectHeight));
+            projectRect.setFillColor(sf::Color(180, 210, 235));
+            projectRect.setOutlineColor(sf::Color(100, 130, 160));
+            projectRect.setOutlineThickness(3);
+            projectRect.setPosition(startX + padding, startY + padding + i * projectHeight);
+            projectRects.push_back(projectRect);
+            
+            // Текст проекта
+            sf::Text projectText;
+            projectText.setString(projects[i].getName());
+            projectText.setFont(font);
+            projectText.setCharacterSize(24);
+            projectText.setFillColor(sf::Color(50, 50, 80));
+            projectText.setStyle(sf::Text::Bold);
+            
+            // Центрирование текста
+            sf::FloatRect textBounds = projectText.getLocalBounds();
+            projectText.setPosition(
+                startX + padding + (projectWidth - textBounds.width) / 2,
+                startY + padding + i * projectHeight + (projectHeight - textBounds.height) / 2 - 3
+            );
+            projectTexts.push_back(projectText); 
+        }
     }
 }
 
 // Создание окна добавления новой задачи
 void ScrumBoard::createAddTaskWindow() {
-    float windowWidth = 500.0f;     // Ширина окна
-    float windowHeight = 400.0f;    // Высота окна
-    float padding = 20.0f;          // Отступы
+    float windowWidth = 500.0f;
+    float windowHeight = 400.0f;
+    float padding = 20.0f;
     
     // Позиционирование по центру экрана
     float startX = (WINDOW_WIDTH - windowWidth) / 2;
@@ -406,8 +451,8 @@ void ScrumBoard::createAddTaskWindow() {
     
     // Создание 4 кнопок для выбора секции
     for (int i = 0; i < 4; i++) {
-        int row = i / 2;  // Номер ряда
-        int col = i % 2;  // Номер колонки
+        int row = i / 2;
+        int col = i % 2;
         
         // Прямоугольник кнопки секции
         sf::RectangleShape sectionRect;
@@ -452,11 +497,7 @@ void ScrumBoard::createAddTaskWindow() {
     confirmAddButtonText.setStyle(sf::Text::Bold);
     
     // Центрирование текста кнопки
-    sf::FloatRect confirmTextBounds = confirmAddButtonText.getLocalBounds();
-    confirmAddButtonText.setPosition(
-        startX + padding + (150 - confirmTextBounds.width) / 2,
-        startY + windowHeight - padding - 50 + (40 - confirmTextBounds.height) / 2 - 3
-    );
+    centerTextInButton(confirmAddButtonText, confirmAddButton);
     
     // Кнопка отмены
     cancelAddButton.setSize(sf::Vector2f(150, 40));
@@ -472,18 +513,14 @@ void ScrumBoard::createAddTaskWindow() {
     cancelAddButtonText.setStyle(sf::Text::Bold);
     
     // Центрирование текста кнопки
-    sf::FloatRect cancelTextBounds = cancelAddButtonText.getLocalBounds();
-    cancelAddButtonText.setPosition(
-        startX + windowWidth - padding - 150 + (150 - cancelTextBounds.width) / 2,
-        startY + windowHeight - padding - 50 + (40 - cancelTextBounds.height) / 2 - 3
-    );
+    centerTextInButton(cancelAddButtonText, cancelAddButton);
 }
 
 // Создание окна редактирования задачи
 void ScrumBoard::createTaskEditWindow() {
-    float windowWidth = 500.0f;     // Ширина окна
-    float windowHeight = 300.0f;    // Высота окна
-    float padding = 20.0f;          // Отступы
+    float windowWidth = 500.0f;
+    float windowHeight = 300.0f;
+    float padding = 20.0f;
     
     // Позиционирование по центру экрана
     float startX = (WINDOW_WIDTH - windowWidth) / 2;
@@ -561,6 +598,158 @@ void ScrumBoard::createTaskEditWindow() {
     centerTextInButton(saveEditButtonText, saveEditButton);
     centerTextInButton(deleteTaskButtonText, deleteTaskButton);
     centerTextInButton(cancelEditButtonText, cancelEditButton);
+}
+
+// Создание окна добавления проекта
+void ScrumBoard::createAddProjectWindow() {
+    float windowWidth = 450.0f;
+    float windowHeight = 250.0f;
+    float padding = 20.0f;
+    
+    // Позиционирование по центру экрана
+    float startX = (WINDOW_WIDTH - windowWidth) / 2;
+    float startY = (WINDOW_HEIGHT - windowHeight) / 2;
+    
+    // Основное окно
+    addProjectWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
+    addProjectWindow.setFillColor(sf::Color(180, 210, 235));
+    addProjectWindow.setOutlineColor(sf::Color(160, 190, 220));
+    addProjectWindow.setOutlineThickness(3);
+    addProjectWindow.setPosition(startX, startY);
+    
+    // Поле ввода названия проекта
+    projectNameInputField.setSize(sf::Vector2f(windowWidth - padding * 2, 50.0f));
+    projectNameInputField.setFillColor(sf::Color::White);
+    projectNameInputField.setOutlineColor(sf::Color(100, 130, 160));
+    projectNameInputField.setOutlineThickness(2);
+    projectNameInputField.setPosition(startX + padding, startY + 70);
+    
+    // Подсказка в поле ввода
+    projectNameInputText.setString("Введите название проекта");
+    projectNameInputText.setFont(font);
+    projectNameInputText.setCharacterSize(20);
+    projectNameInputText.setFillColor(sf::Color(150, 150, 150));
+    projectNameInputText.setPosition(startX + padding + 10, startY + 85);
+    
+    // Кнопка подтверждения добавления
+    confirmAddProjectButton.setSize(sf::Vector2f(150, 40));
+    confirmAddProjectButton.setFillColor(sf::Color(120, 180, 120));
+    confirmAddProjectButton.setOutlineColor(sf::Color(80, 140, 80));
+    confirmAddProjectButton.setOutlineThickness(2);
+    confirmAddProjectButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
+    
+    confirmAddProjectButtonText.setString("Создать");
+    confirmAddProjectButtonText.setFont(font);
+    confirmAddProjectButtonText.setCharacterSize(20);
+    confirmAddProjectButtonText.setFillColor(sf::Color::White);
+    confirmAddProjectButtonText.setStyle(sf::Text::Bold);
+    
+    // Кнопка отмены
+    cancelAddProjectButton.setSize(sf::Vector2f(150, 40));
+    cancelAddProjectButton.setFillColor(sf::Color(180, 120, 120));
+    cancelAddProjectButton.setOutlineColor(sf::Color(140, 80, 80));
+    cancelAddProjectButton.setOutlineThickness(2);
+    cancelAddProjectButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
+    
+    cancelAddProjectButtonText.setString("Отмена");
+    cancelAddProjectButtonText.setFont(font);
+    cancelAddProjectButtonText.setCharacterSize(20);
+    cancelAddProjectButtonText.setFillColor(sf::Color::White);
+    cancelAddProjectButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста на кнопках
+    centerTextInButton(confirmAddProjectButtonText, confirmAddProjectButton);
+    centerTextInButton(cancelAddProjectButtonText, cancelAddProjectButton);
+}
+
+// Создание окна добавления разработчика
+void ScrumBoard::createAddDeveloperWindow() {
+    float developerHeight = 55.0f;
+    float padding = 15.0f;
+    
+    // Загружаем ВСЕХ разработчиков из системы
+    availableDevelopers = getDevelopersFromJson();
+    
+    // Фильтруем разработчиков - убираем текущего пользователя
+    std::vector<Developer> filteredDevelopers;
+    for (const auto& dev : availableDevelopers) {
+        if (activeDeveloper && dev.getId() != activeDeveloper->getId()) {
+            filteredDevelopers.push_back(dev);
+        }
+    }
+    availableDevelopers = filteredDevelopers;
+    
+    // Если нет других разработчиков, создаем окно с сообщением
+    float windowWidth = 400.0f;
+    float windowHeight = 0;
+    
+    if (availableDevelopers.empty()) {
+        windowHeight = 150.0f;
+    } else {
+        windowHeight = developerHeight * availableDevelopers.size() + padding * 2 + 40; 
+    }
+    
+    // Позиционирование по центру экрана
+    float startX = (WINDOW_WIDTH - windowWidth) / 2;
+    float startY = (WINDOW_HEIGHT - windowHeight) / 2;
+    
+    // Основное окно
+    addDeveloperWindow.setSize(sf::Vector2f(windowWidth, windowHeight));
+    addDeveloperWindow.setFillColor(sf::Color(180, 210, 235));
+    addDeveloperWindow.setOutlineColor(sf::Color(160, 190, 220));
+    addDeveloperWindow.setOutlineThickness(3);
+    addDeveloperWindow.setPosition(startX, startY);
+    
+    // Очистка предыдущих элементов
+    developerRects.clear(); 
+    developerTexts.clear(); 
+    
+    float developerWidth = windowWidth - padding * 2; 
+    
+    if (availableDevelopers.empty()) {
+        // Сообщение "Нет других разработчиков"
+        sf::Text noDevelopersText;
+        noDevelopersText.setString("Нет других разработчиков\nв системе");
+        noDevelopersText.setFont(font);
+        noDevelopersText.setCharacterSize(22);
+        noDevelopersText.setFillColor(sf::Color(50, 50, 80));
+        noDevelopersText.setStyle(sf::Text::Bold);
+        
+        sf::FloatRect textBounds = noDevelopersText.getLocalBounds();
+        noDevelopersText.setPosition(
+            startX + (windowWidth - textBounds.width) / 2,
+            startY + padding + 20
+        );
+        developerTexts.push_back(noDevelopersText);
+    } else {
+        // Создание кнопок для каждого разработчика
+        for (size_t i = 0; i < availableDevelopers.size(); i++) { 
+            // Прямоугольник кнопки разработчика
+            sf::RectangleShape developerRect; 
+            developerRect.setSize(sf::Vector2f(developerWidth, developerHeight));
+            developerRect.setFillColor(sf::Color(180, 210, 235));
+            developerRect.setOutlineColor(sf::Color(100, 130, 160));
+            developerRect.setOutlineThickness(3);
+            developerRect.setPosition(startX + padding, startY + padding + i * developerHeight);
+            developerRects.push_back(developerRect);
+            
+            // Текст разработчика
+            sf::Text developerText;
+            developerText.setString(availableDevelopers[i].getLogin());
+            developerText.setFont(font);
+            developerText.setCharacterSize(22);
+            developerText.setFillColor(sf::Color(50, 50, 80));
+            developerText.setStyle(sf::Text::Bold);
+            
+            // Центрирование текста
+            sf::FloatRect textBounds = developerText.getLocalBounds();
+            developerText.setPosition(
+                startX + padding + (developerWidth - textBounds.width) / 2,
+                startY + padding + i * developerHeight + (developerHeight - textBounds.height) / 2 - 3
+            );
+            developerTexts.push_back(developerText); 
+        }
+    }
 }
 
 // Вспомогательная функция для центрирования текста
@@ -647,7 +836,7 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         float sectionWidth = (totalWidth - 120.0f) / 4.0f;
         float spacing = 40.0f;
         float startX = 50.0f;
-        float taskWidth = sectionWidth - 30.0f;  // Ширина задачи с отступами
+        float taskWidth = sectionWidth - 30.0f;
         
         // Позиция задачи в секции
         float x = startX + section * (sectionWidth + spacing) + (sectionWidth - taskWidth) / 2;
@@ -669,12 +858,15 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         }
         newTask.text.setString(displayText);
         
-        // Центрирование текста в задаче
+        // Центрирование текста в задаче - сохраняем относительную позицию текста
         sf::FloatRect textBounds = newTask.text.getLocalBounds();
         newTask.text.setPosition(
             x + (taskWidth - textBounds.width) / 2,
             y + (85 - textBounds.height) / 2 - 5
         );
+        
+        // Сохраняем относительное смещение текста для корректного перемещения
+        newTask.textOffset = sf::Vector2f((taskWidth - textBounds.width) / 2, (85 - textBounds.height) / 2 - 5);
         
         // Добавление задачи в соответствующую секцию
         tasks[section].push_back(newTask);
@@ -714,7 +906,6 @@ void ScrumBoard::saveTasksData() {
     }
 
     // 1. ОБНОВЛЯЕМ ЗАДАЧИ В АКТИВНОМ ПРОЕКТЕ
-    // Создаем временный проект с обновленными задачами
     Project updatedProject(idActiveProject.getId(), idActiveProject.getName(), 
                           idActiveProject.getDeadline(), idActiveProject.getCreatorId());
     
@@ -740,7 +931,7 @@ void ScrumBoard::saveTasksData() {
     for (auto& project : allProjects) {
         if (project.getId() == idActiveProject.getId()) {
             std::cout << "Найден проект для обновления: " << project.getName() << std::endl;
-            project = idActiveProject; // ПОЛНАЯ ЗАМЕНА
+            project = idActiveProject;
             projectFound = true;
             break;
         }
@@ -756,7 +947,7 @@ void ScrumBoard::saveTasksData() {
     std::cout << "Проекты сохранены в файл" << std::endl;
 }
 
-// Обновление позиций всех задач на доске
+// Обновление позиций всех задач на доске - ИСПРАВЛЕННАЯ ВЕРСИЯ
 void ScrumBoard::updateTaskPositions() {
     // Расчет размеров
     float totalWidth = 1820.0f;
@@ -767,7 +958,7 @@ void ScrumBoard::updateTaskPositions() {
     
     // Обновление позиций для всех секций и всех задач
     for (int section = 0; section < 4; section++) {
-        float startY = 270.0f;  // Начальная позиция Y для первой задачи в секции
+        float startY = 270.0f;
         
         for (size_t i = 0; i < tasks[section].size(); i++) {
             // Расчет позиции задачи
@@ -778,11 +969,17 @@ void ScrumBoard::updateTaskPositions() {
             tasks[section][i].setPosition(x, y);
             tasks[section][i].shape.setSize(sf::Vector2f(taskWidth, 85));
             
-            // Центрирование текста в задаче
+            // ВОССТАНАВЛИВАЕМ правильную позицию текста относительно задачи
             sf::FloatRect textBounds = tasks[section][i].text.getLocalBounds();
             tasks[section][i].text.setPosition(
                 x + (taskWidth - textBounds.width) / 2,
                 y + (85 - textBounds.height) / 2 - 5
+            );
+            
+            // Обновляем смещение текста
+            tasks[section][i].textOffset = sf::Vector2f(
+                (taskWidth - textBounds.width) / 2,
+                (85 - textBounds.height) / 2 - 5
             );
         }
     }
@@ -925,10 +1122,63 @@ void ScrumBoard::handleLoginInput(const sf::Event& event) {
     }
 }
 
-// Подтверждение добавления новой задачи в выбранную секцию
+// Обработка ввода текста для нового проекта
+void ScrumBoard::handleAddProjectInput(const sf::Event& event) {
+    if (event.type == sf::Event::TextEntered) {
+        // Обработка только ASCII символов
+        if (event.text.unicode < 128) {
+            char c = static_cast<char>(event.text.unicode);
+            
+            // Обработка Backspace
+            if (event.text.unicode == 8) {
+                if (!currentProjectNameInput.empty()) {
+                    currentProjectNameInput.pop_back();
+                }
+            }
+            // Обработка Enter
+            else if (event.text.unicode == 13) {
+                confirmAddProject();
+                return;
+            }
+            // Обработка печатных символов
+            else if (c >= 32 && c <= 126) {
+                currentProjectNameInput += c;
+            }
+            
+            // Обновление отображаемого текста
+            if (currentProjectNameInput.empty()) {
+                projectNameInputText.setString("Введите название проекта");
+                projectNameInputText.setFillColor(sf::Color(150, 150, 150));
+            } else {
+                projectNameInputText.setString(currentProjectNameInput);
+                projectNameInputText.setFillColor(sf::Color(50, 50, 80));
+            }
+            
+            // Сброс таймера курсора при вводе
+            cursorClock.restart();
+            cursorVisible = true;
+        }
+    }
+}
+
+// Подтверждение добавления новой задачи в выбранную секцию - ИСПРАВЛЕННАЯ ВЕРСИЯ
 void ScrumBoard::confirmAddTask(int selectedSection) {
     // Проверка наличия текста задачи и корректности секции
     if (!currentTaskInput.empty() && selectedSection >= 0 && selectedSection < 4 && activeDeveloper != nullptr) {
+        // Проверяем, что пользователь имеет доступ к активному проекту
+        bool hasAccess = false;
+        for (int devId : idActiveProject.getDeveloperIds()) {
+            if (devId == activeDeveloper->getId()) {
+                hasAccess = true;
+                break;
+            }
+        }
+        
+        if (!hasAccess) {
+            std::cout << "Ошибка: у пользователя нет доступа к этому проекту!" << std::endl;
+            return;
+        }
+        
         // Генерация нового ID (максимальный существующий + 1)
         int newId = 1;
         for (const auto& task : tasksData) {
@@ -954,11 +1204,135 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         taskInputText.setString("Введите задачу на английском");
         taskInputText.setFillColor(sf::Color(150, 150, 150));
         taskInputField.setOutlineColor(sf::Color(100, 130, 160));
-        showAddTaskWindow = false; // Закрываем окно только после успешного добавления
-        cursorVisible = false; // Скрываем курсор
+        showAddTaskWindow = false;
+        cursorVisible = false;
         
         std::cout << "Добавлена новая задача: '" << newTask.getTitle() 
                   << "' в секцию " << selectedSection << std::endl;
+        std::cout << "Теперь в секции " << selectedSection << " задач: " << tasks[selectedSection].size() << std::endl;
+    }
+}
+
+// Подтверждение добавления нового проекта
+void ScrumBoard::confirmAddProject() {
+    if (!currentProjectNameInput.empty() && activeDeveloper != nullptr) {
+        // Генерация нового ID проекта
+        int newId = 1;
+        std::vector<Project> allProjects = Project::getProjectsFromJson();
+        for (const auto& project : allProjects) {
+            if (project.getId() >= newId) {
+                newId = project.getId() + 1;
+            }
+        }
+        
+        // Создание нового проекта с привязкой к текущему пользователю
+        Project newProject(newId, currentProjectNameInput, "2024-12-31", activeDeveloper->getId());
+        newProject.addDeveloper(activeDeveloper->getId());
+        
+        // Добавление проекта в общий список
+        allProjects.push_back(newProject);
+        
+        // Сохраняем проекты в JSON
+        Project::saveProjectsToJson(allProjects);
+        
+        // Обновляем разработчика в файле - добавляем ему проект
+        std::vector<Developer> allDevelopers = getDevelopersFromJson();
+        for (auto& dev : allDevelopers) {
+            if (dev.getId() == activeDeveloper->getId()) {
+                dev.addProject(newProject.getId());
+                break;
+            }
+        }
+        saveDevelopersToJson(allDevelopers);
+        
+        // Обновляем список проектов из файла
+        projects = activeDeveloper->getProjects();
+        createProjectWindow();
+        
+        // Закрываем окно добавления проекта
+        closeAddProjectWindow();
+        
+        // Показываем окно выбора проектов с новым проектом
+        showProjectWindow = true;
+        
+        std::cout << "Создан новый проект '" << currentProjectNameInput 
+                  << "' для пользователя '" << activeDeveloper->getLogin() << "'" << std::endl;
+    }
+}
+
+// Добавление разработчика к проекту
+void ScrumBoard::addDeveloperToProject(int developerIndex) {
+    if (developerIndex >= 0 && developerIndex < availableDevelopers.size() && idActiveProject.getId() != 0) {
+        Developer& selectedDeveloper = availableDevelopers[developerIndex];
+        
+        // Проверяем, не добавлен ли уже этот разработчик к проекту
+        bool alreadyAdded = false;
+        for (int devId : idActiveProject.getDeveloperIds()) {
+            if (devId == selectedDeveloper.getId()) {
+                alreadyAdded = true;
+                break;
+            }
+        }
+        
+        if (alreadyAdded) {
+            std::cout << "Разработчик '" << selectedDeveloper.getLogin() << "' уже добавлен к проекту!" << std::endl;
+            return;
+        }
+        
+        // 1. Добавляем разработчика к проекту
+        idActiveProject.addDeveloper(selectedDeveloper.getId());
+        
+        // 2. Обновляем проект в общем списке проектов
+        std::vector<Project> allProjects = Project::getProjectsFromJson();
+        bool projectUpdated = false;
+        for (auto& project : allProjects) {
+            if (project.getId() == idActiveProject.getId()) {
+                project = idActiveProject;
+                projectUpdated = true;
+                break;
+            }
+        }
+        
+        if (projectUpdated) {
+            Project::saveProjectsToJson(allProjects);
+            std::cout << "Проект обновлен в файле projects.json" << std::endl;
+        }
+        
+        // 3. Добавляем проект к разработчику в его списке проектов
+        std::vector<Developer> allDevelopers = getDevelopersFromJson();
+        bool developerUpdated = false;
+        for (auto& dev : allDevelopers) {
+            if (dev.getId() == selectedDeveloper.getId()) {
+                // Проверяем, нет ли уже этого проекта у разработчика
+                bool projectAlreadyAssigned = false;
+                for (int projectId : dev.getProjectIds()) {
+                    if (projectId == idActiveProject.getId()) {
+                        projectAlreadyAssigned = true;
+                        break;
+                    }
+                }
+                
+                if (!projectAlreadyAssigned) {
+                    dev.addProject(idActiveProject.getId());
+                    developerUpdated = true;
+                    std::cout << "Проект добавлен разработчику '" << dev.getLogin() << "'" << std::endl;
+                }
+                break;
+            }
+        }
+        
+        if (developerUpdated) {
+            saveDevelopersToJson(allDevelopers);
+            std::cout << "Разработчики обновлены в файле developers.json" << std::endl;
+        }
+        
+        // Закрываем окно
+        closeAddDeveloperWindow();
+        
+        std::cout << "Разработчик '" << selectedDeveloper.getLogin() 
+                  << "' добавлен к проекту '" << idActiveProject.getName() << "'" << std::endl;
+    } else {
+        std::cout << "Ошибка: не выбран активный проект!" << std::endl;
     }
 }
 
@@ -969,7 +1343,6 @@ void ScrumBoard::confirmLogin() {
         
         // Загружаем разработчиков один раз
         std::vector<Developer> developers = getDevelopersFromJson();
-        std::cout << developers[0].getLogin() << std::endl;
         
         if (validateDeveloperCredentials(developers, currentUsernameInput, currentPasswordInput)) {
             std::cout << "Вход выполнен успешно!" << std::endl;
@@ -982,8 +1355,11 @@ void ScrumBoard::confirmLogin() {
                 currentUser = currentUsernameInput;
                 showLogoutButton = true; 
                 
-                // Получаем проекты активного разработчика
+                // Получаем ТОЛЬКО проекты активного разработчика
                 projects = activeDeveloper->getProjects();
+                std::cout << "Пользователь '" << currentUser << "' имеет доступ к " 
+                          << projects.size() << " проектам" << std::endl;
+                
                 createProjectWindow();
                 closeLoginWindow();
                 
@@ -998,11 +1374,16 @@ void ScrumBoard::confirmLogin() {
                     idActiveProject = projects[0];
                     tasksData = idActiveProject.getTasks();
                     createSampleTasks();
-                    std::cout << "Автоматически выбран проект: " << idActiveProject.getName() << std::endl;
+                    std::cout << "Автоматически выбран проект: " << idActiveProject.getName() 
+                              << " (ID: " << idActiveProject.getId() << ")" << std::endl;
+                } else {
+                    // Если нет проектов, сбрасываем активный проект
+                    idActiveProject = Project(0, "", "", 0);
+                    tasksData.clear();
+                    createSampleTasks();
+                    std::cout << "У пользователя нет проектов" << std::endl;
                 }
                 
-                std::cout << "Пользователь: " << currentUser << " вошел в систему" << std::endl;
-                std::cout << "Найдено проектов: " << projects.size() << std::endl;
             } else {
                 std::cout << "Ошибка: не удалось найти разработчика!" << std::endl;
             }
@@ -1014,6 +1395,7 @@ void ScrumBoard::confirmLogin() {
         std::cout << "Введите логин и пароль!" << std::endl;
     }
 }
+
 // Выход из системы
 void ScrumBoard::logout() {
     // Сохраняем изменения перед выходом
@@ -1042,20 +1424,19 @@ void ScrumBoard::openEditMode() {
         // Делаем кнопку серой когда режим редактирования активен
         editButton.setFillColor(sf::Color(150, 150, 150));
         editButtonText.setString("Режим редактирования");
+        // Уменьшаем шрифт для вмещения текста
+        editButtonText.setCharacterSize(20);
     } else {
         // Возвращаем обычный цвет когда режим не активен
         editButton.setFillColor(sf::Color(180, 210, 235));
         editButtonText.setString("Редактировать");
+        editButtonText.setCharacterSize(24);
         // Закрываем окно редактирования если оно было открыто
         closeTaskEditWindow();
     }
     
     // Центрирование текста на кнопке
-    sf::FloatRect editTextBounds = editButtonText.getLocalBounds();
-    editButtonText.setPosition(
-        1520 + (250 - editTextBounds.width) / 2,
-        30 + (40 - editTextBounds.height) / 2 - 5
-    );
+    centerTextInButton(editButtonText, editButton);
 }
 
 // Открытие окна редактирования задачи
@@ -1114,12 +1495,18 @@ void ScrumBoard::saveEditedTask() {
         }
         task.text.setString(displayText);
         
-        // Центрирование текста
+        // Центрирование текста с сохранением относительного смещения
         sf::FloatRect textBounds = task.text.getLocalBounds();
         sf::FloatRect taskBounds = task.shape.getGlobalBounds();
         task.text.setPosition(
             taskBounds.left + (taskBounds.width - textBounds.width) / 2,
             taskBounds.top + (taskBounds.height - textBounds.height) / 2 - 5
+        );
+        
+        // Обновляем смещение текста
+        task.textOffset = sf::Vector2f(
+            (taskBounds.width - textBounds.width) / 2,
+            (taskBounds.height - textBounds.height) / 2 - 5
         );
         
         // Сохранение в JSON
@@ -1166,13 +1553,10 @@ void ScrumBoard::closeEditMode() {
     showEditMode = false;
     editButton.setFillColor(sf::Color(180, 210, 235));
     editButtonText.setString("Редактировать");
+    editButtonText.setCharacterSize(24);
     
     // Центрирование текста на кнопке
-    sf::FloatRect editTextBounds = editButtonText.getLocalBounds();
-    editButtonText.setPosition(
-        1520 + (250 - editTextBounds.width) / 2,
-        30 + (40 - editTextBounds.height) / 2 - 5
-    );
+    centerTextInButton(editButtonText, editButton);
     
     closeTaskEditWindow();
 }
@@ -1187,7 +1571,7 @@ void ScrumBoard::closeTaskEditWindow() {
     editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
     editTaskInputText.setString("Введите текст на английском");
     editTaskInputText.setFillColor(sf::Color(150, 150, 150));
-    cursorVisible = false; // Скрываем курсор
+    cursorVisible = false;
 }
 
 // Закрытие окна входа
@@ -1203,21 +1587,86 @@ void ScrumBoard::closeLoginWindow() {
     usernameText.setFillColor(sf::Color(150, 150, 150));
     passwordText.setString("Введите пароль");
     passwordText.setFillColor(sf::Color(150, 150, 150));
-    cursorVisible = false; // Скрываем курсор
+    cursorVisible = false;
 }
 
-// Обработка всех событий ввода
+// Закрытие окна добавления проекта
+void ScrumBoard::closeAddProjectWindow() {
+    showAddProjectWindow = false;
+    isProjectNameInputActive = false;
+    currentProjectNameInput = "";
+    projectNameInputField.setOutlineColor(sf::Color(100, 130, 160));
+    projectNameInputText.setString("Введите название проекта");
+    projectNameInputText.setFillColor(sf::Color(150, 150, 150));
+    cursorVisible = false;
+}
+
+// Закрытие окна добавления разработчика
+void ScrumBoard::closeAddDeveloperWindow() {
+    showAddDeveloperWindow = false;
+    cursorVisible = false;
+}
+
+void ScrumBoard::saveCurrentProjectChanges() {
+    if (idActiveProject.getId() != 0) {
+        std::cout << "Сохранение изменений в проекте: " << idActiveProject.getName() << std::endl;
+        
+        // Обновляем задачи в активном проекте
+        for (auto& task : tasksData) {
+            Tasks* projectTask = idActiveProject.findTaskById(task.getId());
+            if (projectTask) {
+                // Обновляем существующую задачу
+                projectTask->setTitle(task.getTitle());
+                projectTask->changeStatus(task.getStatus());
+            } else {
+                // Добавляем новую задачу
+                idActiveProject.addTask(task);
+            }
+        }
+        
+        // Сохраняем изменения в файл
+        std::vector<Project> allProjects = Project::getProjectsFromJson();
+        
+        // Находим и обновляем активный проект в списке
+        bool projectFound = false;
+        for (auto& project : allProjects) {
+            if (project.getId() == idActiveProject.getId()) {
+                project = idActiveProject;
+                projectFound = true;
+                break;
+            }
+        }
+        
+        if (projectFound) {
+            Project::saveProjectsToJson(allProjects);
+            std::cout << "Изменения проекта сохранены в JSON" << std::endl;
+        } else {
+            std::cout << "Ошибка: проект не найден в списке!" << std::endl;
+        }
+    }
+}
+
+// Обработка всех событий ввода - ИСПРАВЛЕННАЯ ВЕРСИЯ ДЛЯ ПЕРЕТАСКИВАНИЯ
 void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     // Обработка движения мыши для перетаскивания задач
     if (event.type == sf::Event::MouseMoved) {
         sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
         
-        // Перетаскивание задачи
+        // Перетаскивание задачи - ИСПРАВЛЕНО: корректное обновление позиции текста
         if (draggingTaskSection != -1 && draggingTaskIndex != -1) {
             Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
             if (draggedTask.isMoving) {
                 // Обновление позиции перетаскиваемой задачи
-                draggedTask.setPosition(event.mouseMove.x - 190, event.mouseMove.y - 40);
+                float newX = event.mouseMove.x - 190;
+                float newY = event.mouseMove.y - 40;
+                draggedTask.setPosition(newX, newY);
+                
+                // Восстанавливаем правильную позицию текста относительно задачи
+                sf::FloatRect taskBounds = draggedTask.shape.getGlobalBounds();
+                draggedTask.text.setPosition(
+                    taskBounds.left + draggedTask.textOffset.x,
+                    taskBounds.top + draggedTask.textOffset.y
+                );
             }
         }
     }
@@ -1237,6 +1686,11 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
         handleEditTaskInput(event);
     }
     
+    // Обработка ввода текста для нового проекта
+    if (showAddProjectWindow && isProjectNameInputActive) {
+        handleAddProjectInput(event);
+    }
+    
     // Обработка нажатия кнопки мыши
     if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
@@ -1250,7 +1704,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             
             // Обработка информации о пользователе (если вошел)
             if (isLoggedIn && userInfoButton.getGlobalBounds().contains(mousePos)) {
-                activeDeveloper = nullptr;
                 return;
             }
             
@@ -1260,30 +1713,84 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 return;
             }
             
-            // Обработка клика по кнопке проектов
-            if (projectButton.getGlobalBounds().contains(mousePos)) {
-                
+            // Обработка клика по кнопке проектов (только после входа)
+            if (isLoggedIn && projectButton.getGlobalBounds().contains(mousePos)) {
                 showProjectWindow = !showProjectWindow; 
+                return;
+            }
+            
+            // Обработка клика по кнопке добавления проекта
+            if (isLoggedIn && addProjectButton.getGlobalBounds().contains(mousePos)) {
+                showAddProjectWindow = !showAddProjectWindow;
+                if (showAddProjectWindow) {
+                    currentProjectNameInput = "";
+                    projectNameInputText.setString("Введите название проекта");
+                    projectNameInputText.setFillColor(sf::Color(150, 150, 150));
+                    isProjectNameInputActive = false;
+                    projectNameInputField.setOutlineColor(sf::Color(100, 130, 160));
+                    cursorVisible = false;
+                    
+                    // Закрываем другие окна
+                    showProjectWindow = false;
+                }
+                return;
+            }
+            
+            // Обработка клика по кнопке добавления разработчика (только после входа)
+            if (isLoggedIn && addDeveloperButton.getGlobalBounds().contains(mousePos)) {
+                if (idActiveProject.getId() != 0) {
+                    showAddDeveloperWindow = !showAddDeveloperWindow;
+                    if (showAddDeveloperWindow) {
+                        createAddDeveloperWindow();
+                    }
+                } else {
+                    std::cout << "Сначала выберите проект!" << std::endl;
+                }
                 return;
             }
             
             // Обработка клика по кнопке добавления задачи
             if (addButton.getGlobalBounds().contains(mousePos)) {
-                showAddTaskWindow = !showAddTaskWindow;
-                if (showAddTaskWindow) {
-                    currentTaskInput = "";
-                    taskInputText.setString("Введите задачу на английском");
-                    taskInputText.setFillColor(sf::Color(150, 150, 150));
-                    isTaskInputActive = false;
-                    taskInputField.setOutlineColor(sf::Color(100, 130, 160));
-                    cursorVisible = false;
+                if (isLoggedIn) {
+                    // Проверяем доступ пользователя к активному проекту
+                    if (idActiveProject.getId() != 0) {
+                        bool hasAccess = false;
+                        for (int devId : idActiveProject.getDeveloperIds()) {
+                            if (devId == activeDeveloper->getId()) {
+                                hasAccess = true;
+                                break;
+                            }
+                        }
+                        
+                        if (hasAccess) {
+                            showAddTaskWindow = !showAddTaskWindow;
+                            if (showAddTaskWindow) {
+                                currentTaskInput = "";
+                                taskInputText.setString("Введите задачу на английском");
+                                taskInputText.setFillColor(sf::Color(150, 150, 150));
+                                isTaskInputActive = false;
+                                taskInputField.setOutlineColor(sf::Color(100, 130, 160));
+                                cursorVisible = false;
+                            }
+                        } else {
+                            std::cout << "Ошибка: нет доступа к проекту!" << std::endl;
+                        }
+                    } else {
+                        std::cout << "Сначала выберите проект!" << std::endl;
+                    }
+                } else {
+                    std::cout << "Для добавления задач необходимо войти в систему!" << std::endl;
                 }
                 return;
             }
             
             // Обработка клика по кнопке редактирования
             if (editButton.getGlobalBounds().contains(mousePos)) {
-                openEditMode();
+                if (isLoggedIn) {
+                    openEditMode();
+                } else {
+                    std::cout << "Для редактирования задач необходимо войти в систему!" << std::endl;
+                }
                 return;
             }
             
@@ -1299,7 +1806,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         usernameText.setString("");
                         usernameText.setFillColor(sf::Color(50, 50, 80));
                     }
-                    // Сброс курсора
                     cursorClock.restart();
                     cursorVisible = true;
                     return;
@@ -1315,7 +1821,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         passwordText.setString("");
                         passwordText.setFillColor(sf::Color(50, 50, 80));
                     }
-                    // Сброс курсора
                     cursorClock.restart();
                     cursorVisible = true;
                     return;
@@ -1341,8 +1846,57 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 return;
             }
             
+            // Обработка окна добавления проекта
+            if (showAddProjectWindow) {
+                // Клик по полю ввода названия проекта
+                if (projectNameInputField.getGlobalBounds().contains(mousePos)) {
+                    isProjectNameInputActive = true;
+                    projectNameInputField.setOutlineColor(sf::Color(50, 100, 200));
+                    if (currentProjectNameInput.empty()) {
+                        projectNameInputText.setString("");
+                        projectNameInputText.setFillColor(sf::Color(50, 50, 80));
+                    }
+                    cursorClock.restart();
+                    cursorVisible = true;
+                    return;
+                }
+                
+                // Клик по кнопке подтверждения
+                if (confirmAddProjectButton.getGlobalBounds().contains(mousePos)) {
+                    confirmAddProject();
+                    return;
+                }
+                
+                // Клик по кнопке отмены
+                if (cancelAddProjectButton.getGlobalBounds().contains(mousePos)) {
+                    closeAddProjectWindow();
+                    return;
+                }
+                
+                // Закрытие окна при клике вне его
+                if (!addProjectWindow.getGlobalBounds().contains(mousePos)) {
+                    closeAddProjectWindow();
+                }
+                return;
+            }
+            
+            // Обработка окна добавления разработчика
+            if (showAddDeveloperWindow) {
+                for (size_t i = 0; i < developerRects.size(); i++) {
+                    if (developerRects[i].getGlobalBounds().contains(mousePos)) {
+                        addDeveloperToProject(i);
+                        return;
+                    }
+                }
+                
+                // Закрытие окна при клике вне его
+                if (!addDeveloperWindow.getGlobalBounds().contains(mousePos)) {
+                    closeAddDeveloperWindow();
+                }
+                return;
+            }
 
-            // В обработчике выбора проекта:
+            // Обработка окна выбора проекта
             if (showProjectWindow) { 
                 for (size_t i = 0; i < projectRects.size(); i++) {
                     if (projectRects[i].getGlobalBounds().contains(mousePos)) {
@@ -1356,7 +1910,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         std::vector<Project> allProjects = Project::getProjectsFromJson();
                         for (const auto& project : allProjects) {
                             if (project.getId() == projects[i].getId()) {
-                                idActiveProject = project;  // Берем актуальные данные из файла
+                                idActiveProject = project;
                                 break;
                             }
                         }
@@ -1367,6 +1921,12 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         return;
                     }
                 }
+                
+                // Закрытие окна при клике вне его
+                if (!projectWindow.getGlobalBounds().contains(mousePos)) {
+                    showProjectWindow = false;
+                }
+                return;
             }
             
             // Обработка окна добавления задачи
@@ -1379,7 +1939,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         taskInputText.setString("");
                         taskInputText.setFillColor(sf::Color(50, 50, 80));
                     }
-                    // Сброс курсора
                     cursorClock.restart();
                     cursorVisible = true;
                     return;
@@ -1441,7 +2000,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 if (editTaskInputField.getGlobalBounds().contains(mousePos)) {
                     isEditTaskInputActive = true;
                     editTaskInputField.setOutlineColor(sf::Color(50, 100, 200));
-                    // Сброс курсора
                     cursorClock.restart();
                     cursorVisible = true;
                     return;
@@ -1489,7 +2047,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             }
             
             // Обработка начала перетаскивания задачи (только если не открыты другие окна)
-            if (!showEditMode && !showAddTaskWindow && !showProjectWindow && !showTaskEditWindow && !showLoginWindow) {
+            if (!showEditMode && !showAddTaskWindow && !showProjectWindow && !showTaskEditWindow && !showLoginWindow && !showAddProjectWindow && !showAddDeveloperWindow) {
                 for (int i = 0; i < 4; i++) {
                     for (size_t j = 0; j < tasks[i].size(); j++) {
                         if (tasks[i][j].shape.getGlobalBounds().contains(mousePos)) {
@@ -1507,7 +2065,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
     // Обработка отпускания кнопки мыши
     if (event.type == sf::Event::MouseButtonReleased) {
         if (event.mouseButton.button == sf::Mouse::Left) {
-            // Завершение перетаскивания задачи
+            // Завершение перетаскивания задачи - ИСПРАВЛЕНО: корректное восстановление позиции текста
             if (draggingTaskSection != -1 && draggingTaskIndex != -1) {
                 Task& draggedTask = tasks[draggingTaskSection][draggingTaskIndex];
                 draggedTask.isMoving = false;
@@ -1553,46 +2111,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
         }
     }
 }
-
-void ScrumBoard::saveCurrentProjectChanges() {
-    if (idActiveProject.getId() != 0) {
-        std::cout << "Сохранение изменений в проекте: " << idActiveProject.getName() << std::endl;
-        
-        // Обновляем задачи в активном проекте
-        for (auto& task : tasksData) {
-            Tasks* projectTask = idActiveProject.findTaskById(task.getId());
-            if (projectTask) {
-                // Обновляем существующую задачу
-                projectTask->setTitle(task.getTitle());
-                projectTask->changeStatus(task.getStatus());
-            } else {
-                // Добавляем новую задачу
-                idActiveProject.addTask(task);
-            }
-        }
-        
-        // Сохраняем изменения в файл
-        std::vector<Project> allProjects = Project::getProjectsFromJson();
-        
-        // Находим и обновляем активный проект в списке
-        bool projectFound = false;
-        for (auto& project : allProjects) {
-            if (project.getId() == idActiveProject.getId()) {
-                project = idActiveProject; // Полная замена
-                projectFound = true;
-                break;
-            }
-        }
-        
-        if (projectFound) {
-            Project::saveProjectsToJson(allProjects);
-            std::cout << "Изменения проекта сохранены в JSON" << std::endl;
-        } else {
-            std::cout << "Ошибка: проект не найден в списке!" << std::endl;
-        }
-    }
-}
-
 
 // Обновление состояния
 void ScrumBoard::update(float deltaTime) {
@@ -1663,6 +2181,79 @@ void ScrumBoard::drawTaskEditWindow(sf::RenderWindow& window) {
     window.draw(cancelEditButtonText);
 }
 
+// Отрисовка окна добавления проекта
+void ScrumBoard::drawAddProjectWindow(sf::RenderWindow& window) {
+    // Затемнение фона
+    sf::RectangleShape overlay(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+    window.draw(overlay);
+    
+    // Основное окно
+    window.draw(addProjectWindow);
+    
+    // Заголовок окна
+    sf::Text titleText;
+    titleText.setString("Добавить новый проект");
+    titleText.setFont(font);
+    titleText.setCharacterSize(24);
+    titleText.setFillColor(sf::Color(50, 50, 80));
+    titleText.setStyle(sf::Text::Bold);
+    titleText.setPosition(addProjectWindow.getPosition().x + 20, addProjectWindow.getPosition().y + 20);
+    window.draw(titleText);
+    
+    window.draw(projectNameInputField);
+    window.draw(projectNameInputText);
+    window.draw(confirmAddProjectButton);
+    window.draw(confirmAddProjectButtonText);
+    window.draw(cancelAddProjectButton);
+    window.draw(cancelAddProjectButtonText);
+    
+    // Отрисовка курсора для поля ввода
+    if (isProjectNameInputActive && cursorVisible) {
+        sf::FloatRect textBounds = projectNameInputText.getLocalBounds();
+        float cursorX = projectNameInputField.getPosition().x + textBounds.width + 15;
+        float cursorY = projectNameInputField.getPosition().y + 10;
+        cursor.setPosition(cursorX, cursorY);
+        window.draw(cursor);
+    }
+}
+
+// Отрисовка окна добавления разработчика
+void ScrumBoard::drawAddDeveloperWindow(sf::RenderWindow& window) {
+    // Затемнение фона
+    sf::RectangleShape overlay(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+    window.draw(overlay);
+    
+    // Основное окно
+    window.draw(addDeveloperWindow);
+    
+    // Заголовок окна
+    sf::Text titleText;
+    titleText.setString("Выберите разработчика");
+    titleText.setFont(font);
+    titleText.setCharacterSize(24);
+    titleText.setFillColor(sf::Color(50, 50, 80));
+    titleText.setStyle(sf::Text::Bold);
+    
+    sf::FloatRect titleBounds = titleText.getLocalBounds();
+    titleText.setPosition(
+        addDeveloperWindow.getPosition().x + (addDeveloperWindow.getSize().x - titleBounds.width) / 2,
+        addDeveloperWindow.getPosition().y + 15
+    );
+    window.draw(titleText);
+    
+    // Кнопки разработчиков
+    for (const auto& rect : developerRects) {  
+        window.draw(rect);
+    }
+    
+    // Текст разработчиков
+    for (const auto& text : developerTexts) {  
+        window.draw(text);
+    }
+}
+
 // Основной метод отрисовки
 void ScrumBoard::draw(sf::RenderWindow& window) {
     // Отрисовка основных элементов доски
@@ -1677,13 +2268,21 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         
         window.draw(userInfoButton);
         window.draw(userInfoText);
+        
+        // Кнопки управления проектами (только для вошедших пользователей)
+        window.draw(projectButton);      
+        window.draw(projectButtonText);
+        window.draw(addProjectButton);
+        window.draw(addProjectButtonText);
+        window.draw(addDeveloperButton);
+        window.draw(addDeveloperButtonText);
     } else {
+        // Только кнопка входа для неавторизованных пользователей
         window.draw(loginButton);
         window.draw(loginButtonText);
     }
     
-    window.draw(projectButton);      
-    window.draw(projectButtonText);  
+    // Правые кнопки (всегда видны, но функциональность зависит от авторизации)
     window.draw(editButton);         
     window.draw(editButtonText);     
     window.draw(addButton);
@@ -1768,7 +2367,6 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         
         // Отрисовка курсора для поля ввода новой задачи
         if (isTaskInputActive && cursorVisible) {
-            // Расчет позиции курсора в конце текста
             sf::FloatRect textBounds = taskInputText.getLocalBounds();
             float cursorX = taskInputField.getPosition().x + textBounds.width + 15;
             float cursorY = taskInputField.getPosition().y + 10;
@@ -1783,12 +2381,21 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
         
         // Отрисовка курсора для поля редактирования задачи
         if (isEditTaskInputActive && cursorVisible) {
-            // Расчет позиции курсора в конце текста
             sf::FloatRect textBounds = editTaskInputText.getLocalBounds();
             float cursorX = editTaskInputField.getPosition().x + textBounds.width + 15;
             float cursorY = editTaskInputField.getPosition().y + 10;
             cursor.setPosition(cursorX, cursorY);
             window.draw(cursor);
         }
+    }
+    
+    // Окно добавления проекта
+    if (showAddProjectWindow) {
+        drawAddProjectWindow(window);
+    }
+    
+    // Окно добавления разработчика
+    if (showAddDeveloperWindow) {
+        drawAddDeveloperWindow(window);
     }
 }

@@ -4,6 +4,7 @@
 #include "Task.h"
 #include "../core/Tasks.h"
 #include "../core/Project.h"
+#include "../core/Developer.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
@@ -24,6 +25,12 @@ private:
     sf::Text editButtonText;                                                        
     sf::RectangleShape addButton;                                                  
     sf::Text addButtonText;                                                       
+    
+    // Кнопки управления проектами
+    sf::RectangleShape addProjectButton;                                           // Кнопка "Добавить проект"
+    sf::Text addProjectButtonText;                                                 // Текст кнопки добавления проекта
+    sf::RectangleShape addDeveloperButton;                                         // Кнопка "Добавить разработчика"
+    sf::Text addDeveloperButtonText;                                               // Текст кнопки добавления разработчика
     
     // Секции 4 колонки
     std::vector<sf::RectangleShape> sections;                                     
@@ -114,6 +121,24 @@ private:
     Developer* activeDeveloper = nullptr;
     bool showLogoutButton;
 
+    // Новые окна для управления проектами и разработчиками
+    bool showAddProjectWindow;                                                      // Флаг показа окна добавления проекта
+    sf::RectangleShape addProjectWindow;                                            // Основное окно добавления проекта
+    sf::RectangleShape projectNameInputField;                                       // Поле ввода названия проекта
+    sf::Text projectNameInputText;                                                  // Текст в поле ввода
+    std::string currentProjectNameInput;                                            // Текущий введенный текст названия проекта
+    bool isProjectNameInputActive;                                                  // Флаг активности поля ввода названия проекта
+    sf::RectangleShape confirmAddProjectButton;                                     // Кнопка подтверждения добавления проекта
+    sf::Text confirmAddProjectButtonText;                                           // Текст кнопки подтверждения
+    sf::RectangleShape cancelAddProjectButton;                                      // Кнопка отмены добавления проекта
+    sf::Text cancelAddProjectButtonText;                                            // Текст кнопки отмены
+
+    bool showAddDeveloperWindow;                                                    // Флаг показа окна добавления разработчика
+    sf::RectangleShape addDeveloperWindow;                                          // Основное окно добавления разработчика
+    std::vector<sf::RectangleShape> developerRects;                                 // Кнопки разработчиков
+    std::vector<sf::Text> developerTexts;                                           // Тексты на кнопках разработчиков
+    std::vector<Developer> availableDevelopers;                                     // Список доступных разработчиков
+
 public:
     ScrumBoard();                                                                   // Конструктор - инициализация переменных
     bool initialize();                                                              // Инициализация ресурсов и интерфейса
@@ -125,6 +150,7 @@ private:
     void saveCurrentProjectChanges();
     void createTitle();                                                             // Создание заголовка приложения
     void createTopPanel();                                                          // Создание верхней панели с кнопками
+    void createProjectManagementButtons();                                          // Создание кнопок управления проектами
     void createSections();                                                          // Создание 4 секций для задач
     void createSampleTasks();                                                       // Создание задач из данных JSON
     void createLoginWindow();                                                       // Создание окна входа
@@ -132,6 +158,8 @@ private:
     void createAddTaskWindow();                                                     // Создание окна добавления задачи
     void createTaskEditWindow();                                                    // Создание окна редактирования задачи
     void createUserInfo();                                                          // Создание элемента информации о пользователе
+    void createAddProjectWindow();                                                  // Создание окна добавления проекта
+    void createAddDeveloperWindow();                                                // Создание окна добавления разработчика
 
     void addTask(int id, const std::string& taskName, int section);                 // Добавление визуальной задачи в секцию
     void updateTaskPositions();                                                     // Обновление позиций всех задач
@@ -140,7 +168,10 @@ private:
     void handleAddTaskInput(const sf::Event& event);                                // Обработка ввода текста для новой задачи
     void handleEditTaskInput(const sf::Event& event);                               // Обработка ввода текста при редактировании
     void handleLoginInput(const sf::Event& event);                                  // Обработка ввода текста для входа
+    void handleAddProjectInput(const sf::Event& event);                             // Обработка ввода текста для нового проекта
     void confirmAddTask(int selectedSection);                                       // Подтверждение добавления новой задачи
+    void confirmAddProject();                                                       // Подтверждение добавления проекта
+    void addDeveloperToProject(int developerIndex);                                 // Добавление разработчика к проекту
     void confirmLogin();                                                            // Подтверждение входа
     void logout();                                                                  // Выход из системы
     void openEditMode();                                                            // Открытие режима редактирования
@@ -151,10 +182,14 @@ private:
     void closeEditMode();                                                           // Закрытие режима редактирования
     void closeTaskEditWindow();                                                     // Закрытие окна редактирования задачи
     void closeLoginWindow();                                                        // Закрытие окна входа
+    void closeAddProjectWindow();                                                   // Закрытие окна добавления проекта
+    void closeAddDeveloperWindow();                                                 // Закрытие окна добавления разработчика
     
-    // Методы для работы с окном редактирования
+    // Методы для работы с окнами
     void centerTextInButton(sf::Text& text, const sf::RectangleShape& button);      // Центрирование текста в кнопке
     void drawTaskEditWindow(sf::RenderWindow& window);                              // Отрисовка окна редактирования задачи
     void drawLoginWindow(sf::RenderWindow& window);                                 // Отрисовка окна входа
+    void drawAddProjectWindow(sf::RenderWindow& window);                            // Отрисовка окна добавления проекта
+    void drawAddDeveloperWindow(sf::RenderWindow& window);                          // Отрисовка окна добавления разработчика
 };
 #endif

@@ -10,6 +10,7 @@ public:
     int currentSection;
     bool isMoving;
     std::string description;
+    sf::Vector2f textOffset;  // днаюбэре щрс ярпнйс
     
     Task(int id, const std::string& taskText, sf::Font& font, float x, float y);
     void updateTextPosition();

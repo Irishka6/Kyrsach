@@ -4,7 +4,10 @@
         "login": "1",
         "password": "1",
         "project_ids": [
-            1
+            1,
+            6,
+            5,
+            3
         ]
     },
     {
@@ -12,7 +15,9 @@
         "login": "petrov",
         "password": "qwerty",
         "project_ids": [
-            1
+            1,
+            2,
+            5
         ]
     }
 ]
