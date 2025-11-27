@@ -86,17 +86,20 @@ void saveTasksToJson(const std::vector<Tasks>& tasks, const std::string& filenam
         j_task["id"] = task.getId();
         j_task["title"] = task.getTitle();
         j_task["status"] = task.getStatus();
-        j_task["programmer"] = "Vika";
-        j_task["project"] = task.getProjekt();
-        j_task["creation_date"] = task.getFormattedCreationDate();
+        // Убираем временно проблемные поля
+        // j_task["programmer"] = "Vika";
+        // j_task["project"] = task.getProjekt();
+        // j_task["creation_date"] = task.getFormattedCreationDate();
         
         j_array.push_back(j_task);
     }
     
-    std::ofstream file_out(filename, std::ios::binary);
-    file_out << j_array.dump(4);
-    file_out.close();
-    
-    std::cout << "Все задачи сохранены в файл: " << filename << std::endl;
-    std::cout << "Количество сохраненных задач: " << tasks.size() << std::endl;
+    std::ofstream file_out(filename);
+    if (file_out.is_open()) {
+        file_out << j_array.dump(4);
+        file_out.close();
+        std::cout << "Задачи сохранены: " << filename << " (задач: " << tasks.size() << ")" << std::endl;
+    } else {
+        std::cerr << "Ошибка сохранения: " << filename << std::endl;
+    }
 }

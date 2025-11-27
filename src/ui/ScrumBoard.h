@@ -56,6 +56,7 @@ private:
     bool isPasswordInputActive;                                                    // Флаг активности поля пароля
     
     // Окно проектов
+    Project idActiveProject;
     bool showProjectWindow;                                                         // Флаг показа окна проектов
     sf::RectangleShape projectWindow;                                               // Основное окно проектов
     std::vector<sf::RectangleShape> projectRects;                                   // Кнопки проектов
@@ -121,6 +122,7 @@ public:
     void draw(sf::RenderWindow& window);                                            // Отрисовка всех компонентов
 
 private:
+    void saveCurrentProjectChanges();
     void createTitle();                                                             // Создание заголовка приложения
     void createTopPanel();                                                          // Создание верхней панели с кнопками
     void createSections();                                                          // Создание 4 секций для задач

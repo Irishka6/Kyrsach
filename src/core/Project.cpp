@@ -24,19 +24,33 @@ void Project::setName(const std::string& newName) {
         throw std::invalid_argument("Invalid project name");
     }
 }
+ 
+void Project::setID(const int newid){
+    if (newid == 0){
+        id = 0;
+    }
+}
 
 void Project::setDeadline(const std::string& newDeadline) {
     deadline = newDeadline;
 }
 
 void Project::addTask(const Tasks& task) {
-    // Проверяем, нет ли уже задачи с таким ID
-    for (const auto& existingTask : tasks) {
+    // Проверяем, есть ли уже задача с таким ID
+    for (auto& existingTask : tasks) {
         if (existingTask.getId() == task.getId()) {
-            throw std::runtime_error("Task with ID " + std::to_string(task.getId()) + " already exists in project");
+            // Обновляем существующую задачу
+            existingTask.setTitle(task.getTitle());
+            existingTask.changeStatus(task.getStatus());
+            existingTask.setProject(task.getProjekt());
+            
+            std::cout << "Задача ID:" << task.getId() << " обновлена в проекте '" << name << "'" << std::endl;
+            std::cout << "Новое название: '" << task.getTitle() << "', статус: " << task.getStatus() << std::endl;
+            return; // Выходим после обновления
         }
     }
     
+    // Если задачи с таким ID нет, добавляем новую
     tasks.push_back(task);
     std::cout << "Задача '" << task.getTitle() << "' добавлена в проект '" << name << "'" << std::endl;
 }
@@ -121,13 +135,22 @@ Project Project::fromJson(const json& j) {
     project.id = j.value("id", 0);
     project.name = j.value("name", "");
     project.deadline = j.value("deadline", "");
-    project.creatorId = j.value("creator_id", 0);
     
-    // Загружаем ID разработчиков
+    // Обрабатываем оба варианта имени поля
+    if (j.contains("creator_id")) {
+        project.creatorId = j["creator_id"];
+    } else {
+        project.creatorId = 1; // значение по умолчанию
+    }
+    
+    // Обрабатываем разработчиков
     if (j.contains("developer_ids") && j["developer_ids"].is_array()) {
         for (const auto& devId : j["developer_ids"]) {
             project.developerIds.push_back(devId);
         }
+    } else {
+        // Если нет разработчиков, добавляем создателя
+        project.developerIds.push_back(project.creatorId);
     }
     
     // Загружаем задачи
@@ -136,7 +159,7 @@ Project Project::fromJson(const json& j) {
             int taskId = task_json.value("id", 0);
             std::string title = task_json.value("title", "");
             int status = task_json.value("status", 0);
-            std::string projectName = task_json.value("project", "");
+            std::string projectName = task_json.value("project", project.name); // используем имя проекта по умолчанию
             
             Tasks task(taskId, title, status);
             task.setProject(projectName);
@@ -165,21 +188,30 @@ void Project::saveProjectsToJson(const std::vector<Project>& projects, const std
 std::vector<Project> Project::getProjectsFromJson(const std::string& filename) {
     std::vector<Project> projects;
     
-    std::ifstream file_in(filename, std::ios::binary);
+    std::cout << "Открываю файл: " << filename << std::endl;
+    
+    std::ifstream file_in(filename);
     if (!file_in.good()) {
         std::cout << "Файл " << filename << " не найден. Будет создан новый." << std::endl;
         return projects;
     }
     
     try {
-        json j_array;
-        file_in >> j_array;
+        json j_data;
+        file_in >> j_data;
         
-        if (j_array.is_array()) {
-            for (const auto& j_project : j_array) {
+        std::cout << "Тип JSON данных: " << (j_data.is_array() ? "array" : j_data.is_object() ? "object" : "other") << std::endl;
+        std::cout << "Содержимое JSON: " << j_data.dump(2) << std::endl;
+        
+        if (j_data.is_array()) {
+            for (const auto& j_project : j_data) {
                 projects.push_back(Project::fromJson(j_project));
             }
             std::cout << "Загружено проектов: " << projects.size() << std::endl;
+        } else if (j_data.is_object()) {
+            std::cout << "Обнаружен объект проекта, преобразую в массив..." << std::endl;
+            projects.push_back(Project::fromJson(j_data));
+            std::cout << "Загружен 1 проект" << std::endl;
         }
     } catch (const std::exception& e) {
         std::cerr << "Ошибка при чтении файла проектов: " << e.what() << std::endl;

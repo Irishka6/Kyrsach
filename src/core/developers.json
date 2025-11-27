@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "login": "ivanov",
-        "password": "pass123",
+        "login": "1",
+        "password": "1",
         "project_ids": [
             1
         ]
