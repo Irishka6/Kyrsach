@@ -139,7 +139,13 @@ private:
     std::vector<sf::Text> developerTexts;                                           // Тексты на кнопках разработчиков
     std::vector<Developer> availableDevelopers;                                     // Список доступных разработчиков
 
+    // Кнопка регистрации
+    sf::RectangleShape registerButton;
+    sf::Text registerButtonText;
+
 public:
+    void confirmRegister();
+    ~ScrumBoard();
     ScrumBoard();                                                                   // Конструктор - инициализация переменных
     bool initialize();                                                              // Инициализация ресурсов и интерфейса
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);             // Обработка событий ввода
