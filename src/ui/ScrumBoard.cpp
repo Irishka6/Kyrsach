@@ -238,7 +238,7 @@ void ScrumBoard::createLoginWindow() {
     float windowHeight = 300.0f;
     float padding = 20.0f;
     
-    // Позиционирование по центру экрана
+    // По центру экрана
     float startX = (WINDOW_WIDTH - windowWidth) / 2;
     float startY = (WINDOW_HEIGHT - windowHeight) / 2;
     

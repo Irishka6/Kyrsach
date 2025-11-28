@@ -9,21 +9,21 @@
         "name": "Scrum",
         "tasks": [
             {
-                "creation_date": "2025-11-28 01:04:35",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 1,
                 "project": "",
                 "status": 0,
                 "title": "dobavit knopky proect"
             },
             {
-                "creation_date": "2025-11-28 01:04:35",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 2,
                 "project": "",
                 "status": 3,
                 "title": "dobavlen proect"
             },
             {
-                "creation_date": "2025-11-28 01:04:35",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 3,
                 "project": "",
                 "status": 1,
@@ -42,21 +42,21 @@
         "name": "Scrum2",
         "tasks": [
             {
-                "creation_date": "2025-11-28 01:04:35",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 1,
                 "project": "Scrum2",
                 "status": 0,
                 "title": "Design database"
             },
             {
-                "creation_date": "2025-11-28 01:04:35",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 2,
                 "project": "Scrum2",
                 "status": 1,
                 "title": "Implement UI"
             },
             {
-                "creation_date": "2025-11-28 01:04:35",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 3,
                 "project": "",
                 "status": 3,
@@ -75,14 +75,14 @@
         "name": "Scrum1",
         "tasks": [
             {
-                "creation_date": "2025-11-28 01:04:10",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 1,
                 "project": "",
                 "status": 0,
                 "title": "Knopka proect"
             },
             {
-                "creation_date": "2025-11-28 01:04:10",
+                "creation_date": "2025-11-28 11:35:37",
                 "id": 2,
                 "project": "",
                 "status": 2,
@@ -108,6 +108,17 @@
         ],
         "id": 5,
         "name": "Rabota",
+        "tasks": []
+    },
+    {
+        "creator_id": 1,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            1,
+            2
+        ],
+        "id": 6,
+        "name": "gcvhbjnkm",
         "tasks": []
     }
 ]
