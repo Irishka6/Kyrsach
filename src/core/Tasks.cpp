@@ -7,13 +7,13 @@
 using json = nlohmann::json;
 
 Tasks::Tasks(int id, const std::string& title, int status)
-    : id(id), title(title), status(status),
-       creationDate(std::chrono::system_clock::now()),
+    : id(id), title(title), status(status), creatorId(0),
+      creationDate(std::chrono::system_clock::now()),
       lastModifiedDate(creationDate) {}
 
 int Tasks::getId() const { return id; }
 std::string Tasks::getTitle() const { return title; }
-int Tasks::getStatus() const { return status; }  // Добавлен const
+int Tasks::getStatus() const { return status; }
 
 void Tasks::setTitle(const std::string& title) {
     this->title = title;
@@ -29,6 +29,9 @@ void Tasks::setProject(const std::string& name){
     this->prodject = name;
 } 
 
+void Tasks::assignDeveloper(std::string developer) {
+    // Реализация метода assignDeveloper
+}
 
 std::string Tasks::getFormattedCreationDate() const {
     std::time_t time = std::chrono::system_clock::to_time_t(creationDate);
@@ -38,6 +41,15 @@ std::string Tasks::getFormattedCreationDate() const {
 }
 
 std::string Tasks::getProjekt() const { return prodject; }
+
+// ДОБАВЛЕННЫЕ МЕТОДЫ ДЛЯ creatorId
+void Tasks::setCreatorId(int creatorId) {
+    this->creatorId = creatorId;
+}
+
+int Tasks::getCreatorId() const {
+    return creatorId;
+}
 
 // Реализации обычных функций
 std::vector<Tasks> getTasksFromJson(const std::string& filename) {
@@ -59,13 +71,16 @@ std::vector<Tasks> getTasksFromJson(const std::string& filename) {
                 std::string title = j_task.value("title", "");
                 int status = j_task.value("status", 0);
                 std::string project = j_task.value("project", "");
+                int creatorId = j_task.value("creatorId", 0); 
                 
                 Tasks task(id, title, status);
+                task.setCreatorId(creatorId); 
                 tasks.push_back(task);
                 
                 std::cout << "Загружена задача: " << title 
                           << " (ID: " << id 
-                          << ", Статус: " << status << ")" << std::endl;
+                          << ", Статус: " << status 
+                          << ", Creator ID: " << creatorId << ")" << std::endl;
             }
             std::cout << "Всего загружено задач: " << tasks.size() << std::endl;
         }
@@ -76,8 +91,6 @@ std::vector<Tasks> getTasksFromJson(const std::string& filename) {
     return tasks;
 }
 
-
-
 void saveTasksToJson(const std::vector<Tasks>& tasks, const std::string& filename) {
     json j_array = json::array();
     
@@ -86,11 +99,7 @@ void saveTasksToJson(const std::vector<Tasks>& tasks, const std::string& filenam
         j_task["id"] = task.getId();
         j_task["title"] = task.getTitle();
         j_task["status"] = task.getStatus();
-        // Убираем временно проблемные поля
-        // j_task["programmer"] = "Vika";
-        // j_task["project"] = task.getProjekt();
-        // j_task["creation_date"] = task.getFormattedCreationDate();
-        
+        j_task["creatorId"] = task.getCreatorId();
         j_array.push_back(j_task);
     }
     

@@ -4,9 +4,8 @@
 #include <chrono>
 #include <vector>
 
-
 class Tasks {
-    public:
+public:
     Tasks(int id, const std::string& title, int status);
 
     int getId() const;
@@ -19,14 +18,17 @@ class Tasks {
     int getStatus() const;
     std::string getProjekt() const;
     
-    private:
+    void setCreatorId(int creatorId);
+    int getCreatorId() const;
+    
+private:
     int id;
     std::string title;
     int status;
     std::string prodject;
     std::chrono::system_clock::time_point creationDate;
     std::chrono::system_clock::time_point lastModifiedDate;
-
+    int creatorId; 
 };
 
 std::vector<Tasks> getTasksFromJson(const std::string& filename = "tasks.json");
