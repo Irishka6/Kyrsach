@@ -1,46 +1,89 @@
 #include "Task.h"
 
-Task::Task(int taskId, const std::string& taskName, sf::Font& font, float x, float y) 
-    : id(taskId), isMoving(false), currentSection(0), textOffset(10, 10) {  // ДОБАВЬТЕ textOffset ЗДЕСЬ
+Task::Task(int id, const std::string& taskText, sf::Font& font, float x, float y) 
+    : id(id), currentSection(0), isMoving(false), developerName(""), description(taskText) {
     
-    // Инициализация формы
-    shape.setSize(sf::Vector2f(350, 85));
+    shape.setSize(sf::Vector2f(400, 85));
     shape.setFillColor(sf::Color(200, 220, 240));
-    shape.setOutlineColor(sf::Color(150, 170, 190));
-    shape.setOutlineThickness(2);
     shape.setPosition(x, y);
     
-    // Инициализация текста
-    text.setString(taskName);
+    text.setString(taskText);
     text.setFont(font);
     text.setCharacterSize(20);
     text.setFillColor(sf::Color(50, 50, 80));
     
-    // Центрирование текста и сохранение смещения
+    // Текст разработчика
+    developerText.setFont(font);
+    developerText.setCharacterSize(16);
+    developerText.setFillColor(sf::Color(100, 100, 130));
+    developerText.setString("");
+    
+    // Инициализация смещения текста
+    textOffset = sf::Vector2f(0, 0);
+    
+    updateTextPosition();
+}
+
+void Task::setDeveloperName(const std::string& name, sf::Font& font) {
+    developerName = name;
+    developerText.setFont(font);
+    developerText.setCharacterSize(16);
+    developerText.setFillColor(sf::Color(80, 80, 120));
+    developerText.setStyle(sf::Text::Bold);
+    developerText.setString(developerName);
+    
+    // Обновляем позицию
+    sf::FloatRect taskBounds = shape.getGlobalBounds();
+    sf::FloatRect textBounds = developerText.getLocalBounds();
+    
+    developerText.setPosition(
+        taskBounds.left + taskBounds.width - textBounds.width - 10,  // Справа с отступом
+        taskBounds.top + taskBounds.height - textBounds.height - 5   // Снизу с отступом
+    );
+}
+
+void Task::updateTextPosition() {
+    sf::FloatRect taskBounds = shape.getGlobalBounds();
     sf::FloatRect textBounds = text.getLocalBounds();
-    sf::FloatRect shapeBounds = shape.getGlobalBounds();
     
-    // Расчет смещения для центрирования текста
-    textOffset.x = (shapeBounds.width - textBounds.width) / 2;
-    textOffset.y = (shapeBounds.height - textBounds.height) / 2 - 5;
+    // Центрируем основной текст задачи
+    float textX = taskBounds.left + (taskBounds.width - textBounds.width) / 2;
+    float textY = taskBounds.top + (taskBounds.height - textBounds.height) / 2 - 10;
     
-    text.setPosition(x + textOffset.x, y + textOffset.y);
+    text.setPosition(textX, textY);
+    
+    // Сохраняем смещение для корректного перемещения
+    textOffset = sf::Vector2f(
+        (taskBounds.width - textBounds.width) / 2,
+        (taskBounds.height - textBounds.height) / 2 - 10
+    );
+    
+    // Обновляем позицию текста разработчика
+    if (!developerName.empty()) {
+        sf::FloatRect devTextBounds = developerText.getLocalBounds();
+        developerText.setPosition(
+            taskBounds.left + taskBounds.width - devTextBounds.width - 10,
+            taskBounds.top + taskBounds.height - devTextBounds.height - 5
+        );
+    }
 }
 
 void Task::setPosition(float x, float y) {
     shape.setPosition(x, y);
     
-    // Обновляем позицию текста с сохраненным смещением
-    text.setPosition(x + textOffset.x, y + textOffset.y);
-}
-
-void Task::updateTextPosition() {
-    // Метод для обновления позиции текста при изменении размера задачи
-    sf::FloatRect textBounds = text.getLocalBounds();
-    sf::FloatRect shapeBounds = shape.getGlobalBounds();
+    // Обновляем позицию текста с сохранением относительного смещения
+    sf::FloatRect taskBounds = shape.getGlobalBounds();
+    text.setPosition(
+        taskBounds.left + textOffset.x,
+        taskBounds.top + textOffset.y
+    );
     
-    textOffset.x = (shapeBounds.width - textBounds.width) / 2;
-    textOffset.y = (shapeBounds.height - textBounds.height) / 2 - 5;
-    
-    text.setPosition(shapeBounds.left + textOffset.x, shapeBounds.top + textOffset.y);
+    // Обновляем позицию текста разработчика
+    if (!developerName.empty()) {
+        sf::FloatRect devTextBounds = developerText.getLocalBounds();
+        developerText.setPosition(
+            taskBounds.left + taskBounds.width - devTextBounds.width - 10,
+            taskBounds.top + taskBounds.height - devTextBounds.height - 5
+        );
+    }
 }

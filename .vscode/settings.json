@@ -59,7 +59,8 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "xstring": "cpp"
     },
     "cmake.sourceDirectory": "C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/src/ui"
 }
