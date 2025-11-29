@@ -9,28 +9,28 @@
         "name": "Scrum",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "",
                 "status": 0,
                 "title": "dobavit knopky proect"
             },
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 2,
                 "project": "",
                 "status": 3,
                 "title": "dobavlen proect"
             },
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 3,
                 "project": "",
                 "status": 1,
                 "title": "razrabotchiki dobavlen"
             },
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 4,
                 "project": "",
                 "status": 0,
@@ -49,21 +49,21 @@
         "name": "Scrum2",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "Scrum2",
                 "status": 0,
                 "title": "Design database"
             },
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 2,
                 "project": "Scrum2",
                 "status": 1,
                 "title": "Implement UI"
             },
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 3,
                 "project": "",
                 "status": 3,
@@ -82,14 +82,14 @@
         "name": "Scrum1",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "",
                 "status": 0,
                 "title": "Knopka proect"
             },
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 2,
                 "project": "",
                 "status": 2,
@@ -140,7 +140,7 @@
         "name": "qwerty",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 2,
                 "project": "",
                 "status": 1,
@@ -158,7 +158,7 @@
         "name": "123",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "",
                 "status": 2,
@@ -226,7 +226,7 @@
         "name": "vcxz",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "",
                 "status": 3,
@@ -244,7 +244,7 @@
         "name": "blaaaaaaa",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "",
                 "status": 3,
@@ -262,7 +262,7 @@
         "name": "123",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:50:01",
                 "id": 1,
                 "project": "",
                 "status": 3,
@@ -275,17 +275,26 @@
         "deadline": "2024-12-31",
         "developer_ids": [
             8,
-            5
+            5,
+            4,
+            9
         ],
         "id": 13,
         "name": "My first project",
         "tasks": [
             {
-                "creation_date": "2025-11-29 10:42:00",
+                "creation_date": "2025-11-29 23:49:40",
                 "id": 1,
                 "project": "",
                 "status": 0,
                 "title": "Laba OST"
+            },
+            {
+                "creation_date": "2025-11-29 23:49:40",
+                "id": 2,
+                "project": "",
+                "status": 2,
+                "title": "Pz Baza D"
             }
         ]
     },
