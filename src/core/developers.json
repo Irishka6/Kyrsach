@@ -43,7 +43,9 @@
         "id": 5,
         "login": "ira",
         "password": "22052006i",
-        "project_ids": []
+        "project_ids": [
+            13
+        ]
     },
     {
         "id": 6,
@@ -61,6 +63,28 @@
         "password": "1234567890",
         "project_ids": [
             12
+        ]
+    },
+    {
+        "id": 8,
+        "login": "Vika",
+        "password": "12345678",
+        "project_ids": [
+            13
+        ]
+    },
+    {
+        "id": 9,
+        "login": "Stasia",
+        "password": "8145",
+        "project_ids": []
+    },
+    {
+        "id": 10,
+        "login": "stasia",
+        "password": "8145",
+        "project_ids": [
+            14
         ]
     }
 ]
