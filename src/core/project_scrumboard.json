@@ -1,16 +1,297 @@
 [
     {
         "creator_id": 1,
+<<<<<<< HEAD
         "deadline": "2024-12-31",
         "developer_ids": [
             1,
             4,
             5
+=======
+        "deadline": "",
+        "developer_ids": [
+            1
+        ],
+        "id": 1,
+        "name": "Scrum",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "",
+                "status": 0,
+                "title": "dobavit knopky proect"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 2,
+                "project": "",
+                "status": 3,
+                "title": "dobavlen proect"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "razrabotchiki dobavlen"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "12345"
+            }
+        ]
+    },
+    {
+        "creator_id": 1,
+        "deadline": "",
+        "developer_ids": [
+            1,
+            2
+        ],
+        "id": 2,
+        "name": "Scrum2",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "Scrum2",
+                "status": 0,
+                "title": "Design database"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 2,
+                "project": "Scrum2",
+                "status": 1,
+                "title": "Implement UI"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 3,
+                "project": "",
+                "status": 3,
+                "title": "Vika"
+            }
+        ]
+    },
+    {
+        "creator_id": 2,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            2,
+            1
+        ],
+        "id": 3,
+        "name": "Scrum1",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "",
+                "status": 0,
+                "title": "Knopka proect"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 2,
+                "project": "",
+                "status": 2,
+                "title": "knopka dobavka proecta"
+            }
+        ]
+    },
+    {
+        "creator_id": 1,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            1
+        ],
+        "id": 4,
+        "name": "Scrum1",
+        "tasks": []
+    },
+    {
+        "creator_id": 2,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            2
+        ],
+        "id": 5,
+        "name": "Rabota",
+        "tasks": []
+    },
+    {
+        "creator_id": 1,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            1,
+            2
+        ],
+        "id": 6,
+        "name": "gcvhbjnkm",
+        "tasks": []
+    },
+    {
+        "creator_id": 1,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            1,
+            3,
+            6
+        ],
+        "id": 7,
+        "name": "qwerty",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "boom"
+            }
+        ]
+    },
+    {
+        "creator_id": 4,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            4
+        ],
+        "id": 8,
+        "name": "123",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "",
+                "status": 2,
+                "title": "12345"
+            }
+        ]
+    },
+    {
+        "creator_id": 4,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            4
+        ],
+        "id": 8,
+        "name": "123",
+        "tasks": []
+    },
+    {
+        "creator_id": 0,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            0
+        ],
+        "id": 9,
+        "name": "aaaaaaaaaa",
+        "tasks": []
+    },
+    {
+        "creator_id": 256,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            256
+        ],
+        "id": 9,
+        "name": "qwertyui",
+        "tasks": []
+    },
+    {
+        "creator_id": 53,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            53
+        ],
+        "id": 9,
+        "name": "qwertyui",
+        "tasks": []
+    },
+    {
+        "creator_id": -11521536,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            -11521536
+        ],
+        "id": 9,
+        "name": "qwertyira",
+        "tasks": []
+    },
+    {
+        "creator_id": 6,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            6
+        ],
+        "id": 10,
+        "name": "vcxz",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "1234567890"
+            }
+        ]
+    },
+    {
+        "creator_id": 6,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            6
+        ],
+        "id": 11,
+        "name": "blaaaaaaa",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "rabotaet"
+            }
+        ]
+    },
+    {
+        "creator_id": 7,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            7
+        ],
+        "id": 12,
+        "name": "123",
+        "tasks": [
+            {
+                "creation_date": "2025-11-30 00:43:59",
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "ura"
+            }
+        ]
+    },
+    {
+        "creator_id": 8,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            8,
+            5,
+            4,
+            9
+>>>>>>> 84a7e4286a28b21d7f4ccc415b47b3a53be9fe19
         ],
         "id": 1,
         "name": "1",
         "tasks": [
             {
+<<<<<<< HEAD
                 "creation_date": "2025-12-02 00:17:39",
                 "creatorId": 1,
                 "id": 1,
@@ -57,6 +338,20 @@
                 "project": "",
                 "status": 1,
                 "title": "123"
+=======
+                "creation_date": "2025-11-30 00:43:36",
+                "id": 1,
+                "project": "",
+                "status": 0,
+                "title": "Laba OST"
+            },
+            {
+                "creation_date": "2025-11-30 00:43:36",
+                "id": 2,
+                "project": "",
+                "status": 2,
+                "title": "Pz Baza D"
+>>>>>>> 84a7e4286a28b21d7f4ccc415b47b3a53be9fe19
             }
         ]
     },
