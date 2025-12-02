@@ -67,7 +67,7 @@ ScrumBoard::ScrumBoard() :
     tasksData = {};
 }
 
-<<<<<<< HEAD
+
 ScrumBoard::~ScrumBoard() {
     // Защита от двойного удаления
     if (activeDeveloper != nullptr) {
@@ -95,8 +95,7 @@ ScrumBoard::~ScrumBoard() {
     sectionOptionTexts.clear();
 }
 
-=======
->>>>>>> 84a7e4286a28b21d7f4ccc415b47b3a53be9fe19
+
 // Создание интерфейса
 bool ScrumBoard::initialize() {
     // Загрузка шрифта
@@ -2466,13 +2465,5 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
     // Окно добавления разработчика
     if (showAddDeveloperWindow) {
         drawAddDeveloperWindow(window);
-    }
-}
-
-// Деструктор
-ScrumBoard::~ScrumBoard() {
-    if (activeDeveloper != nullptr) {
-        delete activeDeveloper;
-        activeDeveloper = nullptr;
     }
 }
