@@ -1,6 +1,21 @@
 {
+    "cmake.configureOnOpen": true,
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.generator": "MinGW Makefiles",
+    "cmake.cmakePath": "C:\\Program Files\\CMake\\bin\\cmake.exe",
+    
+    // Укажите явно пути к компиляторам
+    "cmake.configureSettings": {
+        "CMAKE_C_COMPILER": "C:/TDM-GCC-64/bin/gcc.exe",
+        "CMAKE_CXX_COMPILER": "C:/TDM-GCC-64/bin/g++.exe",
+        "CMAKE_MAKE_PROGRAM": "C:/TDM-GCC-64/bin/mingw32-make.exe"
+    },
+    
+    // Дополнительные настройки
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "files.associations": {
-        "vector": "cpp",
+        "*.h": "cpp",
+        "*.hpp": "cpp",
         "any": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -27,6 +42,7 @@
         "map": "cpp",
         "set": "cpp",
         "unordered_map": "cpp",
+        "vector": "cpp",
         "exception": "cpp",
         "algorithm": "cpp",
         "functional": "cpp",
@@ -58,9 +74,13 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp",
-        "list": "cpp",
-        "xstring": "cpp"
+        "valarray": "cpp"
     },
-    "cmake.sourceDirectory": "C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/src/ui"
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    
+    // Добавьте путь TDM-GCC в переменные окружения терминала
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\TDM-GCC-64\\bin;${env:PATH}"
+    },
+    "cmake.sourceDirectory": "C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/src"
 }

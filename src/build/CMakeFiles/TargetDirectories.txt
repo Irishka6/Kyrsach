@@ -1,0 +1,3 @@
+C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/ScrumBoard.dir
+C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/edit_cache.dir
+C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/rebuild_cache.dir

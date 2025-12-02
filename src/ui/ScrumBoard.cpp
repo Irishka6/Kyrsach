@@ -68,10 +68,30 @@ ScrumBoard::ScrumBoard() :
 }
 
 ScrumBoard::~ScrumBoard() {
+    // Защита от двойного удаления
     if (activeDeveloper != nullptr) {
         delete activeDeveloper;
         activeDeveloper = nullptr;
     }
+    
+    // Очищаем все данные
+    projects.clear();
+    availableDevelopers.clear();
+    tasksData.clear();
+    
+    for (int i = 0; i < 4; i++) {
+        tasks[i].clear();
+    }
+    
+    // Графические элементы
+    sections.clear();
+    sectionTexts.clear();
+    projectRects.clear();
+    projectTexts.clear();
+    developerRects.clear();
+    developerTexts.clear();
+    sectionOptionRects.clear();
+    sectionOptionTexts.clear();
 }
 
 // Создание интерфейса
@@ -881,15 +901,18 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         
         // Чередуем имена из availableDevelopers
         std::string developerName = "Не назначен";
-        
-        if (!availableDevelopers.empty()) {
-            // Чередуем разработчиков на основе ID задачи
-            int devIndex = (id - 1) % availableDevelopers.size();
-            developerName = availableDevelopers[devIndex].getLogin();
-            std::cout << "Задача ID " << id << " назначена разработчику: " << developerName 
-                      << " (индекс: " << devIndex << ")" << std::endl;
-        } else if (isLoggedIn && activeDeveloper != nullptr) {
-            developerName = currentUser;
+        for (auto& task: tasksData){
+            std::cout << task.getId() << " = " << id << std::endl;
+            if (task.getId() == id){
+                for (auto& developer : availableDevelopers){
+                    std::cout << "developer: "<< developer.getId() << " = " << task.getTitle() << std::endl;
+                    if(developer.getId() == task.getCreatorId()){
+                        developerName = developer.getLogin();
+                        break;
+                    }
+                }
+                break;
+            }
         }
         
         // Установка имени разработчика

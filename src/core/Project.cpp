@@ -122,6 +122,7 @@ json Project::toJson() const {
         task_json["title"] = task.getTitle();
         task_json["status"] = task.getStatus();
         task_json["project"] = task.getProjekt();
+        task_json["creatorId"] = task.getCreatorId();
         task_json["creation_date"] = task.getFormattedCreationDate();
         tasks_array.push_back(task_json);
     }
@@ -159,9 +160,11 @@ Project Project::fromJson(const json& j) {
             int taskId = task_json.value("id", 0);
             std::string title = task_json.value("title", "");
             int status = task_json.value("status", 0);
+            int creatorid = task_json.value("creatorId", 0);
             std::string projectName = task_json.value("project", project.name); // используем имя проекта по умолчанию
             
             Tasks task(taskId, title, status);
+            task.setCreatorId(creatorid);
             task.setProject(projectName);
             project.tasks.push_back(task);
         }

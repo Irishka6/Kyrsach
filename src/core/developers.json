@@ -7,7 +7,8 @@
             1,
             6,
             5,
-            3
+            3,
+            2
         ]
     },
     {
@@ -36,7 +37,8 @@
         "login": "12345",
         "password": "12345678",
         "project_ids": [
-            8
+            8,
+            1
         ]
     },
     {
@@ -44,7 +46,9 @@
         "login": "ira",
         "password": "22052006i",
         "project_ids": [
-            13
+            13,
+            1,
+            2
         ]
     },
     {
@@ -85,6 +89,20 @@
         "password": "8145",
         "project_ids": [
             14
+        ]
+    },
+    {
+        "id": 11,
+        "login": "qewtrefgdfx",
+        "password": "12345678",
+        "project_ids": []
+    },
+    {
+        "id": 12,
+        "login": "alex",
+        "password": "1234567890",
+        "project_ids": [
+            15
         ]
     }
 ]

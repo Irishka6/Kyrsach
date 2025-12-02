@@ -11,6 +11,89 @@ events:
   -
     kind: "find-v1"
     backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeMinGWFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "mingw32-make.exe"
+    candidate_directories:
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
+      - "C:/TDM-GCC-64/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files (x86)/dotnet/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/HuaweiPC/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/JetBrains/PyCharm Community Edition 2022.3.1/bin/"
+      - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "c:/MinGW/bin/"
+      - "/MinGW/bin/"
+      - "/REGISTRY-NOTFOUND/MinGW/bin/"
+    searched_directories:
+      - "C:/Users/HuaweiPC/bin/mingw32-make.exe.com"
+      - "C:/Users/HuaweiPC/bin/mingw32-make.exe"
+      - "C:/Program Files/Git/mingw64/bin/mingw32-make.exe.com"
+      - "C:/Program Files/Git/mingw64/bin/mingw32-make.exe"
+      - "C:/Program Files/Git/usr/local/bin/mingw32-make.exe.com"
+      - "C:/Program Files/Git/usr/local/bin/mingw32-make.exe"
+      - "C:/Program Files/Git/usr/bin/mingw32-make.exe.com"
+      - "C:/Program Files/Git/usr/bin/mingw32-make.exe"
+      - "C:/TDM-GCC-64/bin/mingw32-make.exe.com"
+    found: "C:/TDM-GCC-64/bin/mingw32-make.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\TDM-GCC-64\\bin"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\TDM-GCC-64\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\HuaweiPC\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2022.3.1\\bin"
+        - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
+  -
+    kind: "find-v1"
+    backtrace:
       - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
       - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
       - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
@@ -35,14 +118,22 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -51,6 +142,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "message-v1"
     backtrace:
@@ -71,7 +164,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
       
       The C compiler identification is GNU, found in:
-        C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/4.2.0/CompilerIdC/a.exe
+        C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/4.2.0/CompilerIdC/a.exe
       
   -
     kind: "find-v1"
@@ -94,6 +187,10 @@ events:
       - "ar"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -108,19 +205,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/ar.com"
     found: "C:/TDM-GCC-64/bin/ar.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -129,6 +236,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -150,6 +259,10 @@ events:
       - "ranlib"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -164,19 +277,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/ranlib.com"
     found: "C:/TDM-GCC-64/bin/ranlib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -185,6 +308,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -206,6 +331,10 @@ events:
       - "strip"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -220,19 +349,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/strip.com"
     found: "C:/TDM-GCC-64/bin/strip.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -241,6 +380,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -262,6 +403,10 @@ events:
       - "ld"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -276,19 +421,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/ld.com"
     found: "C:/TDM-GCC-64/bin/ld.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -297,6 +452,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -318,6 +475,10 @@ events:
       - "nm"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -332,19 +493,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/nm.com"
     found: "C:/TDM-GCC-64/bin/nm.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -353,6 +524,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -374,6 +547,10 @@ events:
       - "objdump"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -388,19 +565,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/objdump.com"
     found: "C:/TDM-GCC-64/bin/objdump.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -409,6 +596,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -430,6 +619,10 @@ events:
       - "objcopy"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -444,19 +637,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/objcopy.com"
     found: "C:/TDM-GCC-64/bin/objcopy.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -465,6 +668,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -486,6 +691,10 @@ events:
       - "readelf"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -500,19 +709,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/readelf.com"
     found: "C:/TDM-GCC-64/bin/readelf.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -521,6 +740,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -542,6 +763,10 @@ events:
       - "dlltool"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -556,19 +781,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/dlltool.com"
     found: "C:/TDM-GCC-64/bin/dlltool.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -577,6 +812,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -598,6 +835,10 @@ events:
       - "addr2line"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -612,19 +853,29 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/addr2line.com"
     found: "C:/TDM-GCC-64/bin/addr2line.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -633,6 +884,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -654,6 +907,10 @@ events:
       - "tapi"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -668,10 +925,24 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/tapi.com"
       - "C:/TDM-GCC-64/bin/tapi.exe"
       - "C:/TDM-GCC-64/bin/tapi"
+      - "C:/Users/HuaweiPC/bin/tapi.com"
+      - "C:/Users/HuaweiPC/bin/tapi.exe"
+      - "C:/Users/HuaweiPC/bin/tapi"
+      - "C:/Program Files/Git/mingw64/bin/tapi.com"
+      - "C:/Program Files/Git/mingw64/bin/tapi.exe"
+      - "C:/Program Files/Git/mingw64/bin/tapi"
+      - "C:/Program Files/Git/usr/local/bin/tapi.com"
+      - "C:/Program Files/Git/usr/local/bin/tapi.exe"
+      - "C:/Program Files/Git/usr/local/bin/tapi"
+      - "C:/Program Files/Git/usr/bin/tapi.com"
+      - "C:/Program Files/Git/usr/bin/tapi.exe"
+      - "C:/Program Files/Git/usr/bin/tapi"
       - "C:/Windows/System32/tapi.com"
       - "C:/Windows/System32/tapi.exe"
       - "C:/Windows/System32/tapi"
@@ -714,17 +985,31 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/tapi.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/tapi.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/tapi"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/tapi.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/tapi.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/tapi"
+      - "C:/Program Files/Git/usr/bin/core_perl/tapi.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/tapi.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/tapi"
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -733,6 +1018,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -757,6 +1044,10 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -771,10 +1062,24 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/gcc-ar-10.3.com"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.3.exe"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.3"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.3.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.3.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.3"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.3"
       - "C:/Windows/System32/gcc-ar-10.3.com"
       - "C:/Windows/System32/gcc-ar-10.3.exe"
       - "C:/Windows/System32/gcc-ar-10.3"
@@ -817,9 +1122,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.3.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.3.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.3"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.com"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ar-10"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10"
       - "C:/Windows/System32/gcc-ar-10.com"
       - "C:/Windows/System32/gcc-ar-10.exe"
       - "C:/Windows/System32/gcc-ar-10"
@@ -862,9 +1185,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10"
       - "C:/TDM-GCC-64/bin/gcc-ar10.com"
       - "C:/TDM-GCC-64/bin/gcc-ar10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ar10"
+      - "C:/Users/HuaweiPC/bin/gcc-ar10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ar10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ar10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar10"
+      - "C:/Program Files/Git/usr/bin/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ar10"
       - "C:/Windows/System32/gcc-ar10.com"
       - "C:/Windows/System32/gcc-ar10.exe"
       - "C:/Windows/System32/gcc-ar10"
@@ -907,18 +1248,32 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar10"
       - "C:/TDM-GCC-64/bin/gcc-ar.com"
     found: "C:/TDM-GCC-64/bin/gcc-ar.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -927,6 +1282,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -951,6 +1308,10 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -965,10 +1326,24 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.3.com"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.3.exe"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.3"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.3.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.3.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.3"
       - "C:/Windows/System32/gcc-ranlib-10.3.com"
       - "C:/Windows/System32/gcc-ranlib-10.3.exe"
       - "C:/Windows/System32/gcc-ranlib-10.3"
@@ -1011,9 +1386,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.3.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.3.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.3"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.com"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10"
       - "C:/Windows/System32/gcc-ranlib-10.com"
       - "C:/Windows/System32/gcc-ranlib-10.exe"
       - "C:/Windows/System32/gcc-ranlib-10"
@@ -1056,9 +1449,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10"
       - "C:/TDM-GCC-64/bin/gcc-ranlib10.com"
       - "C:/TDM-GCC-64/bin/gcc-ranlib10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ranlib10"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib10"
       - "C:/Windows/System32/gcc-ranlib10.com"
       - "C:/Windows/System32/gcc-ranlib10.exe"
       - "C:/Windows/System32/gcc-ranlib10"
@@ -1101,18 +1512,32 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib10"
       - "C:/TDM-GCC-64/bin/gcc-ranlib.com"
     found: "C:/TDM-GCC-64/bin/gcc-ranlib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -1121,6 +1546,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -1148,14 +1575,22 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -1164,6 +1599,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "message-v1"
     backtrace:
@@ -1184,7 +1621,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
       
       The CXX compiler identification is GNU, found in:
-        C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/4.2.0/CompilerIdCXX/a.exe
+        C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/4.2.0/CompilerIdCXX/a.exe
       
   -
     kind: "find-v1"
@@ -1210,6 +1647,10 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1224,10 +1665,24 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/gcc-ar-10.3.com"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.3.exe"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.3"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.3.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.3.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.3"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.3"
       - "C:/Windows/System32/gcc-ar-10.3.com"
       - "C:/Windows/System32/gcc-ar-10.3.exe"
       - "C:/Windows/System32/gcc-ar-10.3"
@@ -1270,9 +1725,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.3.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.3.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.3"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.3.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.3"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.com"
       - "C:/TDM-GCC-64/bin/gcc-ar-10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ar-10"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ar-10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar-10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar-10"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ar-10"
       - "C:/Windows/System32/gcc-ar-10.com"
       - "C:/Windows/System32/gcc-ar-10.exe"
       - "C:/Windows/System32/gcc-ar-10"
@@ -1315,9 +1788,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar-10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar-10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar-10"
       - "C:/TDM-GCC-64/bin/gcc-ar10.com"
       - "C:/TDM-GCC-64/bin/gcc-ar10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ar10"
+      - "C:/Users/HuaweiPC/bin/gcc-ar10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ar10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ar10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ar10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ar10"
+      - "C:/Program Files/Git/usr/bin/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ar10"
       - "C:/Windows/System32/gcc-ar10.com"
       - "C:/Windows/System32/gcc-ar10.exe"
       - "C:/Windows/System32/gcc-ar10"
@@ -1360,18 +1851,32 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ar10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ar10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ar10"
       - "C:/TDM-GCC-64/bin/gcc-ar.com"
     found: "C:/TDM-GCC-64/bin/gcc-ar.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -1380,6 +1885,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -1404,6 +1911,10 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "C:/TDM-GCC-64/bin/"
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -1418,10 +1929,24 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
     searched_directories:
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.3.com"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.3.exe"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.3"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.3.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.3.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.3"
       - "C:/Windows/System32/gcc-ranlib-10.3.com"
       - "C:/Windows/System32/gcc-ranlib-10.3.exe"
       - "C:/Windows/System32/gcc-ranlib-10.3"
@@ -1464,9 +1989,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.3.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.3.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.3"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.3.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.3.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.3"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.com"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ranlib-10"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib-10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib-10"
       - "C:/Windows/System32/gcc-ranlib-10.com"
       - "C:/Windows/System32/gcc-ranlib-10.exe"
       - "C:/Windows/System32/gcc-ranlib-10"
@@ -1509,9 +2052,27 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib-10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib-10"
       - "C:/TDM-GCC-64/bin/gcc-ranlib10.com"
       - "C:/TDM-GCC-64/bin/gcc-ranlib10.exe"
       - "C:/TDM-GCC-64/bin/gcc-ranlib10"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib10.com"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib10.exe"
+      - "C:/Users/HuaweiPC/bin/gcc-ranlib10"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib10.com"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/mingw64/bin/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/local/bin/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/bin/gcc-ranlib10"
       - "C:/Windows/System32/gcc-ranlib10.com"
       - "C:/Windows/System32/gcc-ranlib10.exe"
       - "C:/Windows/System32/gcc-ranlib10"
@@ -1554,18 +2115,32 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib10.com"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib10.exe"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/gcc-ranlib10"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib10.com"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib10.exe"
+      - "C:/Program Files/Git/usr/bin/core_perl/gcc-ranlib10"
       - "C:/TDM-GCC-64/bin/gcc-ranlib.com"
     found: "C:/TDM-GCC-64/bin/gcc-ranlib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -1574,6 +2149,8 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
   -
     kind: "find-v1"
     backtrace:
@@ -1597,6 +2174,10 @@ events:
       - "windres"
       - "windres"
     candidate_directories:
+      - "C:/Users/HuaweiPC/bin/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/usr/local/bin/"
+      - "C:/Program Files/Git/usr/bin/"
       - "C:/TDM-GCC-64/bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -1612,6 +2193,11 @@ events:
       - "C:/Users/HuaweiPC/AppData/Local/GitHubDesktop/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/HuaweiPC/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/LocalCache/local-packages/Python310/Scripts/"
+      - "C:/Program Files/Git/usr/bin/vendor_perl/"
+      - "C:/Program Files/Git/usr/bin/core_perl/"
+      - "C:/Program Files/Git/mingw64/bin/"
+      - "C:/Program Files/Git/mingw64/sbin/"
+      - "C:/Program Files/Git/mingw64/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -1625,18 +2211,38 @@ events:
       - "C:/Program Files (x86)/ScrumBoard/sbin/"
       - "C:/Program Files (x86)/ScrumBoard/"
     searched_directories:
+      - "C:/Users/HuaweiPC/bin/windres.com"
+      - "C:/Users/HuaweiPC/bin/windres.exe"
+      - "C:/Users/HuaweiPC/bin/windres"
+      - "C:/Program Files/Git/mingw64/bin/windres.com"
+      - "C:/Program Files/Git/mingw64/bin/windres.exe"
+      - "C:/Program Files/Git/mingw64/bin/windres"
+      - "C:/Program Files/Git/usr/local/bin/windres.com"
+      - "C:/Program Files/Git/usr/local/bin/windres.exe"
+      - "C:/Program Files/Git/usr/local/bin/windres"
+      - "C:/Program Files/Git/usr/bin/windres.com"
+      - "C:/Program Files/Git/usr/bin/windres.exe"
+      - "C:/Program Files/Git/usr/bin/windres"
       - "C:/TDM-GCC-64/bin/windres.com"
     found: "C:/TDM-GCC-64/bin/windres.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -1645,8 +2251,11 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/ScrumBoard"
       CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files/Git/mingw64"
         - "C:/Program Files"
         - "C:/Program Files (x86)"
         - "C:/Program Files/CMake"
@@ -1660,8 +2269,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw"
-      binary: "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw"
+      source: "C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo"
+      binary: "C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -1670,13 +2279,13 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw'
+        Change Dir: 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_482b8/fast
-        C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_482b8.dir\\build.make CMakeFiles/cmTC_482b8.dir/build
-        mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/╧Ёюур/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw'
-        Building C object CMakeFiles/cmTC_482b8.dir/CMakeCCompilerABI.c.obj
-        C:\\TDM-GCC-64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_38b9e/fast
+        C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_38b9e.dir\\build.make CMakeFiles/cmTC_38b9e.dir/build
+        mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo'
+        Building C object CMakeFiles/cmTC_38b9e.dir/CMakeCCompilerABI.c.obj
+        C:\\TDM-GCC-64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
         Using built-in specs.
         COLLECT_GCC=C:\\TDM-GCC-64\\bin\\gcc.exe
         Target: x86_64-w64-mingw32
@@ -1684,8 +2293,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 10.3.0 (tdm64-1) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64'
-         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccnOM9rH.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64'
+         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccfcnUga.s
         GNU C17 (tdm64-1) version 10.3.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 10.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.23-GMP
         
@@ -1706,14 +2315,14 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: 68074fcaab9f6b1377b55f7cea05149b
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64'
-         C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccnOM9rH.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64'
+         C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccfcnUga.s
         GNU assembler version 2.36.1 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.36.1
         COMPILER_PATH=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../libexec/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../lib/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64'
-        Linking C executable cmTC_482b8.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_482b8.dir\\link.txt --verbose=1
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64'
+        Linking C executable cmTC_38b9e.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_38b9e.dir\\link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=C:\\TDM-GCC-64\\bin\\gcc.exe
         COLLECT_LTO_WRAPPER=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe
@@ -1724,16 +2333,16 @@ events:
         gcc version 10.3.0 (tdm64-1) 
         COMPILER_PATH=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../libexec/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../lib/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_482b8.exe' '-mtune=generic' '-march=x86-64'
-         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc286Dud.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_482b8.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_482b8.dir/objects.a --no-whole-archive --out-implib libcmTC_482b8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_38b9e.exe' '-mtune=generic' '-march=x86-64'
+         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc2quM2C.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_38b9e.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_38b9e.dir/objects.a --no-whole-archive --out-implib libcmTC_38b9e.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
         collect2 version 10.3.0
-        C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc286Dud.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_482b8.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_482b8.dir/objects.a --no-whole-archive --out-implib libcmTC_482b8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
+        C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc2quM2C.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_38b9e.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_38b9e.dir/objects.a --no-whole-archive --out-implib libcmTC_38b9e.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
         GNU ld (GNU Binutils) 2.36.1
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_482b8.exe' '-mtune=generic' '-march=x86-64'
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_482b8.dir/objects.a
-        C:\\TDM-GCC-64\\bin\\ar.exe qc CMakeFiles\\cmTC_482b8.dir/objects.a @CMakeFiles\\cmTC_482b8.dir\\objects1.rsp
-        C:\\TDM-GCC-64\\bin\\gcc.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_482b8.dir/objects.a -Wl,--no-whole-archive -o cmTC_482b8.exe -Wl,--out-implib,libcmTC_482b8.dll.a -Wl,--major-image-version,0,--minor-image-version,0
-        mingw32-make.exe[1]: Leaving directory 'C:/Users/HuaweiPC/Desktop/╧Ёюур/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_38b9e.exe' '-mtune=generic' '-march=x86-64'
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_38b9e.dir/objects.a
+        C:\\TDM-GCC-64\\bin\\ar.exe qc CMakeFiles\\cmTC_38b9e.dir/objects.a @CMakeFiles\\cmTC_38b9e.dir\\objects1.rsp
+        C:\\TDM-GCC-64\\bin\\gcc.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_38b9e.dir/objects.a -Wl,--no-whole-archive -o cmTC_38b9e.exe -Wl,--out-implib,libcmTC_38b9e.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        mingw32-make.exe[1]: Leaving directory 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo'
         
       exitCode: 0
   -
@@ -1768,13 +2377,13 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw']
+        ignore line: [Change Dir: 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo']
         ignore line: []
-        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_482b8/fast]
-        ignore line: [C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_482b8.dir\\build.make CMakeFiles/cmTC_482b8.dir/build]
-        ignore line: [mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/╧Ёюур/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-ctevmw']
-        ignore line: [Building C object CMakeFiles/cmTC_482b8.dir/CMakeCCompilerABI.c.obj]
-        ignore line: [C:\\TDM-GCC-64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"]
+        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_38b9e/fast]
+        ignore line: [C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_38b9e.dir\\build.make CMakeFiles/cmTC_38b9e.dir/build]
+        ignore line: [mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-b3nsyo']
+        ignore line: [Building C object CMakeFiles/cmTC_38b9e.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [C:\\TDM-GCC-64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\TDM-GCC-64\\bin\\gcc.exe]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -1782,8 +2391,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 10.3.0 (tdm64-1) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64']
-        ignore line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccnOM9rH.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64']
+        ignore line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccfcnUga.s]
         ignore line: [GNU C17 (tdm64-1) version 10.3.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 10.3.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.23-GMP]
         ignore line: []
@@ -1804,8 +2413,8 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: 68074fcaab9f6b1377b55f7cea05149b]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64']
-        ignore line: [ C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccnOM9rH.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64']
+        ignore line: [ C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccfcnUga.s]
         ignore line: [GNU assembler version 2.36.1 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.36.1]
         ignore line: [COMPILER_PATH=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/]
         ignore line: [C:/TDM-GCC-64/bin/../libexec/gcc/]
@@ -1816,9 +2425,9 @@ events:
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_482b8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64']
-        ignore line: [Linking C executable cmTC_482b8.exe]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_482b8.dir\\link.txt --verbose=1]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_38b9e.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64']
+        ignore line: [Linking C executable cmTC_38b9e.exe]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_38b9e.dir\\link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\TDM-GCC-64\\bin\\gcc.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe]
@@ -1836,13 +2445,13 @@ events:
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_482b8.exe' '-mtune=generic' '-march=x86-64']
-        link line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc286Dud.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_482b8.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_482b8.dir/objects.a --no-whole-archive --out-implib libcmTC_482b8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_38b9e.exe' '-mtune=generic' '-march=x86-64']
+        link line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc2quM2C.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_38b9e.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_38b9e.dir/objects.a --no-whole-archive --out-implib libcmTC_38b9e.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
           arg [C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll] ==> ignore
           arg [-plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc286Dud.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc2quM2C.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
@@ -1872,7 +2481,7 @@ events:
           arg [--undefined=__xl_f] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_482b8.exe] ==> ignore
+          arg [cmTC_38b9e.exe] ==> ignore
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o]
           arg [-LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0] ==> dir [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0]
@@ -1883,10 +2492,10 @@ events:
           arg [-LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../..] ==> dir [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../..]
           arg [-v] ==> ignore
           arg [--whole-archive] ==> ignore
-          arg [CMakeFiles\\cmTC_482b8.dir/objects.a] ==> ignore
+          arg [CMakeFiles\\cmTC_38b9e.dir/objects.a] ==> ignore
           arg [--no-whole-archive] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_482b8.dll.a] ==> ignore
+          arg [libcmTC_38b9e.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -1917,7 +2526,7 @@ events:
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o]
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
         ignore line: [collect2 version 10.3.0]
-        ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc286Dud.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_482b8.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_482b8.dir/objects.a --no-whole-archive --out-implib libcmTC_482b8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
+        ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\cc2quM2C.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_38b9e.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_38b9e.dir/objects.a --no-whole-archive --out-implib libcmTC_38b9e.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
         linker tool for 'C': C:/TDM-GCC-64/x86_64-w64-mingw32/bin/ld.exe
         remove lib [msvcrt]
         remove lib [msvcrt]
@@ -1956,8 +2565,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi"
-      binary: "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi"
+      source: "C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy"
+      binary: "C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -1967,13 +2576,13 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi'
+        Change Dir: 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_390ee/fast
-        C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_390ee.dir\\build.make CMakeFiles/cmTC_390ee.dir/build
-        mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/╧Ёюур/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi'
-        Building CXX object CMakeFiles/cmTC_390ee.dir/CMakeCXXCompilerABI.cpp.obj
-        C:\\TDM-GCC-64\\bin\\g++.exe   -v -o CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_bbcde/fast
+        C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_bbcde.dir\\build.make CMakeFiles/cmTC_bbcde.dir/build
+        mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy'
+        Building CXX object CMakeFiles/cmTC_bbcde.dir/CMakeCXXCompilerABI.cpp.obj
+        C:\\TDM-GCC-64\\bin\\g++.exe   -v -o CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
         Using built-in specs.
         COLLECT_GCC=C:\\TDM-GCC-64\\bin\\g++.exe
         Target: x86_64-w64-mingw32
@@ -1981,8 +2590,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 10.3.0 (tdm64-1) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64'
-         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1plus.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccvxXmPK.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64'
+         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1plus.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccxc3YSZ.s
         GNU C++14 (tdm64-1) version 10.3.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 10.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.23-GMP
         
@@ -2009,14 +2618,14 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: 5e49fa89ed7bfe906173ae8e94e08de6
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64'
-         C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccvxXmPK.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64'
+         C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccxc3YSZ.s
         GNU assembler version 2.36.1 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.36.1
         COMPILER_PATH=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../libexec/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../lib/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64'
-        Linking CXX executable cmTC_390ee.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_390ee.dir\\link.txt --verbose=1
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64'
+        Linking CXX executable cmTC_bbcde.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_bbcde.dir\\link.txt --verbose=1
         Using built-in specs.
         COLLECT_GCC=C:\\TDM-GCC-64\\bin\\g++.exe
         COLLECT_LTO_WRAPPER=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe
@@ -2027,16 +2636,16 @@ events:
         gcc version 10.3.0 (tdm64-1) 
         COMPILER_PATH=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../libexec/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/;C:/TDM-GCC-64/bin/../lib/gcc/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/;C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_390ee.exe' '-mtune=generic' '-march=x86-64'
-         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccqcTx3g.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_390ee.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_390ee.dir/objects.a --no-whole-archive --out-implib libcmTC_390ee.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_bbcde.exe' '-mtune=generic' '-march=x86-64'
+         C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccc3JGZs.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_bbcde.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_bbcde.dir/objects.a --no-whole-archive --out-implib libcmTC_bbcde.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
         collect2 version 10.3.0
-        C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccqcTx3g.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_390ee.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_390ee.dir/objects.a --no-whole-archive --out-implib libcmTC_390ee.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
+        C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccc3JGZs.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_bbcde.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_bbcde.dir/objects.a --no-whole-archive --out-implib libcmTC_bbcde.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o
         GNU ld (GNU Binutils) 2.36.1
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_390ee.exe' '-mtune=generic' '-march=x86-64'
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_390ee.dir/objects.a
-        C:\\TDM-GCC-64\\bin\\ar.exe qc CMakeFiles\\cmTC_390ee.dir/objects.a @CMakeFiles\\cmTC_390ee.dir\\objects1.rsp
-        C:\\TDM-GCC-64\\bin\\g++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_390ee.dir/objects.a -Wl,--no-whole-archive -o cmTC_390ee.exe -Wl,--out-implib,libcmTC_390ee.dll.a -Wl,--major-image-version,0,--minor-image-version,0
-        mingw32-make.exe[1]: Leaving directory 'C:/Users/HuaweiPC/Desktop/╧Ёюур/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_bbcde.exe' '-mtune=generic' '-march=x86-64'
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_bbcde.dir/objects.a
+        C:\\TDM-GCC-64\\bin\\ar.exe qc CMakeFiles\\cmTC_bbcde.dir/objects.a @CMakeFiles\\cmTC_bbcde.dir\\objects1.rsp
+        C:\\TDM-GCC-64\\bin\\g++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_bbcde.dir/objects.a -Wl,--no-whole-archive -o cmTC_bbcde.exe -Wl,--out-implib,libcmTC_bbcde.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        mingw32-make.exe[1]: Leaving directory 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy'
         
       exitCode: 0
   -
@@ -2095,14 +2704,22 @@ events:
     found: "C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/libstdc++.a"
     search_context:
       ENV{PATH}:
+        - "C:\\Users\\HuaweiPC\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\local\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Program Files\\Git\\mingw64\\bin"
+        - "C:\\Program Files\\Git\\usr\\bin"
+        - "C:\\Users\\HuaweiPC\\bin"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\WINDOWS\\system32"
         - "C:\\WINDOWS"
         - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\WINDOWS\\System32\\OpenSSH"
+        - "C:\\Program Files (x86)\\dotnet"
+        - "C:\\Program Files\\dotnet"
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\TDM-GCC-64\\bin"
         - "C:\\Program Files\\CMake\\bin"
@@ -2111,8 +2728,11 @@ events:
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
+        - "C:\\Program Files\\Git\\usr\\bin\\vendor_perl"
+        - "C:\\Program Files\\Git\\usr\\bin\\core_perl"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/ScrumBoard"
       CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files/Git/mingw64"
         - "C:/Program Files"
         - "C:/Program Files (x86)"
         - "C:/Program Files/CMake"
@@ -2131,13 +2751,13 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/HuaweiPC/Desktop/Прога/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi']
+        ignore line: [Change Dir: 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy']
         ignore line: []
-        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_390ee/fast]
-        ignore line: [C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_390ee.dir\\build.make CMakeFiles/cmTC_390ee.dir/build]
-        ignore line: [mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/╧Ёюур/Kyrsovaya/Kyrsach1/Kyrsach/build/CMakeFiles/CMakeScratch/TryCompile-etqcqi']
-        ignore line: [Building CXX object CMakeFiles/cmTC_390ee.dir/CMakeCXXCompilerABI.cpp.obj]
-        ignore line: [C:\\TDM-GCC-64\\bin\\g++.exe   -v -o CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"]
+        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/TDM-GCC-64/bin/mingw32-make.exe -f Makefile cmTC_bbcde/fast]
+        ignore line: [C:/TDM-GCC-64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_bbcde.dir\\build.make CMakeFiles/cmTC_bbcde.dir/build]
+        ignore line: [mingw32-make.exe[1]: Entering directory 'C:/Users/HuaweiPC/Desktop/Proga/Kyrsovaya/Kyrsach1/Kyrsach/src/build/CMakeFiles/CMakeScratch/TryCompile-xgtjsy']
+        ignore line: [Building CXX object CMakeFiles/cmTC_bbcde.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [C:\\TDM-GCC-64\\bin\\g++.exe   -v -o CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\TDM-GCC-64\\bin\\g++.exe]
         ignore line: [Target: x86_64-w64-mingw32]
@@ -2145,8 +2765,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 10.3.0 (tdm64-1) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64']
-        ignore line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1plus.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccvxXmPK.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64']
+        ignore line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/cc1plus.exe -quiet -v -iprefix C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccxc3YSZ.s]
         ignore line: [GNU C++14 (tdm64-1) version 10.3.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 10.3.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.23-GMP]
         ignore line: []
@@ -2173,8 +2793,8 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: 5e49fa89ed7bfe906173ae8e94e08de6]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64']
-        ignore line: [ C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccvxXmPK.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64']
+        ignore line: [ C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccxc3YSZ.s]
         ignore line: [GNU assembler version 2.36.1 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.36.1]
         ignore line: [COMPILER_PATH=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/]
         ignore line: [C:/TDM-GCC-64/bin/../libexec/gcc/]
@@ -2185,9 +2805,9 @@ events:
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_390ee.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64']
-        ignore line: [Linking CXX executable cmTC_390ee.exe]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_390ee.dir\\link.txt --verbose=1]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_bbcde.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-mtune=generic' '-march=x86-64']
+        ignore line: [Linking CXX executable cmTC_bbcde.exe]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_bbcde.dir\\link.txt --verbose=1]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\TDM-GCC-64\\bin\\g++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe]
@@ -2205,13 +2825,13 @@ events:
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_390ee.exe' '-mtune=generic' '-march=x86-64']
-        link line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccqcTx3g.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_390ee.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_390ee.dir/objects.a --no-whole-archive --out-implib libcmTC_390ee.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_bbcde.exe' '-mtune=generic' '-march=x86-64']
+        link line: [ C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccc3JGZs.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_bbcde.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_bbcde.dir/objects.a --no-whole-archive --out-implib libcmTC_bbcde.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
           arg [C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll] ==> ignore
           arg [-plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccqcTx3g.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccc3JGZs.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
@@ -2241,7 +2861,7 @@ events:
           arg [--undefined=__xl_f] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_390ee.exe] ==> ignore
+          arg [cmTC_bbcde.exe] ==> ignore
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o]
           arg [-LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0] ==> dir [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0]
@@ -2252,10 +2872,10 @@ events:
           arg [-LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../..] ==> dir [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../..]
           arg [-v] ==> ignore
           arg [--whole-archive] ==> ignore
-          arg [CMakeFiles\\cmTC_390ee.dir/objects.a] ==> ignore
+          arg [CMakeFiles\\cmTC_bbcde.dir/objects.a] ==> ignore
           arg [--no-whole-archive] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_390ee.dll.a] ==> ignore
+          arg [libcmTC_bbcde.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -2289,7 +2909,7 @@ events:
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o]
           arg [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o] ==> obj [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
         ignore line: [collect2 version 10.3.0]
-        ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccqcTx3g.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_390ee.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_390ee.dir/objects.a --no-whole-archive --out-implib libcmTC_390ee.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
+        ignore line: [C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/liblto_plugin-0.dll -plugin-opt=C:/TDM-GCC-64/bin/../libexec/gcc/x86_64-w64-mingw32/10.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HuaweiPC\\AppData\\Local\\Temp\\ccc3JGZs.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --exclude-libs=libpthread.a --undefined=__xl_f -Bdynamic -o cmTC_bbcde.exe C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtbegin.o -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0 -LC:/TDM-GCC-64/bin/../lib/gcc -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib -LC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../.. -v --whole-archive CMakeFiles\\cmTC_bbcde.dir/objects.a --no-whole-archive --out-implib libcmTC_bbcde.dll.a --major-image-version 0 --minor-image-version 0 -Bstatic -lstdc++ -Bdynamic -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lpthread -lgcc -lkernel32 -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/lib/../lib/default-manifest.o C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/crtend.o]
         linker tool for 'CXX': C:/TDM-GCC-64/x86_64-w64-mingw32/bin/ld.exe
         search lib [SEARCH_STATIC:stdc++] ==> [C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/libstdc++.a]
         remove lib [msvcrt]
@@ -2320,55 +2940,4 @@ events:
     message: |
       Running the CXX compiler's linker: "C:/TDM-GCC-64/x86_64-w64-mingw32/bin/ld.exe" "-v"
       GNU ld (GNU Binutils) 2.36.1
-  -
-    kind: "find-v1"
-    backtrace:
-      - "CMakeLists.txt:87 (find_file)"
-    mode: "file"
-    variable: "FREETYPE_DLL"
-    description: "Path to a file."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "freetype.dll"
-      - "freetype-6.dll"
-    candidate_directories:
-      - "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/src/ui/SFML-2.6.1/bin/"
-      - "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/src/ui/"
-    searched_directories:
-      - "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/src/ui/SFML-2.6.1/bin/freetype.dll"
-      - "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/src/ui/freetype.dll"
-      - "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/src/ui/SFML-2.6.1/bin/freetype-6.dll"
-      - "C:/Users/HuaweiPC/Desktop/\u041f\u0440\u043e\u0433\u0430/Kyrsovaya/Kyrsach1/Kyrsach/src/ui/freetype-6.dll"
-    found: false
-    search_context:
-      ENV{PATH}:
-        - "C:\\TDM-GCC-64\\bin"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\dotnet\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\TDM-GCC-64\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\HuaweiPC\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2022.3.1\\bin"
-        - "C:\\Users\\HuaweiPC\\AppData\\Local\\GitHubDesktop\\bin"
-        - "C:\\Users\\HuaweiPC\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\HuaweiPC\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python310\\Scripts"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/ScrumBoard"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/ScrumBoard"
 ...
