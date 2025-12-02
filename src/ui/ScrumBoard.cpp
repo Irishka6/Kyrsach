@@ -16,7 +16,9 @@ const int WINDOW_HEIGHT = 1080;
 ScrumBoard::ScrumBoard() :
     isLoggedIn(false),
     currentUser(""),
-    showLogoutButton(false)  
+    showLogoutButton(false),
+    showMessage(false),
+    messageTimer(0.0f)
 {
     // Названия секций
     sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
@@ -65,6 +67,18 @@ ScrumBoard::ScrumBoard() :
     
     // Загружаем задачи из JSON файла
     tasksData = {};
+    
+    // Инициализация сообщения
+    messageText.setFont(font);
+    messageText.setCharacterSize(24);
+    messageText.setFillColor(sf::Color::White);
+    messageText.setStyle(sf::Text::Bold);
+    
+    // Фон сообщения
+    messageBackground.setFillColor(sf::Color(120, 165, 205)); 
+    messageBackground.setOutlineThickness(0); // Без контура
+    messageBackground.setOutlineColor(sf::Color(120, 165, 205));
+    messageBackground.setOutlineThickness(2);
 }
 
 
@@ -100,7 +114,6 @@ ScrumBoard::~ScrumBoard() {
 bool ScrumBoard::initialize() {
     // Загрузка шрифта
     if (!font.loadFromFile("ofont.ru_Pastry Chef.ttf")) {
-        std::cout << "Не удалось загрузить шрифт!" << std::endl;
         return false;
     }
     
@@ -837,13 +850,9 @@ void ScrumBoard::createSections() {
 
 // Создание визуальных задач из загруженных данных JSON
 void ScrumBoard::createSampleTasks() {
-    std::cout << "=== СОЗДАНИЕ ВИЗУАЛЬНЫХ ЗАДАЧ ===" << std::endl;
-    std::cout << "Задач в данных: " << tasksData.size() << std::endl;
-    
     // Убедимся, что разработчики загружены
     if (availableDevelopers.empty()) {
         availableDevelopers = getDevelopersFromJson();
-        std::cout << "Загружено разработчиков для отображения: " << availableDevelopers.size() << std::endl;
     }
     
     // Очистка существующих задач
@@ -853,13 +862,11 @@ void ScrumBoard::createSampleTasks() {
     
     // Добавление задач из JSON данных
     for (const auto& task : tasksData){
-        std::cout << "Добавляем задачу: '" << task.getTitle() << "' в секцию: " << task.getStatus() << std::endl;
         addTask(task.getId(), task.getTitle(), task.getStatus());
     }
     
     // Обновление позиций задач
     updateTaskPositions();
-    std::cout << "Визуальные задачи созданы" << std::endl;
 }
 
 // Добавление визуальной задачи в указанную секцию
@@ -885,10 +892,8 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         // Чередуем имена из availableDevelopers
         std::string developerName = "Не назначен";
         for (auto& task: tasksData){
-            std::cout << task.getId() << " = " << id << std::endl;
             if (task.getId() == id){
                 for (auto& developer : availableDevelopers){
-                    std::cout << "developer: "<< developer.getId() << " = " << task.getTitle() << std::endl;
                     if(developer.getId() == task.getCreatorId()){
                         developerName = developer.getLogin();
                         break;
@@ -929,14 +934,9 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
 
 // Обновление статуса задачи в данных при перемещении между секциями
 void ScrumBoard::updateTaskStatusInData(int taskId, int newStatus) {
-    std::cout << "=== ОБНОВЛЕНИЕ СТАТУСА ЗАДАЧИ ===" << std::endl;
-    std::cout << "Активный проект: " << idActiveProject.getName() << " (ID: " << idActiveProject.getId() << ")" << std::endl;
-    std::cout << "Задача ID: " << taskId << ", новый статус: " << newStatus << std::endl;
-    
     // Обновляем в tasksData
     for (auto& task : tasksData) {
         if (task.getId() == taskId){
-            std::cout << "Найдена в tasksData: '" << task.getTitle() << "' статус: " << task.getStatus() << " -> " << newStatus << std::endl;
             task.changeStatus(newStatus);
             idActiveProject.addTask(task);
             break;
@@ -945,17 +945,12 @@ void ScrumBoard::updateTaskStatusInData(int taskId, int newStatus) {
     
     // Сохраняем изменения
     saveTasksData();
-    std::cout << "Изменения сохранены" << std::endl;
+    showMessageFor("Задача перемещена", 2.0f);
 }
 
 // Сохранение всех задач в JSON файл
 void ScrumBoard::saveTasksData() {
-    std::cout<< std::endl << "=== СОХРАНЕНИЕ ДАННЫХ ===" << std::endl;
-    std::cout << "Активный проект: " << idActiveProject.getName() << " (ID: " << idActiveProject.getId() << ")" << std::endl;
-    std::cout << "Количество задач для сохранения: " << tasksData.size() << std::endl;
-    
-    if (idActiveProject.getId() == 0) {
-        std::cout << "Ошибка: нет активного проекта!" << std::endl;
+    if (idActiveProject.getId() <= 0) {
         return;
     }
 
@@ -978,13 +973,11 @@ void ScrumBoard::saveTasksData() {
 
     // Загружаем ВСЕ проекты из файла
     std::vector<Project> allProjects = Project::getProjectsFromJson();
-    std::cout << "Загружено проектов из файла: " << allProjects.size() << std::endl;
     
     // Находим и заменяем активный проект в списке
     bool projectFound = false;
     for (auto& project : allProjects) {
         if (project.getId() == idActiveProject.getId()) {
-            std::cout << "Найден проект для обновления: " << project.getName() << std::endl;
             project = idActiveProject;
             projectFound = true;
             break;
@@ -992,13 +985,11 @@ void ScrumBoard::saveTasksData() {
     }
     
     if (!projectFound) {
-        std::cout << "Проект не найден, добавляем новый" << std::endl;
         allProjects.push_back(idActiveProject);
     }
     
     // Сохраняем обратно в файл
     Project::saveProjectsToJson(allProjects);
-    std::cout << "Проекты сохранены в файл" << std::endl;
 }
 
 // Обновление позиций всех задач на доске
@@ -1234,7 +1225,7 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         }
         
         if (!hasAccess) {
-            std::cout << "Ошибка: у пользователя нет доступа к этому проекту!" << std::endl;
+            showMessageFor("Ошибка: нет доступа к этому проекту!", 3.0f);
             return;
         }
         
@@ -1268,9 +1259,7 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         showAddTaskWindow = false;
         cursorVisible = false;
         
-        std::cout << "Добавлена новая задача: '" << newTask.getTitle() 
-                  << "' в секцию " << selectedSection << " создатель: " << currentUser << std::endl;
-        std::cout << "Теперь в секции " << selectedSection << " задач: " << tasks[selectedSection].size() << std::endl;
+        showMessageFor("Задача добавлена", 2.0f);
     }
 }
 
@@ -1298,26 +1287,43 @@ void ScrumBoard::confirmAddProject() {
         
         // Обновляем разработчика в файле - добавляем ему проект
         std::vector<Developer> allDevelopers = getDevelopersFromJson();
+        bool developerUpdated = false;
         for (auto& dev : allDevelopers) {
             if (dev.getId() == activeDeveloper->getId()) {
                 dev.addProject(newProject.getId());
+                developerUpdated = true;
                 break;
             }
         }
-        saveDevelopersToJson(allDevelopers);
         
-        // Обновляем список проектов из файла
+        if (developerUpdated) {
+            saveDevelopersToJson(allDevelopers);
+            
+            // ОБНОВЛЯЕМ ТЕКУЩЕГО ПОЛЬЗОВАТЕЛЯ
+            delete activeDeveloper;
+            // Находим обновленного разработчика
+            for (const auto& dev : allDevelopers) {
+                if (dev.getId() == activeDeveloper->getId()) {
+                    activeDeveloper = new Developer(dev);
+                    break;
+                }
+            }
+        }
+        
+        // ОБНОВЛЯЕМ СПИСОК ПРОЕКТОВ ПОЛЬЗОВАТЕЛЯ
         projects = activeDeveloper->getProjects();
         createProjectWindow();
         
         // Закрываем окно добавления проекта
         closeAddProjectWindow();
         
-        // Показываем окно выбора проектов с новым проектом
-        showProjectWindow = true;
+        // АВТОМАТИЧЕСКИ ВЫБИРАЕМ НОВЫЙ ПРОЕКТ
+        idActiveProject = newProject;
+        tasksData = idActiveProject.getTasks();
+        projectButtonText.setString(idActiveProject.getName());
+        createSampleTasks();
         
-        std::cout << "Создан новый проект '" << currentProjectNameInput 
-                  << "' для пользователя '" << activeDeveloper->getLogin() << "'" << std::endl;
+        showMessageFor("Проект создан и выбран", 2.0f);
     }
 }
 
@@ -1336,7 +1342,7 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         }
         
         if (alreadyAdded) {
-            std::cout << "Разработчик '" << selectedDeveloper.getLogin() << "' уже добавлен к проекту!" << std::endl;
+            showMessageFor("Разработчик уже добавлен к проекту!", 3.0f);
             return;
         }
         
@@ -1356,7 +1362,6 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         
         if (projectUpdated) {
             Project::saveProjectsToJson(allProjects);
-            std::cout << "Проект обновлен в файле projects.json" << std::endl;
         }
         
         // Добавляем проект к разработчику в его списке проектов
@@ -1376,7 +1381,6 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
                 if (!projectAlreadyAssigned) {
                     dev.addProject(idActiveProject.getId());
                     developerUpdated = true;
-                    std::cout << "Проект добавлен разработчику '" << dev.getLogin() << "'" << std::endl;
                 }
                 break;
             }
@@ -1384,16 +1388,14 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         
         if (developerUpdated) {
             saveDevelopersToJson(allDevelopers);
-            std::cout << "Разработчики обновлены в файле developers.json" << std::endl;
         }
         
         // Закрываем окно
         closeAddDeveloperWindow();
         
-        std::cout << "Разработчик '" << selectedDeveloper.getLogin() 
-                  << "' добавлен к проекту '" << idActiveProject.getName() << "'" << std::endl;
+        showMessageFor("Разработчик добавлен к проекту", 2.0f);
     } else {
-        std::cout << "Ошибка: не выбран активный проект!" << std::endl;
+        showMessageFor("Ошибка: не выбран активный проект!", 3.0f);
     }
 }
 
@@ -1406,8 +1408,6 @@ void ScrumBoard::confirmLogin() {
         std::vector<Developer> developers = getDevelopersFromJson();
         
         if (validateDeveloperCredentials(developers, currentUsernameInput, currentPasswordInput)) {
-            std::cout << "Вход выполнен успешно!" << std::endl;
-            
             activeDeveloper = findDeveloperByLogin(developers, currentUsernameInput, currentPasswordInput);
             
             if (activeDeveloper != nullptr) {
@@ -1417,12 +1417,9 @@ void ScrumBoard::confirmLogin() {
                 
                 // Загрузка разработчиков для задач
                 availableDevelopers = getDevelopersFromJson();
-                std::cout << "Загружено разработчиков: " << availableDevelopers.size() << std::endl;
                 
                 // Получаем проекты активного разработчика
                 projects = activeDeveloper->getProjects();
-                std::cout << "Пользователь '" << currentUser << "' имеет доступ к " 
-                          << projects.size() << " проектам" << std::endl;
                 
                 createProjectWindow();
                 closeLoginWindow();
@@ -1438,25 +1435,64 @@ void ScrumBoard::confirmLogin() {
                     idActiveProject = projects[0];
                     tasksData = idActiveProject.getTasks();
                     createSampleTasks();
-                    std::cout << "Автоматически выбран проект: " << idActiveProject.getName() 
-                              << " (ID: " << idActiveProject.getId() << ")" << std::endl;
                 } else {
-                    // Если нет проектов, сбрасываем активный проект
-                    idActiveProject = Project(0, "", "", 0);
-                    tasksData.clear();
+                    // Если нет проектов, создаем тестовый проект
+                    
+                    // Генерируем уникальный ID
+                    std::vector<Project> allProjects = Project::getProjectsFromJson();
+                    int newId = 1;
+                    for (const auto& proj : allProjects) {
+                        if (proj.getId() >= newId) {
+                            newId = proj.getId() + 1;
+                        }
+                    }
+                    
+                    // Создаем тестовый проект
+                    Project testProject(newId, "My First Project", "2024-12-31", activeDeveloper->getId());
+                    testProject.addDeveloper(activeDeveloper->getId());
+                    
+                    // Добавляем тестовую задачу
+                    Tasks testTask(1, "Primer zadachi 'Dobavit zadachy'", 0);
+                    testTask.setCreatorId(activeDeveloper->getId());
+                    testProject.addTask(testTask);
+                    
+                    // Сохраняем проект
+                    allProjects.push_back(testProject);
+                    Project::saveProjectsToJson(allProjects);
+                    
+                    // Добавляем проект разработчику
+                    std::vector<Developer> allDevelopers = getDevelopersFromJson();
+                    for (auto& dev : allDevelopers) {
+                        if (dev.getId() == activeDeveloper->getId()) {
+                            dev.addProject(testProject.getId());
+                            break;
+                        }
+                    }
+                    saveDevelopersToJson(allDevelopers);
+                    
+                    // Обновляем локальные данные
+                    projects = {testProject};
+                    idActiveProject = testProject;
+                    tasksData = idActiveProject.getTasks();
+                    projectButtonText.setString("My First Project");
+                    
                     createSampleTasks();
-                    std::cout << "У пользователя нет проектов" << std::endl;
+                    
+                    // Пересоздаем окно проектов
+                    createProjectWindow();
                 }
                 
+                showMessageFor("Вход выполнен успешно!", 2.0f);
+                
             } else {
-                std::cout << "Ошибка: не удалось найти разработчика!" << std::endl;
+                showMessageFor("Ошибка: не удалось найти разработчика!", 3.0f);
             }
             
         } else {
-            std::cout << "Неверный логин или пароль!" << std::endl;
+            showMessageFor("Неверный логин или пароль!", 3.0f);
         }
     } else {
-        std::cout << "Введите логин и пароль!" << std::endl;
+        showMessageFor("Введите логин и пароль!", 3.0f);
     }
 }
 
@@ -1477,7 +1513,8 @@ void ScrumBoard::logout() {
     }
     createProjectWindow();
     showLogoutButton = false;
-    std::cout << "Выход выполнен" << std::endl;
+    
+    showMessageFor("Выход выполнен", 2.0f);
 }
 
 // Открытие режима редактирования
@@ -1582,6 +1619,8 @@ void ScrumBoard::saveEditedTask() {
         
         // Закрытие окна редактирования
         closeTaskEditWindow();
+        
+        showMessageFor("Задача сохранена", 2.0f);
     }
 }
 
@@ -1611,7 +1650,8 @@ void ScrumBoard::deleteCurrentTask() {
         
         // Закрытие окна редактирования
         closeTaskEditWindow();
-        std::cout << "Задача удалена: ID " << taskId << std::endl;
+        
+        showMessageFor("Задача удалена", 2.0f);
     }
 }
 
@@ -1676,8 +1716,6 @@ void ScrumBoard::closeAddDeveloperWindow() {
 
 void ScrumBoard::saveCurrentProjectChanges() {
     if (idActiveProject.getId() != 0) {
-        std::cout << "Сохранение изменений в проекте: " << idActiveProject.getName() << std::endl;
-        
         // Обновляем задачи в активном проекте
         for (auto& task : tasksData) {
             Tasks* projectTask = idActiveProject.findTaskById(task.getId());
@@ -1706,9 +1744,6 @@ void ScrumBoard::saveCurrentProjectChanges() {
         
         if (projectFound) {
             Project::saveProjectsToJson(allProjects);
-            std::cout << "Изменения проекта сохранены в JSON" << std::endl;
-        } else {
-            std::cout << "Ошибка: проект не найден в списке!" << std::endl;
         }
     }
 }
@@ -1811,7 +1846,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         createAddDeveloperWindow();
                     }
                 } else {
-                    std::cout << "Сначала выберите проект!" << std::endl;
+                    showMessageFor("Сначала выберите проект!", 3.0f);
                 }
                 return;
             }
@@ -1819,13 +1854,19 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             // Обработка клика по кнопке добавления задачи
             if (addButton.getGlobalBounds().contains(mousePos)) {
                 if (isLoggedIn) {
-                    // Проверяем доступ пользователя к активному проекту
-                    if (idActiveProject.getId() != 0) {
+                    if (activeDeveloper == nullptr) {
+                        showMessageFor("Ошибка системы", 3.0f);
+                        return;
+                    }
+                    
+                    // Проверяем, есть ли активный проект
+                    if (idActiveProject.getId() > 0) {
+                        // Проверяем доступ пользователя к активному проекту
                         bool hasAccess = false;
-                        for (int devId : idActiveProject.getDeveloperIds()) {
+                        const auto& devIds = idActiveProject.getDeveloperIds();
+                        for (int devId : devIds) {
                             if (devId == activeDeveloper->getId()) {
                                 hasAccess = true;
-                                break;
                             }
                         }
                         
@@ -1838,15 +1879,22 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                                 isTaskInputActive = false;
                                 taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                                 cursorVisible = false;
+                                
+                                // Обновляем доступные разработчики для отображения в задачах
+                                availableDevelopers = getDevelopersFromJson();
                             }
                         } else {
-                            std::cout << "Ошибка: нет доступа к проекту!" << std::endl;
+                            showMessageFor("Ошибка: нет доступа к проекту!", 3.0f);
                         }
                     } else {
-                        std::cout << "Сначала выберите проект!" << std::endl;
+                        showMessageFor("Сначала выберите проект!", 3.0f);
+                        // Автоматически показываем окно выбора проекта
+                        showProjectWindow = true;
                     }
                 } else {
-                    std::cout << "Для добавления задач необходимо войти в систему!" << std::endl;
+                    showMessageFor("Для добавления задач необходимо войти в систему!", 3.0f);
+                    // Автоматически показываем окно входа
+                    showLoginWindow = true;
                 }
                 return;
             }
@@ -1856,7 +1904,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 if (isLoggedIn) {
                     openEditMode();
                 } else {
-                    std::cout << "Для редактирования задач необходимо войти в систему!" << std::endl;
+                    showMessageFor("Для редактирования задач необходимо войти в систему!", 3.0f);
                 }
                 return;
             }
@@ -1985,6 +2033,8 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         tasksData = idActiveProject.getTasks();
                         createSampleTasks();
                         showProjectWindow = false;
+                        
+                        showMessageFor("Проект выбран: " + idActiveProject.getName(), 2.0f);
                         return;
                     }
                 }
@@ -2162,7 +2212,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             
                             // Обновление позиций задач
                             updateTaskPositions();
-                            std::cout << "Задача перемещена в секцию " << newSection << std::endl;
                             break;
                         } else {
                             // Возврат задачи в исходную позицию
@@ -2186,6 +2235,39 @@ void ScrumBoard::update(float deltaTime) {
         cursorVisible = !cursorVisible;
         cursorClock.restart();
     }
+    
+    // Обновление таймера сообщения
+    if (showMessage) {
+        messageTimer -= deltaTime;
+        if (messageTimer <= 0) {
+            showMessage = false;
+        }
+    }
+}
+
+// Показать сообщение на экране
+void ScrumBoard::showMessageFor(const std::string& message, float duration) {
+    showMessage = true;
+    messageText.setString(message);
+    messageTimer = duration;
+    
+    // Центрирование текста сообщения
+    sf::FloatRect textBounds = messageText.getLocalBounds();
+    float messageWidth = 300;  // ФИКСИРОВАННАЯ ШИРИНА
+    float messageHeight = 50;
+    
+    // Позиция над верхней панелью 
+    messageBackground.setSize(sf::Vector2f(messageWidth, messageHeight));
+    messageBackground.setPosition(
+        (WINDOW_WIDTH - messageWidth) / 2,
+        25.0f 
+    );
+    
+    // Позиция текста сообщения (центрируем в фиксированном окне)
+    messageText.setPosition(
+        (WINDOW_WIDTH - messageWidth) / 2 + (messageWidth - textBounds.width) / 2,
+        25.0f + (messageHeight - textBounds.height) / 2 - 5
+    );
 }
 
 // Отрисовка окна входа
@@ -2318,6 +2400,14 @@ void ScrumBoard::drawAddDeveloperWindow(sf::RenderWindow& window) {
     // Текст разработчиков
     for (const auto& text : developerTexts) {  
         window.draw(text);
+    }
+}
+
+// Отрисовка сообщения
+void ScrumBoard::drawMessage(sf::RenderWindow& window) {
+    if (showMessage) {
+        window.draw(messageBackground);
+        window.draw(messageText);
     }
 }
 
@@ -2465,5 +2555,10 @@ void ScrumBoard::draw(sf::RenderWindow& window) {
     // Окно добавления разработчика
     if (showAddDeveloperWindow) {
         drawAddDeveloperWindow(window);
+    }
+    
+    // Отрисовка сообщения поверх всего
+    if (showMessage) {
+        drawMessage(window);
     }
 }

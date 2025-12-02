@@ -11,6 +11,7 @@
 
 class ScrumBoard {
 private:
+    
     // Графика и текст
     sf::Font font;                                                                  
     sf::Text titleText;                                                            
@@ -64,89 +65,94 @@ private:
     
     // Окно проектов
     Project idActiveProject;
-    bool showProjectWindow;                                                         // Флаг показа окна проектов
-    sf::RectangleShape projectWindow;                                               // Основное окно проектов
-    std::vector<sf::RectangleShape> projectRects;                                   // Кнопки проектов
-    std::vector<sf::Text> projectTexts;                                             // Тексты на кнопках проектов
-    std::vector<Project> projects;                                              // Список названий проектов
+    bool showProjectWindow;                                                        // Флаг показа окна проектов
+    sf::RectangleShape projectWindow;                                              // Основное окно проектов
+    std::vector<sf::RectangleShape> projectRects;                                  // Кнопки проектов
+    std::vector<sf::Text> projectTexts;                                            // Тексты на кнопках проектов
+    std::vector<Project> projects;                                                 // Список названий проектов
     
     // Окно добавления задач
-    bool showAddTaskWindow;                                                         // Флаг показа окна добавления
-    bool isTaskInputActive;                                                         // Флаг активности поля ввода
-    sf::RectangleShape addTaskWindow;                                               // Основное окно добавления
-    sf::RectangleShape taskInputField;                                              // Поле ввода названия задачи
-    sf::Text taskInputText;                                                         // Текст в поле ввода
-    std::string currentTaskInput;                                                   // Текущий введенный текст
-    sf::Text sectionLabelText;                                                      // Метка "Выберите секцию:"
-    std::vector<sf::RectangleShape> sectionOptionRects;                             // Кнопки выбора секции
-    std::vector<sf::Text> sectionOptionTexts;                                       // Тексты на кнопках секций
-    sf::RectangleShape confirmAddButton;                                            // Кнопка "Добавить"
-    sf::Text confirmAddButtonText;                                                  // Текст кнопки добавления
-    sf::RectangleShape cancelAddButton;                                             // Кнопка "Отмена"
-    sf::Text cancelAddButtonText;                                                   // Текст кнопки отмены
+    bool showAddTaskWindow;                                                        // Флаг показа окна добавления
+    bool isTaskInputActive;                                                        // Флаг активности поля ввода
+    sf::RectangleShape addTaskWindow;                                              // Основное окно добавления
+    sf::RectangleShape taskInputField;                                             // Поле ввода названия задачи
+    sf::Text taskInputText;                                                        // Текст в поле ввода
+    std::string currentTaskInput;                                                  // Текущий введенный текст
+    sf::Text sectionLabelText;                                                     // Метка "Выберите секцию:"
+    std::vector<sf::RectangleShape> sectionOptionRects;                            // Кнопки выбора секции
+    std::vector<sf::Text> sectionOptionTexts;                                      // Тексты на кнопках секций
+    sf::RectangleShape confirmAddButton;                                           // Кнопка "Добавить"
+    sf::Text confirmAddButtonText;                                                 // Текст кнопки добавления
+    sf::RectangleShape cancelAddButton;                                            // Кнопка "Отмена"
+    sf::Text cancelAddButtonText;                                                  // Текст кнопки отмены
     
     // Окно редактирования задач
-    bool showEditMode;                                                              // Флаг режима редактирования
-    bool showTaskEditWindow;                                                        // Флаг показа окна редактирования задачи
-    sf::RectangleShape editModeWindow;                                              // Окно редактирования
-    sf::RectangleShape editTaskInputField;                                          // Поле ввода для редактирования
-    sf::Text editTaskInputText;                                                     // Текст в поле редактирования
-    std::string currentEditTaskInput;                                               // Текущий редактируемый текст
-    bool isEditTaskInputActive;                                                     // Флаг активности поля редактирования
-    int editingTaskSection;                                                         // Секция редактируемой задачи
-    int editingTaskIndex;                                                           // Индекс редактируемой задачи
-    sf::RectangleShape saveEditButton;                                              // Кнопка сохранения
-    sf::Text saveEditButtonText;                                                    // Текст кнопки сохранения
-    sf::RectangleShape cancelEditButton;                                            // Кнопка отмены редактирования
-    sf::Text cancelEditButtonText;                                                  // Текст кнопки отмены
-    sf::RectangleShape deleteTaskButton;                                            // Кнопка удаления
-    sf::Text deleteTaskButtonText;                                                  // Текст кнопки удаления
-    sf::Text editTitleText;                                                         // Заголовок окна редактирования
+    bool showEditMode;                                                             // Флаг режима редактирования
+    bool showTaskEditWindow;                                                       // Флаг показа окна редактирования задачи
+    sf::RectangleShape editModeWindow;                                             // Окно редактирования
+    sf::RectangleShape editTaskInputField;                                         // Поле ввода для редактирования
+    sf::Text editTaskInputText;                                                    // Текст в поле редактирования
+    std::string currentEditTaskInput;                                              // Текущий редактируемый текст
+    bool isEditTaskInputActive;                                                    // Флаг активности поля редактирования
+    int editingTaskSection;                                                        // Секция редактируемой задачи
+    int editingTaskIndex;                                                          // Индекс редактируемой задачи
+    sf::RectangleShape saveEditButton;                                             // Кнопка сохранения
+    sf::Text saveEditButtonText;                                                   // Текст кнопки сохранения
+    sf::RectangleShape cancelEditButton;                                           // Кнопка отмены редактирования
+    sf::Text cancelEditButtonText;                                                 // Текст кнопки отмены
+    sf::RectangleShape deleteTaskButton;                                           // Кнопка удаления
+    sf::Text deleteTaskButtonText;                                                 // Текст кнопки удаления
+    sf::Text editTitleText;                                                        // Заголовок окна редактирования
     
     // Курсор для полей ввода
-    sf::RectangleShape cursor;                                                      // Курсор ввода текста
-    sf::Clock cursorClock;                                                          // Таймер для мигания курсора
-    bool cursorVisible;                                                             // Видимость курсора
+    sf::RectangleShape cursor;                                                     // Курсор ввода текста
+    sf::Clock cursorClock;                                                         // Таймер для мигания курсора
+    bool cursorVisible;                                                            // Видимость курсора
     
     // Данные задач
-    std::vector<Tasks> tasksData;                                                   
+    std::vector<Tasks> tasksData;                                                  
 
     // Переменные для управления пользователем
-    bool isLoggedIn;
-    std::string currentUser;
-    sf::RectangleShape userInfoButton;
-    sf::Text userInfoText;
-    sf::RectangleShape logoutButton;
-    sf::Text logoutButtonText;
-    Developer* activeDeveloper = nullptr;
-    bool showLogoutButton;
+    bool isLoggedIn;                                                              // Флаг вошел ли пользователь в систему
+    std::string currentUser;                                                      // Имя текущего пользователя
+    sf::RectangleShape userInfoButton;                                            // Кнопка с информацией о пользователе
+    sf::Text userInfoText;                                                        // Текст с именем пользователя
+    sf::RectangleShape logoutButton;                                              // Кнопка "Выйти"
+    sf::Text logoutButtonText;                                                    // Текст на кнопке "Выйти"
+    Developer* activeDeveloper = nullptr;                                         // Указатель на активного разработчика
+    bool showLogoutButton;                                                        // Флаг показа кнопки выхода
 
     // Новые окна для управления проектами и разработчиками
-    bool showAddProjectWindow;                                                      // Флаг показа окна добавления проекта
-    sf::RectangleShape addProjectWindow;                                            // Основное окно добавления проекта
-    sf::RectangleShape projectNameInputField;                                       // Поле ввода названия проекта
-    sf::Text projectNameInputText;                                                  // Текст в поле ввода
-    std::string currentProjectNameInput;                                            // Текущий введенный текст названия проекта
-    bool isProjectNameInputActive;                                                  // Флаг активности поля ввода названия проекта
-    sf::RectangleShape confirmAddProjectButton;                                     // Кнопка подтверждения добавления проекта
-    sf::Text confirmAddProjectButtonText;                                           // Текст кнопки подтверждения
-    sf::RectangleShape cancelAddProjectButton;                                      // Кнопка отмены добавления проекта
-    sf::Text cancelAddProjectButtonText;                                            // Текст кнопки отмены
+    bool showAddProjectWindow;                                                     // Флаг показа окна добавления проекта
+    sf::RectangleShape addProjectWindow;                                           // Основное окно добавления проекта
+    sf::RectangleShape projectNameInputField;                                      // Поле ввода названия проекта
+    sf::Text projectNameInputText;                                                 // Текст в поле ввода
+    std::string currentProjectNameInput;                                           // Текущий введенный текст названия проекта
+    bool isProjectNameInputActive;                                                 // Флаг активности поля ввода названия проекта
+    sf::RectangleShape confirmAddProjectButton;                                    // Кнопка подтверждения добавления проекта
+    sf::Text confirmAddProjectButtonText;                                          // Текст кнопки подтверждения
+    sf::RectangleShape cancelAddProjectButton;                                     // Кнопка отмены добавления проекта
+    sf::Text cancelAddProjectButtonText;                                           // Текст кнопки отмены
 
-    bool showAddDeveloperWindow;                                                    // Флаг показа окна добавления разработчика
-    sf::RectangleShape addDeveloperWindow;                                          // Основное окно добавления разработчика
-    std::vector<sf::RectangleShape> developerRects;                                 // Кнопки разработчиков
-    std::vector<sf::Text> developerTexts;                                           // Тексты на кнопках разработчиков
-    std::vector<Developer> availableDevelopers;                                     // Список доступных разработчиков
+    bool showAddDeveloperWindow;                                                   // Флаг показа окна добавления разработчика
+    sf::RectangleShape addDeveloperWindow;                                         // Основное окно добавления разработчика
+    std::vector<sf::RectangleShape> developerRects;                                // Кнопки разработчиков
+    std::vector<sf::Text> developerTexts;                                          // Тексты на кнопках разработчиков
+    std::vector<Developer> availableDevelopers;                                    // Список доступных разработчиков
 
     // Кнопка регистрации
     sf::RectangleShape registerButton;
     sf::Text registerButtonText;
 
+    // Сообщения
+    bool showMessage;                                                              // Флаг показа сообщения
+    float messageTimer;                                                            // Таймер для сообщения
+    sf::Text messageText;                                                          // Текст сообщения
+    sf::RectangleShape messageBackground;                                          // Фон сообщения
+
 public:
-    void confirmRegister();
-    ~ScrumBoard();
     ScrumBoard();                                                                   // Конструктор - инициализация переменных
+    ~ScrumBoard();                                                                  // Деструктор
     bool initialize();                                                              // Инициализация ресурсов и интерфейса
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);             // Обработка событий ввода
     void update(float deltaTime);                                                   // Обновление состояния
@@ -191,6 +197,10 @@ private:
     void closeAddProjectWindow();                                                   // Закрытие окна добавления проекта
     void closeAddDeveloperWindow();                                                 // Закрытие окна добавления разработчика
     
+    // Методы для работы с сообщениями
+    void showMessageFor(const std::string& message, float duration);                // Показать сообщение на экране
+    void drawMessage(sf::RenderWindow& window);                                     // Отрисовка сообщения
+    
     // Методы для работы с окнами
     void centerTextInButton(sf::Text& text, const sf::RectangleShape& button);      // Центрирование текста в кнопке
     void drawTaskEditWindow(sf::RenderWindow& window);                              // Отрисовка окна редактирования задачи
@@ -198,4 +208,4 @@ private:
     void drawAddProjectWindow(sf::RenderWindow& window);                            // Отрисовка окна добавления проекта
     void drawAddDeveloperWindow(sf::RenderWindow& window);                          // Отрисовка окна добавления разработчика
 };
-#endif
+#endif 

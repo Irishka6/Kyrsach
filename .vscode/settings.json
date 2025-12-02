@@ -74,7 +74,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "xstring": "cpp"
     },
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     

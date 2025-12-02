@@ -197,8 +197,14 @@ bool validateDeveloperCredentials(const std::vector<Developer>& developers, cons
 Developer* findDeveloperByLogin(std::vector<Developer>& developers, const std::string& login, const std::string& password) {
     for (auto& dev : developers) {
         if (dev.getLogin() == login && dev.getPassword() == password) {
-            return &dev;
+            // Возвращаем новый объект
+            Developer* newDev = new Developer(dev.getId(), dev.getLogin(), dev.getPassword());
+            // Копируем проекты
+            for (int projectId : dev.getProjectIds()) {
+                newDev->addProject(projectId);
+            }
+            return newDev;
         }
     }
-    return nullptr;  // Возвращаем nullptr после цикла
+    return nullptr;
 }

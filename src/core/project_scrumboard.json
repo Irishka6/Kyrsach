@@ -1,98 +1,139 @@
 [
     {
-        "creator_id": 1,
+        "creator_id": 8,
         "deadline": "2024-12-31",
         "developer_ids": [
-            1,
-            4,
-            5
+            8,
+            2,
+            9,
+            3
         ],
         "id": 1,
-        "name": "1",
+        "name": "My First Project",
         "tasks": [
             {
-                "creation_date": "2025-12-02 18:10:44",
-                "creatorId": 1,
+                "creation_date": "2025-12-02 21:37:33",
+                "creatorId": 8,
                 "id": 1,
                 "project": "",
                 "status": 0,
-                "title": "1"
+                "title": "Primer zadachi 'Dobavit zadachy'"
             },
             {
-                "creation_date": "2025-12-02 18:10:44",
-                "creatorId": 1,
+                "creation_date": "2025-12-02 21:37:33",
+                "creatorId": 9,
                 "id": 2,
                 "project": "",
-                "status": 2,
-                "title": "2"
-            },
-            {
-                "creation_date": "2025-12-02 18:10:44",
-                "creatorId": 1,
-                "id": 3,
-                "project": "",
-                "status": 2,
-                "title": "4"
-            },
-            {
-                "creation_date": "2025-12-02 18:10:44",
-                "creatorId": 4,
-                "id": 4,
-                "project": "",
-                "status": 2,
-                "title": "4"
-            },
-            {
-                "creation_date": "2025-12-02 18:10:44",
-                "creatorId": 4,
-                "id": 5,
-                "project": "",
                 "status": 1,
-                "title": "6"
-            },
-            {
-                "creation_date": "2025-12-02 18:10:44",
-                "creatorId": 5,
-                "id": 6,
-                "project": "",
-                "status": 1,
-                "title": "123"
+                "title": "My molodzy, yraa"
             }
         ]
     },
     {
-        "creator_id": 1,
+        "creator_id": 8,
         "deadline": "2024-12-31",
         "developer_ids": [
-            1,
-            5
+            8,
+            9
         ],
         "id": 2,
-        "name": "3",
+        "name": "privet",
+        "tasks": []
+    },
+    {
+        "creator_id": 9,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            9,
+            8
+        ],
+        "id": 3,
+        "name": "My First Project",
         "tasks": [
             {
-                "creation_date": "2025-12-02 18:10:47",
-                "creatorId": 1,
+                "creation_date": "2025-12-02 21:37:33",
+                "creatorId": 9,
                 "id": 1,
                 "project": "",
-                "status": 1,
-                "title": "qwerty"
+                "status": 0,
+                "title": "Primer zadachi 'Dobavit zadachy'"
             },
             {
-                "creation_date": "2025-12-02 18:10:47",
-                "creatorId": 5,
+                "creation_date": "2025-12-02 21:37:33",
+                "creatorId": 9,
                 "id": 2,
                 "project": "",
                 "status": 0,
-                "title": "qwertyui"
-            },
+                "title": "gfchbj"
+            }
+        ]
+    },
+    {
+        "creator_id": 8,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            8,
+            3
+        ],
+        "id": 4,
+        "name": "bvbbhjn",
+        "tasks": [
             {
-                "creation_date": "2025-12-02 18:10:47",
-                "creatorId": 5,
-                "id": 3,
+                "creation_date": "2025-12-02 21:37:33",
+                "creatorId": 8,
+                "id": 1,
                 "project": "",
-                "status": 2,
-                "title": "fghjk"
+                "status": 0,
+                "title": "szzdfghj"
+            }
+        ]
+    },
+    {
+        "creator_id": 8,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            8,
+            3
+        ],
+        "id": 5,
+        "name": "dfghj",
+        "tasks": []
+    },
+    {
+        "creator_id": 2,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            2
+        ],
+        "id": 6,
+        "name": "My First Project",
+        "tasks": [
+            {
+                "creation_date": "2025-12-02 21:37:33",
+                "creatorId": 2,
+                "id": 1,
+                "project": "",
+                "status": 0,
+                "title": "Primer zadachi 'Dobavit zadachy'"
+            }
+        ]
+    },
+    {
+        "creator_id": 8,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            8
+        ],
+        "id": 7,
+        "name": "cgvghbjnj",
+        "tasks": [
+            {
+                "creation_date": "2025-12-02 21:37:29",
+                "creatorId": 8,
+                "id": 1,
+                "project": "",
+                "status": 1,
+                "title": "cgfvghbnj"
             }
         ]
     }

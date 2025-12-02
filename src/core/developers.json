@@ -29,7 +29,10 @@
         "password": "qwertyui",
         "project_ids": [
             8,
-            7
+            7,
+            4,
+            5,
+            1
         ]
     },
     {
@@ -56,7 +59,12 @@
         "login": "Vika",
         "password": "12345678",
         "project_ids": [
-            13
+            13,
+            1,
+            3,
+            4,
+            5,
+            7
         ]
     },
     {
@@ -64,7 +72,10 @@
         "login": "Stasia",
         "password": "8145",
         "project_ids": [
-            13
+            13,
+            3,
+            2,
+            1
         ]
     },
     {
