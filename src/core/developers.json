@@ -51,7 +51,8 @@
         "project_ids": [
             13,
             1,
-            2
+            2,
+            11
         ]
     },
     {
@@ -90,6 +91,25 @@
         "password": "1234567890",
         "project_ids": [
             15
+        ]
+    },
+    {
+        "id": 13,
+        "login": "Misha",
+        "password": "1234567890",
+        "project_ids": [
+            8,
+            9
+        ]
+    },
+    {
+        "id": 14,
+        "login": "lapa",
+        "password": "7890",
+        "project_ids": [
+            10,
+            11,
+            12
         ]
     }
 ]

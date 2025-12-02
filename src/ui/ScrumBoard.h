@@ -150,7 +150,9 @@ private:
     sf::Text messageText;                                                          // Текст сообщения
     sf::RectangleShape messageBackground;                                          // Фон сообщения
 
+
 public:
+    void confirmRegister();
     ScrumBoard();                                                                   // Конструктор - инициализация переменных
     ~ScrumBoard();                                                                  // Деструктор
     bool initialize();                                                              // Инициализация ресурсов и интерфейса

@@ -320,7 +320,22 @@ void ScrumBoard::createLoginWindow() {
     passwordLabel.setFillColor(sf::Color(50, 50, 80));
     passwordLabel.setStyle(sf::Text::Bold);
     passwordLabel.setPosition(startX + padding, startY + padding + 90);
+     // Кнопка регистрации (добавить после кнопок входа и отмены)
+
+    registerButton.setSize(sf::Vector2f(120, 40));
+    registerButton.setFillColor(sf::Color(120, 150, 180));
+    registerButton.setOutlineColor(sf::Color(80, 110, 140));
+    registerButton.setOutlineThickness(2);
+    registerButton.setPosition(startX + (windowWidth - 120) / 2, startY + windowHeight - padding - 50);
     
+    registerButtonText.setString("Регистрация");
+    registerButtonText.setFont(font);
+    registerButtonText.setCharacterSize(20);
+    registerButtonText.setFillColor(sf::Color::White);
+    registerButtonText.setStyle(sf::Text::Bold);
+    
+    // Центрирование текста на кнопке
+    centerTextInButton(registerButtonText, registerButton);
     // Поле ввода пароля
     passwordField.setSize(sf::Vector2f(windowWidth - padding * 2, 40.0f));
     passwordField.setFillColor(sf::Color::White);
@@ -1224,10 +1239,6 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
             }
         }
         
-        if (!hasAccess) {
-            showMessageFor("Ошибка: нет доступа к этому проекту!", 3.0f);
-            return;
-        }
         
         // Генерация нового ID
         int newId = 1;
@@ -1398,7 +1409,55 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         showMessageFor("Ошибка: не выбран активный проект!", 3.0f);
     }
 }
-
+void ScrumBoard::confirmRegister() {
+    // Проверка наличия логина и пароля
+    if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
+        
+        // Загружаем текущих разработчиков
+        std::vector<Developer> developers = getDevelopersFromJson();
+        
+        // Проверяем, не занят ли логин
+        bool loginExists = false;
+        for (const auto& dev : developers) {
+            if (dev.getLogin() == currentUsernameInput) {
+                loginExists = true;
+                break;
+            }
+        }
+        
+        if (loginExists) {
+            std::cout << "Логин уже занят!" << std::endl;
+            return;
+        }
+        
+        // Генерируем новый ID
+        int newId = 1;
+        for (const auto& dev : developers) {
+            if (dev.getId() >= newId) {
+                newId = dev.getId() + 1;
+            }
+        }
+        
+        // Создаем нового разработчика
+        Developer newDev(newId, currentUsernameInput, currentPasswordInput);
+        developers.push_back(newDev);
+        
+        // Сохраняем в файл
+        saveDevelopersToJson(developers);
+        
+        std::cout << "Регистрация успешна! Теперь вы можете войти." << std::endl;
+        
+        // Очищаем поля
+        currentUsernameInput = "";
+        currentPasswordInput = "";
+        usernameText.setString("Введите имя пользователя");
+        usernameText.setFillColor(sf::Color(150, 150, 150));
+        passwordText.setString("Введите пароль");
+        passwordText.setFillColor(sf::Color(150, 150, 150));
+    } else {
+        std::cout << "Введите логин и пароль для регистрации!" << std::endl;
+    }
+}
 // Подтверждение входа
 void ScrumBoard::confirmLogin() {
     // Проверка наличия логина и пароля
@@ -1958,6 +2017,16 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     closeLoginWindow();
                     return;
                 }
+
+                if (!loginWindow.getGlobalBounds().contains(mousePos)) {
+                    closeLoginWindow();
+                    return;
+                }
+
+                if (registerButton.getGlobalBounds().contains(mousePos)) {
+                    confirmRegister();
+                    return;
+                }
                 return;
             }
             
@@ -2229,7 +2298,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
 }
 
 // Обновление состояния
-void ScrumBoard::update(float deltaTime) {
+void ScrumBoard::update(float deltaTime){
     // Мигание курсора
     if (cursorClock.getElapsedTime().asSeconds() > 0.5f) {
         cursorVisible = !cursorVisible;
@@ -2289,6 +2358,8 @@ void ScrumBoard::drawLoginWindow(sf::RenderWindow& window) {
     window.draw(confirmLoginButtonText);
     window.draw(cancelLoginButton);
     window.draw(cancelLoginButtonText);
+    window.draw(registerButton);
+    window.draw(registerButtonText);
     
     // Отрисовка курсора для полей ввода
     if ((isUsernameInputActive || isPasswordInputActive) && cursorVisible) {
