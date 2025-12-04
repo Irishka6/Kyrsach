@@ -1,433 +1,544 @@
 [
     {
-        "creator_id": 8,
-        "deadline": "2024-12-31",
+        "creator_id": 1,
+        "deadline": "2024-09-30",
         "developer_ids": [
-            8,
+            1,
             2,
-            9,
-            3,
-            5,
-            12,
-            13,
-            11,
-            1
+            3
         ],
         "id": 1,
-        "name": "My First Project",
+        "name": "Analytics",
         "tasks": [
             {
-                "creation_date": "2025-12-04 21:46:40",
-                "creatorId": 8,
+                "creation_date": "2025-12-05 00:42:05",
+                "creatorId": 1,
                 "id": 1,
                 "project": "",
-                "status": 0,
-                "title": "Primer zadachi 'Dobavit zadachy'"
+                "status": 1,
+                "title": "Design database schema"
             },
             {
-                "creation_date": "2025-12-04 21:46:40",
-                "creatorId": 9,
+                "creation_date": "2025-12-05 00:42:05",
+                "creatorId": 2,
                 "id": 2,
                 "project": "",
                 "status": 1,
-                "title": "My molodzy, yraa"
+                "title": "Implement REST API"
             },
             {
-                "creation_date": "2025-12-04 21:46:40",
-                "creatorId": 8,
+                "creation_date": "2025-12-05 00:42:05",
+                "creatorId": 1,
                 "id": 3,
                 "project": "",
-                "status": 3,
-                "title": "Kursach"
+                "status": 1,
+                "title": "Create UI components"
             },
             {
-                "creation_date": "2025-12-04 21:46:40",
-                "creatorId": 12,
+                "creation_date": "2025-12-05 00:42:05",
+                "creatorId": 3,
                 "id": 4,
                 "project": "",
-                "status": 3,
-                "title": "zashita"
+                "status": 1,
+                "title": "Integrate social APIs"
             },
             {
-                "creation_date": "2025-12-04 21:46:40",
-                "creatorId": 8,
+                "creation_date": "2025-12-05 00:42:05",
+                "creatorId": 2,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Write unit tests"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:05",
+                "creatorId": 3,
                 "id": 6,
                 "project": "",
-                "status": 3,
-                "title": "Testirovanie"
-            },
-            {
-                "creation_date": "2025-12-04 21:46:40",
-                "creatorId": 8,
-                "id": 7,
-                "project": "",
-                "status": 3,
-                "title": "cmake2025"
-            },
-            {
-                "creation_date": "2025-12-04 21:47:13",
-                "creatorId": 8,
-                "id": 8,
-                "project": "",
                 "status": 0,
-                "title": "German"
-            },
-            {
-                "creation_date": "2025-12-04 21:47:20",
-                "creatorId": 8,
-                "id": 9,
-                "project": "",
-                "status": 0,
-                "title": "Vika"
-            },
-            {
-                "creation_date": "2025-12-04 21:47:32",
-                "creatorId": 8,
-                "id": 10,
-                "project": "",
-                "status": 1,
-                "title": "Ira"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:00",
-                "creatorId": 8,
-                "id": 11,
-                "project": "",
-                "status": 3,
-                "title": "ghjkb"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:09",
-                "creatorId": 8,
-                "id": 12,
-                "project": "",
-                "status": 1,
-                "title": "poka"
+                "title": "Deploy to AWS"
             }
         ]
     },
     {
-        "creator_id": 8,
-        "deadline": "2024-12-31",
+        "creator_id": 1,
+        "deadline": "2024-08-15",
         "developer_ids": [
-            8,
-            9
+            1,
+            3
         ],
         "id": 2,
-        "name": "privet",
-        "tasks": []
-    },
-    {
-        "creator_id": 9,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            9,
-            8
-        ],
-        "id": 3,
-        "name": "My First Project",
+        "name": "Ecommerce",
         "tasks": [
             {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 9,
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
                 "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "Primer zadachi 'Dobavit zadachy'"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 9,
-                "id": 2,
-                "project": "",
-                "status": 0,
-                "title": "gfchbj"
-            }
-        ]
-    },
-    {
-        "creator_id": 8,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            8,
-            3
-        ],
-        "id": 4,
-        "name": "bvbbhjn",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 8,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "szzdfghj"
-            }
-        ]
-    },
-    {
-        "creator_id": 8,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            8,
-            3
-        ],
-        "id": 5,
-        "name": "dfghj",
-        "tasks": []
-    },
-    {
-        "creator_id": 2,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            2
-        ],
-        "id": 6,
-        "name": "My First Project",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 2,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "Primer zadachi 'Dobavit zadachy'"
-            }
-        ]
-    },
-    {
-        "creator_id": 8,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            8
-        ],
-        "id": 7,
-        "name": "cgvghbjnj",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 8,
-                "id": 1,
-                "project": "",
-                "status": 1,
-                "title": "cgfvghbnj"
-            }
-        ]
-    },
-    {
-        "creator_id": 13,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            13
-        ],
-        "id": 8,
-        "name": "My First Project",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 13,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "Primer zadachi 'Dobavit zadachy'"
-            }
-        ]
-    },
-    {
-        "creator_id": 13,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            13
-        ],
-        "id": 9,
-        "name": "My second project",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 13,
-                "id": 1,
-                "project": "",
-                "status": 1,
-                "title": "bay phone"
-            }
-        ]
-    },
-    {
-        "creator_id": 14,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            14
-        ],
-        "id": 10,
-        "name": "My First Project",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "Primer zadachi 'Dobavit zadachy'"
-            }
-        ]
-    },
-    {
-        "creator_id": 14,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            14,
-            5
-        ],
-        "id": 11,
-        "name": "ass",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "mop the floor"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 3,
-                "project": "",
-                "status": 2,
-                "title": "water flowers"
-            }
-        ]
-    },
-    {
-        "creator_id": 14,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            14
-        ],
-        "id": 12,
-        "name": "opening",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 1,
-                "project": "",
-                "status": 2,
-                "title": "changing"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 2,
-                "project": "",
-                "status": 0,
-                "title": "dancing"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 3,
                 "project": "",
                 "status": 3,
-                "title": "ffffff"
+                "title": "Design catalog screen"
             },
             {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 4,
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Implement cart"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 3,
                 "project": "",
                 "status": 0,
-                "title": "fwte"
+                "title": "Payment integration"
             },
             {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 4,
+                "project": "",
+                "status": 1,
+                "title": "User authentication"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
                 "id": 5,
                 "project": "",
                 "status": 0,
-                "title": "car"
+                "title": "Push notifications"
             },
             {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 6,
+                "project": "",
+                "status": 2,
+                "title": "Performance optimization"
+            }
+        ]
+    },
+    {
+        "creator_id": 1,
+        "deadline": "2024-10-31",
+        "developer_ids": [
+            1,
+            2
+        ],
+        "id": 3,
+        "name": "Inventory",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Design database"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Barcode scanning"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Stock alerts"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Reporting dashboard"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Supplier management"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
                 "id": 6,
                 "project": "",
                 "status": 0,
-                "title": "hills"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 7,
-                "project": "",
-                "status": 1,
-                "title": "do it"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 8,
-                "project": "",
-                "status": 1,
-                "title": "giggles"
-            },
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 14,
-                "id": 9,
-                "project": "",
-                "status": 1,
-                "title": "december"
-            }
-        ]
-    },
-    {
-        "creator_id": 15,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            15
-        ],
-        "id": 13,
-        "name": "My First Project",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 15,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "Primer zadachi 'Dobavit zadachy'"
-            }
-        ]
-    },
-    {
-        "creator_id": 15,
-        "deadline": "2024-12-31",
-        "developer_ids": [
-            15
-        ],
-        "id": 14,
-        "name": "1",
-        "tasks": [
-            {
-                "creation_date": "2025-12-04 21:49:46",
-                "creatorId": 15,
-                "id": 1,
-                "project": "",
-                "status": 0,
-                "title": "`"
+                "title": "Data export"
             }
         ]
     },
     {
         "creator_id": 2,
-        "deadline": "2024-12-31",
+        "deadline": "2024-07-20",
         "developer_ids": [
+            2,
+            3
+        ],
+        "id": 4,
+        "name": "Fitness",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Workout logging"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Calorie tracking"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Progress charts"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Device integration"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Social features"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 6,
+                "project": "",
+                "status": 0,
+                "title": "Plan generator"
+            }
+        ]
+    },
+    {
+        "creator_id": 2,
+        "deadline": "2024-11-30",
+        "developer_ids": [
+            2,
+            1
+        ],
+        "id": 5,
+        "name": "RealEstate",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Listing pages"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Map search"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Agent system"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Virtual tours"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Mortgage calculator"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 6,
+                "project": "",
+                "status": 0,
+                "title": "Admin dashboard"
+            }
+        ]
+    },
+    {
+        "creator_id": 2,
+        "deadline": "2024-09-15",
+        "developer_ids": [
+            2,
+            3
+        ],
+        "id": 6,
+        "name": "Learning",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Course catalog"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Video player"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Quiz system"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Progress tracking"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Certificate generation"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 6,
+                "project": "",
+                "status": 0,
+                "title": "Discussion forum"
+            }
+        ]
+    },
+    {
+        "creator_id": 3,
+        "deadline": "2024-08-31",
+        "developer_ids": [
+            3,
+            1
+        ],
+        "id": 7,
+        "name": "Booking",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Reservation interface"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Availability checking"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Menu management"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Waitlist feature"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Notifications"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 6,
+                "project": "",
+                "status": 0,
+                "title": "Analytics dashboard"
+            }
+        ]
+    },
+    {
+        "creator_id": 3,
+        "deadline": "2024-10-15",
+        "developer_ids": [
+            3,
             2
         ],
-        "id": 15,
-        "name": "5",
-        "tasks": []
+        "id": 8,
+        "name": "Events",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Event creation"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Ticketing system"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Check-in module"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Promotion tools"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Payment processing"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 6,
+                "project": "",
+                "status": 0,
+                "title": "Post-event analytics"
+            }
+        ]
+    },
+    {
+        "creator_id": 3,
+        "deadline": "2024-12-31",
+        "developer_ids": [
+            3,
+            1,
+            2
+        ],
+        "id": 9,
+        "name": "Healthcare",
+        "tasks": [
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 1,
+                "project": "",
+                "status": 3,
+                "title": "Patient dashboard"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 2,
+                "project": "",
+                "status": 1,
+                "title": "Appointment scheduling"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 3,
+                "project": "",
+                "status": 1,
+                "title": "Medical records"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 3,
+                "id": 4,
+                "project": "",
+                "status": 0,
+                "title": "Prescription management"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 1,
+                "id": 5,
+                "project": "",
+                "status": 2,
+                "title": "Video calls"
+            },
+            {
+                "creation_date": "2025-12-05 00:42:10",
+                "creatorId": 2,
+                "id": 6,
+                "project": "",
+                "status": 0,
+                "title": "Medication reminders"
+            }
+        ]
     }
 ]

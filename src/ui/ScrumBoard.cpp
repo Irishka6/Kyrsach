@@ -837,7 +837,7 @@ void ScrumBoard::centerTextInButton(sf::Text& text, const sf::RectangleShape& bu
     sf::FloatRect buttonBounds = button.getGlobalBounds();
     
     // Проверка если это кнопка проекта и текст не помещается
-    if (text.getString() == "My First Project" || text.getString().find("Project") != std::string::npos) {
+    if (text.getString() == "Project" || text.getString().find("Project") != std::string::npos) {
         float maxWidth = buttonBounds.width - 20;
         
         // Если не помещается - уменьшаем шрифт
@@ -1551,7 +1551,7 @@ void ScrumBoard::confirmLogin() {
                     }
                     
                     // Создаем тестовый проект
-                    Project testProject(newId, "My First Project", "2024-12-31", activeDeveloper->getId());
+                    Project testProject(newId, "Project", "2024-12-31", activeDeveloper->getId());
                     testProject.addDeveloper(activeDeveloper->getId());
                     
                     // Добавляем тестовую задачу
@@ -1577,7 +1577,7 @@ void ScrumBoard::confirmLogin() {
                     projects = {testProject};
                     idActiveProject = testProject;
                     tasksData = idActiveProject.getTasks();
-                    projectButtonText.setString("My First Project");
+                    projectButtonText.setString("Project");
                     
                     createSampleTasks();
                     
