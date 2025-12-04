@@ -81,7 +81,6 @@ ScrumBoard::ScrumBoard() :
     messageBackground.setOutlineThickness(2);
 }
 
-
 ScrumBoard::~ScrumBoard() {
     // Защита от двойного удаления
     if (activeDeveloper != nullptr) {
@@ -195,7 +194,7 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     centerTextInButton(loginButtonText, loginButton);
 
-    // Кнопка "Проекты" (будет показываться только после входа)
+    // Кнопка "Проекты" 
     projectButton.setSize(sf::Vector2f(200, 40));
     projectButton.setFillColor(sf::Color(180, 210, 235));
     projectButton.setOutlineThickness(0);
@@ -203,7 +202,7 @@ void ScrumBoard::createTopPanel() {
 
     projectButtonText.setString("Проекты"); 
     projectButtonText.setFont(font);
-    projectButtonText.setCharacterSize(24);
+    projectButtonText.setCharacterSize(22); 
     projectButtonText.setFillColor(sf::Color(50, 50, 80));
     projectButtonText.setStyle(sf::Text::Bold);
     
@@ -320,8 +319,8 @@ void ScrumBoard::createLoginWindow() {
     passwordLabel.setFillColor(sf::Color(50, 50, 80));
     passwordLabel.setStyle(sf::Text::Bold);
     passwordLabel.setPosition(startX + padding, startY + padding + 90);
-     // Кнопка регистрации (добавить после кнопок входа и отмены)
-
+    
+    // Кнопка регистрации (добавить после кнопок входа и отмены)
     registerButton.setSize(sf::Vector2f(120, 40));
     registerButton.setFillColor(sf::Color(120, 150, 180));
     registerButton.setOutlineColor(sf::Color(80, 110, 140));
@@ -336,6 +335,7 @@ void ScrumBoard::createLoginWindow() {
     
     // Центрирование текста на кнопке
     centerTextInButton(registerButtonText, registerButton);
+    
     // Поле ввода пароля
     passwordField.setSize(sf::Vector2f(windowWidth - padding * 2, 40.0f));
     passwordField.setFillColor(sf::Color::White);
@@ -386,7 +386,7 @@ void ScrumBoard::createProjectWindow() {
     float projectHeight = 55.0f;
     float padding = 15.0f;
     
-    // Если нет проектов, создаем маленькое окно с сообщением
+    // Если нет проектов, создаем окно с сообщением
     float windowWidth = 380.0f;
     float windowHeight = 0;
     
@@ -418,16 +418,27 @@ void ScrumBoard::createProjectWindow() {
         sf::Text noProjectsText;
         noProjectsText.setString("Нет доступных проектов");
         noProjectsText.setFont(font);
-        noProjectsText.setCharacterSize(24);
+        noProjectsText.setCharacterSize(20); 
         noProjectsText.setFillColor(sf::Color(50, 50, 80));
         noProjectsText.setStyle(sf::Text::Bold);
         
+        // Уменьшаем шрифт если не помещается
         sf::FloatRect textBounds = noProjectsText.getLocalBounds();
+        float maxWidth = windowWidth - 40; // Отступы
+        unsigned int fontSize = 20;
+        
+        while (textBounds.width > maxWidth && fontSize > 10) {
+            fontSize--;
+            noProjectsText.setCharacterSize(fontSize);
+            textBounds = noProjectsText.getLocalBounds();
+        }
+        
         noProjectsText.setPosition(
             startX + (windowWidth - textBounds.width) / 2,
             startY + padding
         );
         projectTexts.push_back(noProjectsText);
+    
     } else {
         // Создание кнопок для каждого проекта
         for (size_t i = 0; i < projects.size(); i++) { 
@@ -444,12 +455,22 @@ void ScrumBoard::createProjectWindow() {
             sf::Text projectText;
             projectText.setString(projects[i].getName());
             projectText.setFont(font);
-            projectText.setCharacterSize(24);
+            projectText.setCharacterSize(22); // Начальный размер
             projectText.setFillColor(sf::Color(50, 50, 80));
             projectText.setStyle(sf::Text::Bold);
             
-            // Центрирование текста
+            // Уменьшаем шрифт если не помещается
             sf::FloatRect textBounds = projectText.getLocalBounds();
+            float maxWidth = projectWidth - 20; // Отступы
+            unsigned int fontSize = 22;
+            
+            while (textBounds.width > maxWidth && fontSize > 10) {
+                fontSize--;
+                projectText.setCharacterSize(fontSize);
+                textBounds = projectText.getLocalBounds();
+            }
+            
+            // Центрирование текста
             projectText.setPosition(
                 startX + padding + (projectWidth - textBounds.width) / 2,
                 startY + padding + i * projectHeight + (projectHeight - textBounds.height) / 2 - 3
@@ -724,7 +745,7 @@ void ScrumBoard::createAddDeveloperWindow() {
     float developerHeight = 55.0f;
     float padding = 15.0f;
     
-    // Загружаем ВСЕХ разработчиков из системы
+    // Загружаем разработчиков из системы
     availableDevelopers = getDevelopersFromJson();
     
     // Фильтруем разработчиков - убираем текущего пользователя
@@ -778,6 +799,7 @@ void ScrumBoard::createAddDeveloperWindow() {
             startY + padding + 20
         );
         developerTexts.push_back(noDevelopersText);
+    
     } else {
         // Создание кнопок для каждого разработчика
         for (size_t i = 0; i < availableDevelopers.size(); i++) { 
@@ -809,10 +831,31 @@ void ScrumBoard::createAddDeveloperWindow() {
     }
 }
 
-// Вспомогательная функция для центрирования текста
+// Функция для центрирования текста
 void ScrumBoard::centerTextInButton(sf::Text& text, const sf::RectangleShape& button) {
     sf::FloatRect textBounds = text.getLocalBounds();
     sf::FloatRect buttonBounds = button.getGlobalBounds();
+    
+    // Проверка если это кнопка проекта и текст не помещается
+    if (text.getString() == "My First Project" || text.getString().find("Project") != std::string::npos) {
+        float maxWidth = buttonBounds.width - 20;
+        
+        // Если не помещается - уменьшаем шрифт
+        while (textBounds.width > maxWidth && text.getCharacterSize() > 8) {
+            text.setCharacterSize(text.getCharacterSize() - 1);
+            textBounds = text.getLocalBounds();
+        }
+        
+        // Если все равно не помещается - обрезаем
+        if (textBounds.width > maxWidth) {
+            std::string str = text.getString();
+            if (str.length() > 15) {
+                text.setString(str.substr(0, 10) + "...");
+                textBounds = text.getLocalBounds();
+            }
+        }
+    }
+    
     text.setPosition(
         buttonBounds.left + (buttonBounds.width - textBounds.width) / 2,
         buttonBounds.top + (buttonBounds.height - textBounds.height) / 2 - 5
@@ -932,7 +975,7 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         }
         newTask.text.setString(displayText);
         
-        // Центрирование текста в задаче - сохраняем относительную позицию текста
+        // Центрирование текста в задаче
         sf::FloatRect textBounds = newTask.text.getLocalBounds();
         newTask.text.setPosition(
             x + (taskWidth - textBounds.width) / 2,
@@ -978,7 +1021,7 @@ void ScrumBoard::saveTasksData() {
         updatedProject.addDeveloper(devId);
     }
     
-    // Добавляем ВСЕ текущие задачи
+    // Добавляем текущие задачи
     for (const auto& task : tasksData) {
         updatedProject.addTask(task);
     }
@@ -986,7 +1029,7 @@ void ScrumBoard::saveTasksData() {
     // Заменяем старый проект обновленным
     idActiveProject = updatedProject;
 
-    // Загружаем ВСЕ проекты из файла
+    // Загружаем проекты из файла
     std::vector<Project> allProjects = Project::getProjectsFromJson();
     
     // Находим и заменяем активный проект в списке
@@ -1023,7 +1066,7 @@ void ScrumBoard::updateTaskPositions() {
         for (size_t i = 0; i < tasks[section].size(); i++) {
             // Расчет позиции задачи
             float x = startX + section * (sectionWidth + spacing) + (sectionWidth - taskWidth) / 2;
-            float y = startY + i * 95;  
+            float y = startY + i * 100;  
             
             // Установка позиции задачи
             tasks[section][i].setPosition(x, y);
@@ -1228,8 +1271,10 @@ void ScrumBoard::handleAddProjectInput(const sf::Event& event) {
 
 // Подтверждение добавления новой задачи в выбранную секцию
 void ScrumBoard::confirmAddTask(int selectedSection) {
+    
     // Проверка наличия текста задачи и корректности секции
     if (!currentTaskInput.empty() && selectedSection >= 0 && selectedSection < 4 && activeDeveloper != nullptr) {
+        
         // Проверка, что пользователь имеет доступ к активному проекту
         bool hasAccess = false;
         for (int devId : idActiveProject.getDeveloperIds()) {
@@ -1238,7 +1283,6 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
                 break;
             }
         }
-        
         
         // Генерация нового ID
         int newId = 1;
@@ -1310,7 +1354,7 @@ void ScrumBoard::confirmAddProject() {
         if (developerUpdated) {
             saveDevelopersToJson(allDevelopers);
             
-            // ОБНОВЛЯЕМ ТЕКУЩЕГО ПОЛЬЗОВАТЕЛЯ
+            // Обновляем текущего пользователя
             delete activeDeveloper;
             // Находим обновленного разработчика
             for (const auto& dev : allDevelopers) {
@@ -1321,14 +1365,14 @@ void ScrumBoard::confirmAddProject() {
             }
         }
         
-        // ОБНОВЛЯЕМ СПИСОК ПРОЕКТОВ ПОЛЬЗОВАТЕЛЯ
+        // Обновляем список проектов
         projects = activeDeveloper->getProjects();
         createProjectWindow();
         
         // Закрываем окно добавления проекта
         closeAddProjectWindow();
         
-        // АВТОМАТИЧЕСКИ ВЫБИРАЕМ НОВЫЙ ПРОЕКТ
+        // Автоматически выбираем новый проект
         idActiveProject = newProject;
         tasksData = idActiveProject.getTasks();
         projectButtonText.setString(idActiveProject.getName());
@@ -1380,6 +1424,7 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         bool developerUpdated = false;
         for (auto& dev : allDevelopers) {
             if (dev.getId() == selectedDeveloper.getId()) {
+                
                 // Проверка, нет ли этого проекта у разработчика
                 bool projectAlreadyAssigned = false;
                 for (int projectId : dev.getProjectIds()) {
@@ -1426,7 +1471,7 @@ void ScrumBoard::confirmRegister() {
         }
         
         if (loginExists) {
-            std::cout << "Логин уже занят!" << std::endl;
+            showMessageFor("Логин уже занят", 2.0f);
             return;
         }
         
@@ -1444,8 +1489,7 @@ void ScrumBoard::confirmRegister() {
         
         // Сохраняем в файл
         saveDevelopersToJson(developers);
-        
-        std::cout << "Регистрация успешна! Теперь вы можете войти." << std::endl;
+        showMessageFor("Регистрация успешна! Вы можете войти.", 2.0f);
         
         // Очищаем поля
         currentUsernameInput = "";
@@ -1455,7 +1499,7 @@ void ScrumBoard::confirmRegister() {
         passwordText.setString("Введите пароль");
         passwordText.setFillColor(sf::Color(150, 150, 150));
     } else {
-        std::cout << "Введите логин и пароль для регистрации!" << std::endl;
+        showMessageFor("Введите логин и пароль", 2.0f);
     }
 }
 // Подтверждение входа
@@ -1495,8 +1539,8 @@ void ScrumBoard::confirmLogin() {
                     tasksData = idActiveProject.getTasks();
                     createSampleTasks();
                 } else {
-                    // Если нет проектов, создаем тестовый проект
                     
+                    // Если нет проектов, создаем тестовый проект
                     // Генерируем уникальный ID
                     std::vector<Project> allProjects = Project::getProjectsFromJson();
                     int newId = 1;
@@ -1572,7 +1616,6 @@ void ScrumBoard::logout() {
     }
     createProjectWindow();
     showLogoutButton = false;
-    
     showMessageFor("Выход выполнен", 2.0f);
 }
 
@@ -1585,11 +1628,13 @@ void ScrumBoard::openEditMode() {
         editButton.setFillColor(sf::Color(150, 150, 150));
         editButtonText.setString("Режим редактирования");
         editButtonText.setCharacterSize(20);
+    
     } else {
         // Возвращаем обычный цвет когда режим не активен
         editButton.setFillColor(sf::Color(180, 210, 235));
         editButtonText.setString("Редактировать");
         editButtonText.setCharacterSize(24);
+        
         // Закрываем окно редактирования если оно было открыто
         closeTaskEditWindow();
     }
@@ -1709,7 +1754,6 @@ void ScrumBoard::deleteCurrentTask() {
         
         // Закрытие окна редактирования
         closeTaskEditWindow();
-        
         showMessageFor("Задача удалена", 2.0f);
     }
 }
@@ -1775,6 +1819,7 @@ void ScrumBoard::closeAddDeveloperWindow() {
 
 void ScrumBoard::saveCurrentProjectChanges() {
     if (idActiveProject.getId() != 0) {
+        
         // Обновляем задачи в активном проекте
         for (auto& task : tasksData) {
             Tasks* projectTask = idActiveProject.findTaskById(task.getId());
@@ -1857,7 +1902,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
             
-            // Обработка кнопки выхода (всегда видна после входа)
+            // Обработка кнопки выхода
             if (isLoggedIn && logoutButton.getGlobalBounds().contains(mousePos)) {
                 logout();
                 return;
@@ -2320,21 +2365,39 @@ void ScrumBoard::showMessageFor(const std::string& message, float duration) {
     messageText.setString(message);
     messageTimer = duration;
     
-    // Центрирование текста сообщения
-    sf::FloatRect textBounds = messageText.getLocalBounds();
-    float messageWidth = 300;  // ФИКСИРОВАННАЯ ШИРИНА
-    float messageHeight = 50;
+    // Размер сообщения 
+    float minWidth = 300.0f; // Минимальная ширина сообщения
+    float minHeight = 50.0f; // Минимальная высота сообщения
+    float padding = 20.0f;
     
-    // Позиция над верхней панелью 
+    // Начинаем с размера 24 и уменьшаем пока не поместится
+    unsigned int fontSize = 24;
+    messageText.setCharacterSize(fontSize);
+    sf::FloatRect textBounds = messageText.getLocalBounds();
+    
+    // Подгоняем размер шрифта под минимальную ширину
+    float availableWidth = minWidth - padding * 2;
+    while (textBounds.width > availableWidth && fontSize > 12) {
+        fontSize--;
+        messageText.setCharacterSize(fontSize);
+        textBounds = messageText.getLocalBounds();
+    }
+    
+    // Рассчитываем фактическую ширину прямоугольника
+    float actualTextWidth = textBounds.width;
+    float messageWidth = std::max(minWidth, actualTextWidth + padding * 2);
+    float messageHeight = std::max(minHeight, textBounds.height + padding);
+    
+    // Позиция над верхней панелью
     messageBackground.setSize(sf::Vector2f(messageWidth, messageHeight));
     messageBackground.setPosition(
         (WINDOW_WIDTH - messageWidth) / 2,
         25.0f 
     );
     
-    // Позиция текста сообщения (центрируем в фиксированном окне)
+    // Позиция текста сообщения
     messageText.setPosition(
-        (WINDOW_WIDTH - messageWidth) / 2 + (messageWidth - textBounds.width) / 2,
+        (WINDOW_WIDTH - actualTextWidth) / 2,
         25.0f + (messageHeight - textBounds.height) / 2 - 5
     );
 }
