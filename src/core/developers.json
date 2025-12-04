@@ -20,7 +20,8 @@
             2,
             5,
             6,
-            8
+            8,
+            15
         ]
     },
     {
@@ -83,14 +84,17 @@
         "id": 11,
         "login": "qewtrefgdfx",
         "password": "12345678",
-        "project_ids": []
+        "project_ids": [
+            1
+        ]
     },
     {
         "id": 12,
         "login": "alex",
         "password": "1234567890",
         "project_ids": [
-            15
+            15,
+            1
         ]
     },
     {
@@ -99,7 +103,8 @@
         "password": "1234567890",
         "project_ids": [
             8,
-            9
+            9,
+            1
         ]
     },
     {
@@ -110,6 +115,15 @@
             10,
             11,
             12
+        ]
+    },
+    {
+        "id": 15,
+        "login": "qwertyuio",
+        "password": "qwertyuio",
+        "project_ids": [
+            13,
+            14
         ]
     }
 ]
