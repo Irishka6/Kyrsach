@@ -4,7 +4,6 @@
 #include "Project.h"
 
 int main() {
-    setlocale(LC_ALL, "Russian");
     try {
         // Создание разработчиков
         Developer dev1(1, "ivanov", "pass123");

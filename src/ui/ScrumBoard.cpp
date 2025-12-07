@@ -21,7 +21,7 @@ ScrumBoard::ScrumBoard() :
     messageTimer(0.0f)
 {
     // Названия секций
-    sectionNames = {"Назначено", "В процессе", "Блокировано", "Готово"};
+    sectionNames = {"To Do", "In Progress", "Blocked", "Done"};
     tasks.resize(4);
     idActiveProject.setID(0);
     
@@ -108,7 +108,6 @@ ScrumBoard::~ScrumBoard() {
     sectionOptionTexts.clear();
 }
 
-
 // Создание интерфейса
 bool ScrumBoard::initialize() {
     // Загрузка шрифта
@@ -152,7 +151,7 @@ void ScrumBoard::createUserInfo() {
     logoutButton.setOutlineThickness(0);
     logoutButton.setPosition(20, 30);
 
-    logoutButtonText.setString("Выйти");
+    logoutButtonText.setString("Logout");
     logoutButtonText.setFont(font);
     logoutButtonText.setCharacterSize(22);
     logoutButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -163,7 +162,7 @@ void ScrumBoard::createUserInfo() {
 
 // Создание заголовка приложения
 void ScrumBoard::createTitle() {
-    titleText.setString("Scrum Board - Управление задачами");
+    titleText.setString("Scrum Board - Task Management");
     titleText.setFont(font);
     titleText.setCharacterSize(36);
     titleText.setFillColor(sf::Color(50, 50, 100));
@@ -179,13 +178,13 @@ void ScrumBoard::createTopPanel() {
     topPanel.setOutlineThickness(0);
     topPanel.setPosition(0, 20);
 
-    // Кнопка "Войти" 
+    // Кнопка "Login" 
     loginButton.setSize(sf::Vector2f(200, 40));
     loginButton.setFillColor(sf::Color(180, 210, 235));
     loginButton.setOutlineThickness(0);
     loginButton.setPosition(150, 30);
 
-    loginButtonText.setString("Войти"); 
+    loginButtonText.setString("Login"); 
     loginButtonText.setFont(font);
     loginButtonText.setCharacterSize(24);
     loginButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -194,13 +193,13 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     centerTextInButton(loginButtonText, loginButton);
 
-    // Кнопка "Проекты" 
+    // Кнопка "Projects" 
     projectButton.setSize(sf::Vector2f(200, 40));
     projectButton.setFillColor(sf::Color(180, 210, 235));
     projectButton.setOutlineThickness(0);
     projectButton.setPosition(370, 30);
 
-    projectButtonText.setString("Проекты"); 
+    projectButtonText.setString("Projects"); 
     projectButtonText.setFont(font);
     projectButtonText.setCharacterSize(22); 
     projectButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -209,13 +208,13 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     centerTextInButton(projectButtonText, projectButton);
 
-    // Кнопка "Редактировать"
+    // Кнопка "Edit Mode"
     editButton.setSize(sf::Vector2f(250, 40));
     editButton.setFillColor(sf::Color(180, 210, 235));
     editButton.setOutlineThickness(0);
     editButton.setPosition(1600, 30);
 
-    editButtonText.setString("Редактировать");
+    editButtonText.setString("Edit Mode");
     editButtonText.setFont(font);
     editButtonText.setCharacterSize(24);
     editButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -224,13 +223,13 @@ void ScrumBoard::createTopPanel() {
     // Центрирование текста на кнопке
     centerTextInButton(editButtonText, editButton);
 
-    // Кнопка "Добавить задачу"
+    // Кнопка "Add Task"
     addButton.setSize(sf::Vector2f(220, 40));
     addButton.setFillColor(sf::Color(180, 210, 235));
     addButton.setOutlineThickness(0);
     addButton.setPosition(1360, 30);
 
-    addButtonText.setString("Добавить задачу");
+    addButtonText.setString("Add Task");
     addButtonText.setFont(font);
     addButtonText.setCharacterSize(22);
     addButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -242,13 +241,13 @@ void ScrumBoard::createTopPanel() {
 
 // Создание кнопок управления проектами
 void ScrumBoard::createProjectManagementButtons() {
-    // Кнопка "Добавить проект"
+    // Кнопка "Add Project"
     addProjectButton.setSize(sf::Vector2f(220, 40));
     addProjectButton.setFillColor(sf::Color(180, 210, 235));
     addProjectButton.setOutlineThickness(0);
     addProjectButton.setPosition(590, 30);
 
-    addProjectButtonText.setString("Добавить проект");
+    addProjectButtonText.setString("Add Project");
     addProjectButtonText.setFont(font);
     addProjectButtonText.setCharacterSize(22);
     addProjectButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -257,13 +256,13 @@ void ScrumBoard::createProjectManagementButtons() {
     // Центрирование текста на кнопке
     centerTextInButton(addProjectButtonText, addProjectButton);
 
-    // Кнопка "Добавить разработчика"
+    // Кнопка "Add Developer"
     addDeveloperButton.setSize(sf::Vector2f(260, 40));
     addDeveloperButton.setFillColor(sf::Color(180, 210, 235));
     addDeveloperButton.setOutlineThickness(0);
     addDeveloperButton.setPosition(820, 30);
 
-    addDeveloperButtonText.setString("Добавить разработчика");
+    addDeveloperButtonText.setString("Add Developer");
     addDeveloperButtonText.setFont(font);
     addDeveloperButtonText.setCharacterSize(20);
     addDeveloperButtonText.setFillColor(sf::Color(50, 50, 80));
@@ -290,8 +289,8 @@ void ScrumBoard::createLoginWindow() {
     loginWindow.setOutlineThickness(3);
     loginWindow.setPosition(startX, startY);
     
-    // Метка "Имя пользователя"
-    usernameLabel.setString("Имя пользователя:");
+    // Метка "Username"
+    usernameLabel.setString("Username:");
     usernameLabel.setFont(font);
     usernameLabel.setCharacterSize(20);
     usernameLabel.setFillColor(sf::Color(50, 50, 80));
@@ -306,28 +305,28 @@ void ScrumBoard::createLoginWindow() {
     usernameField.setPosition(startX + padding, startY + padding + 30);
     
     // Текст в поле имени пользователя
-    usernameText.setString("Введите имя пользователя");
+    usernameText.setString("Enter username");
     usernameText.setFont(font);
     usernameText.setCharacterSize(18);
     usernameText.setFillColor(sf::Color(150, 150, 150));
     usernameText.setPosition(startX + padding + 10, startY + padding + 40);
     
-    // Метка "Пароль"
-    passwordLabel.setString("Пароль:");
+    // Метка "Password"
+    passwordLabel.setString("Password:");
     passwordLabel.setFont(font);
     passwordLabel.setCharacterSize(20);
     passwordLabel.setFillColor(sf::Color(50, 50, 80));
     passwordLabel.setStyle(sf::Text::Bold);
     passwordLabel.setPosition(startX + padding, startY + padding + 90);
     
-    // Кнопка регистрации (добавить после кнопок входа и отмены)
+    // Кнопка регистрации
     registerButton.setSize(sf::Vector2f(120, 40));
     registerButton.setFillColor(sf::Color(120, 150, 180));
     registerButton.setOutlineColor(sf::Color(80, 110, 140));
     registerButton.setOutlineThickness(2);
     registerButton.setPosition(startX + (windowWidth - 120) / 2, startY + windowHeight - padding - 50);
     
-    registerButtonText.setString("Регистрация");
+    registerButtonText.setString("Register");
     registerButtonText.setFont(font);
     registerButtonText.setCharacterSize(20);
     registerButtonText.setFillColor(sf::Color::White);
@@ -344,7 +343,7 @@ void ScrumBoard::createLoginWindow() {
     passwordField.setPosition(startX + padding, startY + padding + 120);
     
     // Текст в поле пароля
-    passwordText.setString("Введите пароль");
+    passwordText.setString("Enter password");
     passwordText.setFont(font);
     passwordText.setCharacterSize(18);
     passwordText.setFillColor(sf::Color(150, 150, 150));
@@ -357,7 +356,7 @@ void ScrumBoard::createLoginWindow() {
     confirmLoginButton.setOutlineThickness(2);
     confirmLoginButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
     
-    confirmLoginButtonText.setString("Войти");
+    confirmLoginButtonText.setString("Login");
     confirmLoginButtonText.setFont(font);
     confirmLoginButtonText.setCharacterSize(20);
     confirmLoginButtonText.setFillColor(sf::Color::White);
@@ -370,7 +369,7 @@ void ScrumBoard::createLoginWindow() {
     cancelLoginButton.setOutlineThickness(2);
     cancelLoginButton.setPosition(startX + windowWidth - padding - 120, startY + windowHeight - padding - 50);
     
-    cancelLoginButtonText.setString("Отмена");
+    cancelLoginButtonText.setString("Cancel");
     cancelLoginButtonText.setFont(font);
     cancelLoginButtonText.setCharacterSize(20);
     cancelLoginButtonText.setFillColor(sf::Color::White);
@@ -414,9 +413,9 @@ void ScrumBoard::createProjectWindow() {
     float projectWidth = windowWidth - padding * 2; 
     
     if (projects.empty()) {
-        // Сообщение "Нет проектов"
+        // Сообщение "No projects"
         sf::Text noProjectsText;
-        noProjectsText.setString("Нет доступных проектов");
+        noProjectsText.setString("No projects available");
         noProjectsText.setFont(font);
         noProjectsText.setCharacterSize(20); 
         noProjectsText.setFillColor(sf::Color(50, 50, 80));
@@ -505,14 +504,14 @@ void ScrumBoard::createAddTaskWindow() {
     taskInputField.setPosition(startX + padding, startY + padding);
     
     // Подсказка в поле ввода
-    taskInputText.setString("Введите задачу на английском");
+    taskInputText.setString("Enter task in English");
     taskInputText.setFont(font);
     taskInputText.setCharacterSize(20);
     taskInputText.setFillColor(sf::Color(150, 150, 150));
     taskInputText.setPosition(startX + padding + 10, startY + padding + 15);
     
     // Метка выбора секции
-    sectionLabelText.setString("Выберите секцию:");
+    sectionLabelText.setString("Select section:");
     sectionLabelText.setFont(font);
     sectionLabelText.setCharacterSize(22);
     sectionLabelText.setFillColor(sf::Color(50, 50, 80));
@@ -568,7 +567,7 @@ void ScrumBoard::createAddTaskWindow() {
     confirmAddButton.setOutlineThickness(2);
     confirmAddButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
     
-    confirmAddButtonText.setString("Добавить");
+    confirmAddButtonText.setString("Add");
     confirmAddButtonText.setFont(font);
     confirmAddButtonText.setCharacterSize(20);
     confirmAddButtonText.setFillColor(sf::Color::White);
@@ -584,7 +583,7 @@ void ScrumBoard::createAddTaskWindow() {
     cancelAddButton.setOutlineThickness(2);
     cancelAddButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
     
-    cancelAddButtonText.setString("Отмена");
+    cancelAddButtonText.setString("Cancel");
     cancelAddButtonText.setFont(font);
     cancelAddButtonText.setCharacterSize(20);
     cancelAddButtonText.setFillColor(sf::Color::White);
@@ -612,7 +611,7 @@ void ScrumBoard::createTaskEditWindow() {
     editModeWindow.setPosition(startX, startY);
     
     // Заголовок окна редактирования
-    editTitleText.setString("Редактировать");
+    editTitleText.setString("Edit Task");
     editTitleText.setFont(font);
     editTitleText.setCharacterSize(28);
     editTitleText.setFillColor(sf::Color(50, 50, 80));
@@ -627,7 +626,7 @@ void ScrumBoard::createTaskEditWindow() {
     editTaskInputField.setPosition(startX + padding, startY + 80);
     
     // Подсказка в поле ввода
-    editTaskInputText.setString("Введите текст на английском");
+    editTaskInputText.setString("Enter text in English");
     editTaskInputText.setFont(font);
     editTaskInputText.setCharacterSize(20);
     editTaskInputText.setFillColor(sf::Color(150, 150, 150));
@@ -640,7 +639,7 @@ void ScrumBoard::createTaskEditWindow() {
     saveEditButton.setOutlineThickness(2);
     saveEditButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
     
-    saveEditButtonText.setString("Сохранить");
+    saveEditButtonText.setString("Save");
     saveEditButtonText.setFont(font);
     saveEditButtonText.setCharacterSize(20);
     saveEditButtonText.setFillColor(sf::Color::White);
@@ -653,7 +652,7 @@ void ScrumBoard::createTaskEditWindow() {
     deleteTaskButton.setOutlineThickness(2);
     deleteTaskButton.setPosition(startX + padding + 130, startY + windowHeight - padding - 50);
     
-    deleteTaskButtonText.setString("Удалить");
+    deleteTaskButtonText.setString("Delete");
     deleteTaskButtonText.setFont(font);
     deleteTaskButtonText.setCharacterSize(20);
     deleteTaskButtonText.setFillColor(sf::Color::White);
@@ -666,7 +665,7 @@ void ScrumBoard::createTaskEditWindow() {
     cancelEditButton.setOutlineThickness(2);
     cancelEditButton.setPosition(startX + windowWidth - padding - 120, startY + windowHeight - padding - 50);
     
-    cancelEditButtonText.setString("Отмена");
+    cancelEditButtonText.setString("Cancel");
     cancelEditButtonText.setFont(font);
     cancelEditButtonText.setCharacterSize(20);
     cancelEditButtonText.setFillColor(sf::Color::White);
@@ -703,7 +702,7 @@ void ScrumBoard::createAddProjectWindow() {
     projectNameInputField.setPosition(startX + padding, startY + 70);
     
     // Подсказка в поле ввода
-    projectNameInputText.setString("Введите название проекта");
+    projectNameInputText.setString("Enter project name");
     projectNameInputText.setFont(font);
     projectNameInputText.setCharacterSize(20);
     projectNameInputText.setFillColor(sf::Color(150, 150, 150));
@@ -716,7 +715,7 @@ void ScrumBoard::createAddProjectWindow() {
     confirmAddProjectButton.setOutlineThickness(2);
     confirmAddProjectButton.setPosition(startX + padding, startY + windowHeight - padding - 50);
     
-    confirmAddProjectButtonText.setString("Создать");
+    confirmAddProjectButtonText.setString("Create");
     confirmAddProjectButtonText.setFont(font);
     confirmAddProjectButtonText.setCharacterSize(20);
     confirmAddProjectButtonText.setFillColor(sf::Color::White);
@@ -729,7 +728,7 @@ void ScrumBoard::createAddProjectWindow() {
     cancelAddProjectButton.setOutlineThickness(2);
     cancelAddProjectButton.setPosition(startX + windowWidth - padding - 150, startY + windowHeight - padding - 50);
     
-    cancelAddProjectButtonText.setString("Отмена");
+    cancelAddProjectButtonText.setString("Cancel");
     cancelAddProjectButtonText.setFont(font);
     cancelAddProjectButtonText.setCharacterSize(20);
     cancelAddProjectButtonText.setFillColor(sf::Color::White);
@@ -785,9 +784,9 @@ void ScrumBoard::createAddDeveloperWindow() {
     float developerWidth = windowWidth - padding * 2; 
     
     if (availableDevelopers.empty()) {
-        // Сообщение "Нет других разработчиков"
+        // Сообщение "No other developers"
         sf::Text noDevelopersText;
-        noDevelopersText.setString("Нет других разработчиков\nв системе");
+        noDevelopersText.setString("No other developers\nin system");
         noDevelopersText.setFont(font);
         noDevelopersText.setCharacterSize(22);
         noDevelopersText.setFillColor(sf::Color(50, 50, 80));
@@ -948,7 +947,7 @@ void ScrumBoard::addTask(int id, const std::string& taskName, int section) {
         newTask.shape.setSize(sf::Vector2f(taskWidth, 85));
         
         // Чередуем имена из availableDevelopers
-        std::string developerName = "Не назначен";
+        std::string developerName = "Not assigned";
         for (auto& task: tasksData){
             if (task.getId() == id){
                 for (auto& developer : availableDevelopers){
@@ -1003,7 +1002,7 @@ void ScrumBoard::updateTaskStatusInData(int taskId, int newStatus) {
     
     // Сохраняем изменения
     saveTasksData();
-    showMessageFor("Задача перемещена", 2.0f);
+    showMessageFor("Task moved", 2.0f);
 }
 
 // Сохранение всех задач в JSON файл
@@ -1205,7 +1204,7 @@ void ScrumBoard::handleLoginInput(const sf::Event& event) {
             // Обновление отображаемого текста
             if (isUsernameInputActive) {
                 if (currentUsernameInput.empty()) {
-                    usernameText.setString("Введите имя пользователя");
+                    usernameText.setString("Enter username");
                     usernameText.setFillColor(sf::Color(150, 150, 150));
                 } else {
                     usernameText.setString(currentUsernameInput);
@@ -1213,7 +1212,7 @@ void ScrumBoard::handleLoginInput(const sf::Event& event) {
                 }
             } else if (isPasswordInputActive) {
                 if (currentPasswordInput.empty()) {
-                    passwordText.setString("Введите пароль");
+                    passwordText.setString("Enter password");
                     passwordText.setFillColor(sf::Color(150, 150, 150));
                 } else {
                     // Скрываем пароль звездочками
@@ -1255,7 +1254,7 @@ void ScrumBoard::handleAddProjectInput(const sf::Event& event) {
             
             // Обновление отображаемого текста
             if (currentProjectNameInput.empty()) {
-                projectNameInputText.setString("Введите название проекта");
+                projectNameInputText.setString("Enter project name");
                 projectNameInputText.setFillColor(sf::Color(150, 150, 150));
             } else {
                 projectNameInputText.setString(currentProjectNameInput);
@@ -1308,13 +1307,13 @@ void ScrumBoard::confirmAddTask(int selectedSection) {
         // Сброс состояния
         currentTaskInput = "";
         isTaskInputActive = false;
-        taskInputText.setString("Введите задачу на английском");
+        taskInputText.setString("Enter task in English");
         taskInputText.setFillColor(sf::Color(150, 150, 150));
         taskInputField.setOutlineColor(sf::Color(100, 130, 160));
         showAddTaskWindow = false;
         cursorVisible = false;
         
-        showMessageFor("Задача добавлена", 2.0f);
+        showMessageFor("Task added", 2.0f);
     }
 }
 
@@ -1378,7 +1377,7 @@ void ScrumBoard::confirmAddProject() {
         projectButtonText.setString(idActiveProject.getName());
         createSampleTasks();
         
-        showMessageFor("Проект создан и выбран", 2.0f);
+        showMessageFor("Project created and selected", 2.0f);
     }
 }
 
@@ -1397,7 +1396,7 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         }
         
         if (alreadyAdded) {
-            showMessageFor("Разработчик уже добавлен к проекту!", 3.0f);
+            showMessageFor("Developer already added to project!", 3.0f);
             return;
         }
         
@@ -1449,11 +1448,12 @@ void ScrumBoard::addDeveloperToProject(int developerIndex) {
         // Закрываем окно
         closeAddDeveloperWindow();
         
-        showMessageFor("Разработчик добавлен к проекту", 2.0f);
+        showMessageFor("Developer added to project", 2.0f);
     } else {
-        showMessageFor("Ошибка: не выбран активный проект!", 3.0f);
+        showMessageFor("Error: no active project selected!", 3.0f);
     }
 }
+
 void ScrumBoard::confirmRegister() {
     // Проверка наличия логина и пароля
     if (!currentUsernameInput.empty() && !currentPasswordInput.empty()) {
@@ -1471,7 +1471,7 @@ void ScrumBoard::confirmRegister() {
         }
         
         if (loginExists) {
-            showMessageFor("Логин уже занят", 2.0f);
+            showMessageFor("Username already exists", 2.0f);
             return;
         }
         
@@ -1489,19 +1489,20 @@ void ScrumBoard::confirmRegister() {
         
         // Сохраняем в файл
         saveDevelopersToJson(developers);
-        showMessageFor("Регистрация успешна! Вы можете войти.", 2.0f);
+        showMessageFor("Registration successful! You can now login.", 2.0f);
         
         // Очищаем поля
         currentUsernameInput = "";
         currentPasswordInput = "";
-        usernameText.setString("Введите имя пользователя");
+        usernameText.setString("Enter username");
         usernameText.setFillColor(sf::Color(150, 150, 150));
-        passwordText.setString("Введите пароль");
+        passwordText.setString("Enter password");
         passwordText.setFillColor(sf::Color(150, 150, 150));
     } else {
-        showMessageFor("Введите логин и пароль", 2.0f);
+        showMessageFor("Enter username and password", 2.0f);
     }
 }
+
 // Подтверждение входа
 void ScrumBoard::confirmLogin() {
     // Проверка наличия логина и пароля
@@ -1555,7 +1556,7 @@ void ScrumBoard::confirmLogin() {
                     testProject.addDeveloper(activeDeveloper->getId());
                     
                     // Добавляем тестовую задачу
-                    Tasks testTask(1, "Primer zadachi 'Dobavit zadachy'", 0);
+                    Tasks testTask(1, "Example task 'Add task'", 0);
                     testTask.setCreatorId(activeDeveloper->getId());
                     testProject.addTask(testTask);
                     
@@ -1585,17 +1586,17 @@ void ScrumBoard::confirmLogin() {
                     createProjectWindow();
                 }
                 
-                showMessageFor("Вход выполнен успешно!", 2.0f);
+                showMessageFor("Login successful!", 2.0f);
                 
             } else {
-                showMessageFor("Ошибка: не удалось найти разработчика!", 3.0f);
+                showMessageFor("Error: could not find developer!", 3.0f);
             }
             
         } else {
-            showMessageFor("Неверный логин или пароль!", 3.0f);
+            showMessageFor("Invalid username or password!", 3.0f);
         }
     } else {
-        showMessageFor("Введите логин и пароль!", 3.0f);
+        showMessageFor("Enter username and password!", 3.0f);
     }
 }
 
@@ -1616,7 +1617,7 @@ void ScrumBoard::logout() {
     }
     createProjectWindow();
     showLogoutButton = false;
-    showMessageFor("Выход выполнен", 2.0f);
+    showMessageFor("Logged out", 2.0f);
 }
 
 // Открытие режима редактирования
@@ -1626,13 +1627,13 @@ void ScrumBoard::openEditMode() {
     if (showEditMode) {
         // Делаем кнопку серой когда режим редактирования активен
         editButton.setFillColor(sf::Color(150, 150, 150));
-        editButtonText.setString("Режим редактирования");
+        editButtonText.setString("Edit Mode Active");
         editButtonText.setCharacterSize(20);
     
     } else {
         // Возвращаем обычный цвет когда режим не активен
         editButton.setFillColor(sf::Color(180, 210, 235));
-        editButtonText.setString("Редактировать");
+        editButtonText.setString("Edit Mode");
         editButtonText.setCharacterSize(24);
         
         // Закрываем окно редактирования если оно было открыто
@@ -1724,7 +1725,7 @@ void ScrumBoard::saveEditedTask() {
         // Закрытие окна редактирования
         closeTaskEditWindow();
         
-        showMessageFor("Задача сохранена", 2.0f);
+        showMessageFor("Task saved", 2.0f);
     }
 }
 
@@ -1754,7 +1755,7 @@ void ScrumBoard::deleteCurrentTask() {
         
         // Закрытие окна редактирования
         closeTaskEditWindow();
-        showMessageFor("Задача удалена", 2.0f);
+        showMessageFor("Task deleted", 2.0f);
     }
 }
 
@@ -1762,7 +1763,7 @@ void ScrumBoard::deleteCurrentTask() {
 void ScrumBoard::closeEditMode() {
     showEditMode = false;
     editButton.setFillColor(sf::Color(180, 210, 235));
-    editButtonText.setString("Редактировать");
+    editButtonText.setString("Edit Mode");
     editButtonText.setCharacterSize(24);
     
     // Центрирование текста на кнопке
@@ -1779,7 +1780,7 @@ void ScrumBoard::closeTaskEditWindow() {
     editingTaskSection = -1;
     editingTaskIndex = -1;
     editTaskInputField.setOutlineColor(sf::Color(100, 130, 160));
-    editTaskInputText.setString("Введите текст на английском");
+    editTaskInputText.setString("Enter text in English");
     editTaskInputText.setFillColor(sf::Color(150, 150, 150));
     cursorVisible = false;
 }
@@ -1793,9 +1794,9 @@ void ScrumBoard::closeLoginWindow() {
     currentPasswordInput = "";
     usernameField.setOutlineColor(sf::Color(100, 130, 160));
     passwordField.setOutlineColor(sf::Color(100, 130, 160));
-    usernameText.setString("Введите имя пользователя");
+    usernameText.setString("Enter username");
     usernameText.setFillColor(sf::Color(150, 150, 150));
-    passwordText.setString("Введите пароль");
+    passwordText.setString("Enter password");
     passwordText.setFillColor(sf::Color(150, 150, 150));
     cursorVisible = false;
 }
@@ -1806,7 +1807,7 @@ void ScrumBoard::closeAddProjectWindow() {
     isProjectNameInputActive = false;
     currentProjectNameInput = "";
     projectNameInputField.setOutlineColor(sf::Color(100, 130, 160));
-    projectNameInputText.setString("Введите название проекта");
+    projectNameInputText.setString("Enter project name");
     projectNameInputText.setFillColor(sf::Color(150, 150, 150));
     cursorVisible = false;
 }
@@ -1913,7 +1914,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 return;
             }
             
-            // Обработка клика по кнопке "Войти" (только если не вошел)
+            // Обработка клика по кнопке "Login" (только если не вошел)
             if (!isLoggedIn && loginButton.getGlobalBounds().contains(mousePos)) {
                 showLoginWindow = !showLoginWindow; 
                 return;
@@ -1930,7 +1931,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 showAddProjectWindow = !showAddProjectWindow;
                 if (showAddProjectWindow) {
                     currentProjectNameInput = "";
-                    projectNameInputText.setString("Введите название проекта");
+                    projectNameInputText.setString("Enter project name");
                     projectNameInputText.setFillColor(sf::Color(150, 150, 150));
                     isProjectNameInputActive = false;
                     projectNameInputField.setOutlineColor(sf::Color(100, 130, 160));
@@ -1950,7 +1951,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         createAddDeveloperWindow();
                     }
                 } else {
-                    showMessageFor("Сначала выберите проект!", 3.0f);
+                    showMessageFor("Select a project first!", 3.0f);
                 }
                 return;
             }
@@ -1959,7 +1960,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
             if (addButton.getGlobalBounds().contains(mousePos)) {
                 if (isLoggedIn) {
                     if (activeDeveloper == nullptr) {
-                        showMessageFor("Ошибка системы", 3.0f);
+                        showMessageFor("System error", 3.0f);
                         return;
                     }
                     
@@ -1978,7 +1979,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                             showAddTaskWindow = !showAddTaskWindow;
                             if (showAddTaskWindow) {
                                 currentTaskInput = "";
-                                taskInputText.setString("Введите задачу на английском");
+                                taskInputText.setString("Enter task in English");
                                 taskInputText.setFillColor(sf::Color(150, 150, 150));
                                 isTaskInputActive = false;
                                 taskInputField.setOutlineColor(sf::Color(100, 130, 160));
@@ -1988,15 +1989,15 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                                 availableDevelopers = getDevelopersFromJson();
                             }
                         } else {
-                            showMessageFor("Ошибка: нет доступа к проекту!", 3.0f);
+                            showMessageFor("Error: no access to project!", 3.0f);
                         }
                     } else {
-                        showMessageFor("Сначала выберите проект!", 3.0f);
+                        showMessageFor("Select a project first!", 3.0f);
                         // Автоматически показываем окно выбора проекта
                         showProjectWindow = true;
                     }
                 } else {
-                    showMessageFor("Для добавления задач необходимо войти в систему!", 3.0f);
+                    showMessageFor("You need to login to add tasks!", 3.0f);
                     // Автоматически показываем окно входа
                     showLoginWindow = true;
                 }
@@ -2008,7 +2009,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 if (isLoggedIn) {
                     openEditMode();
                 } else {
-                    showMessageFor("Для редактирования задач необходимо войти в систему!", 3.0f);
+                    showMessageFor("You need to login to edit tasks!", 3.0f);
                 }
                 return;
             }
@@ -2058,11 +2059,6 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                 }
                 
                 // Закрытие окна при клике вне его
-                if (!loginWindow.getGlobalBounds().contains(mousePos)) {
-                    closeLoginWindow();
-                    return;
-                }
-
                 if (!loginWindow.getGlobalBounds().contains(mousePos)) {
                     closeLoginWindow();
                     return;
@@ -2148,7 +2144,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                         createSampleTasks();
                         showProjectWindow = false;
                         
-                        showMessageFor("Проект выбран: " + idActiveProject.getName(), 2.0f);
+                        showMessageFor("Project selected: " + idActiveProject.getName(), 2.0f);
                         return;
                     }
                 }
@@ -2194,7 +2190,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     showAddTaskWindow = false;
                     isTaskInputActive = false;
                     currentTaskInput = "";
-                    taskInputText.setString("Введите задачу на английском");
+                    taskInputText.setString("Enter task in English");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
                     taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                     cursorVisible = false;
@@ -2206,7 +2202,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     isTaskInputActive = false;
                     taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                     if (currentTaskInput.empty()) {
-                        taskInputText.setString("Введите задачу на английском");
+                        taskInputText.setString("Enter task in English");
                         taskInputText.setFillColor(sf::Color(150, 150, 150));
                     }
                     cursorVisible = false;
@@ -2217,7 +2213,7 @@ void ScrumBoard::handleEvent(const sf::Event& event, sf::RenderWindow& window) {
                     showAddTaskWindow = false;
                     isTaskInputActive = false;
                     currentTaskInput = "";
-                    taskInputText.setString("Введите задачу на английском");
+                    taskInputText.setString("Enter task in English");
                     taskInputText.setFillColor(sf::Color(150, 150, 150));
                     taskInputField.setOutlineColor(sf::Color(100, 130, 160));
                     cursorVisible = false;
@@ -2476,7 +2472,7 @@ void ScrumBoard::drawAddProjectWindow(sf::RenderWindow& window) {
     
     // Заголовок окна
     sf::Text titleText;
-    titleText.setString("Добавить новый проект");
+    titleText.setString("Add New Project");
     titleText.setFont(font);
     titleText.setCharacterSize(24);
     titleText.setFillColor(sf::Color(50, 50, 80));
@@ -2513,7 +2509,7 @@ void ScrumBoard::drawAddDeveloperWindow(sf::RenderWindow& window) {
     
     // Заголовок окна
     sf::Text titleText;
-    titleText.setString("Выберите разработчика");
+    titleText.setString("Select Developer");
     titleText.setFont(font);
     titleText.setCharacterSize(24);
     titleText.setFillColor(sf::Color(50, 50, 80));

@@ -1,18 +1,21 @@
 #include "Task.h"
 
+// Конструктор задачи
 Task::Task(int id, const std::string& taskText, sf::Font& font, float x, float y) 
     : id(id), currentSection(0), isMoving(false), developerName(""), description(taskText) {
     
+    // Инициализация прямоугольника задачи
     shape.setSize(sf::Vector2f(400, 85));
     shape.setFillColor(sf::Color(200, 220, 240));
     shape.setPosition(x, y);
     
+    // Инициализация текста задачи
     text.setString(taskText);
     text.setFont(font);
     text.setCharacterSize(20);
     text.setFillColor(sf::Color(50, 50, 80));
     
-    // Текст разработчика
+    // Инициализация текста разработчика
     developerText.setFont(font);
     developerText.setCharacterSize(16);
     developerText.setFillColor(sf::Color(100, 100, 130));
@@ -21,9 +24,11 @@ Task::Task(int id, const std::string& taskText, sf::Font& font, float x, float y
     // Инициализация смещения текста
     textOffset = sf::Vector2f(0, 0);
     
+    // Обновление позиций текстов
     updateTextPosition();
 }
 
+// Установка имени разработчика для задачи
 void Task::setDeveloperName(const std::string& name, sf::Font& font) {
     developerName = name;
     developerText.setFont(font);
@@ -32,7 +37,7 @@ void Task::setDeveloperName(const std::string& name, sf::Font& font) {
     developerText.setStyle(sf::Text::Bold);
     developerText.setString(developerName);
     
-    // Обновляем позицию
+    // Обновляем позицию текста разработчика
     sf::FloatRect taskBounds = shape.getGlobalBounds();
     sf::FloatRect textBounds = developerText.getLocalBounds();
     
@@ -42,7 +47,9 @@ void Task::setDeveloperName(const std::string& name, sf::Font& font) {
     );
 }
 
+// Обновление позиций текста задачи
 void Task::updateTextPosition() {
+    // Получаем границы прямоугольника задачи и текста
     sf::FloatRect taskBounds = shape.getGlobalBounds();
     sf::FloatRect textBounds = text.getLocalBounds();
     
@@ -68,7 +75,9 @@ void Task::updateTextPosition() {
     }
 }
 
+// Установка новой позиции задачи
 void Task::setPosition(float x, float y) {
+    // Устанавливаем позицию прямоугольника задачи
     shape.setPosition(x, y);
     
     // Обновляем позицию текста с сохранением относительного смещения

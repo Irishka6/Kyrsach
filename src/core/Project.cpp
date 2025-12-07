@@ -1,13 +1,15 @@
 #include "Project.h"
-#include "Developer.h"  // Теперь включаем здесь
+#include "Developer.h"  
 #include "Tasks.h" 
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
 
+// Конструктор проекта с параметрами
 Project::Project(int id, const std::string& name, const std::string& deadline, int creatorId)
     : id(id), name(name), deadline(deadline), creatorId(creatorId) {
     
+    // Проверка валидности имени проекта
     if (!validateName(name)) {
         throw std::invalid_argument("Invalid project name");
     }
@@ -15,8 +17,10 @@ Project::Project(int id, const std::string& name, const std::string& deadline, i
     developerIds.push_back(creatorId);
 }
 
+// Конструктор проекта по умолчанию
 Project::Project() : id(0), name(""), deadline(""), creatorId(0) {}
 
+// Установка имени проекта
 void Project::setName(const std::string& newName) {
     if (validateName(newName)) {
         name = newName;
@@ -25,16 +29,19 @@ void Project::setName(const std::string& newName) {
     }
 }
  
+// Установка идентификатора проекта
 void Project::setID(const int newid){
     if (newid == 0){
         id = 0;
     }
 }
 
+// Установка дедлайна проекта
 void Project::setDeadline(const std::string& newDeadline) {
     deadline = newDeadline;
 }
 
+// Добавление задачи в проект
 void Project::addTask(const Tasks& task) {
     // Проверяем, есть ли уже задача с таким ID
     for (auto& existingTask : tasks) {
@@ -55,6 +62,7 @@ void Project::addTask(const Tasks& task) {
     std::cout << "Задача '" << task.getTitle() << "' добавлена в проект '" << name << "'" << std::endl;
 }
 
+// Удаление задачи из проекта
 void Project::removeTask(int taskId) {
     auto it = std::remove_if(tasks.begin(), tasks.end(),
         [taskId](const Tasks& task) { return task.getId() == taskId; });
@@ -67,6 +75,7 @@ void Project::removeTask(int taskId) {
     }
 }
 
+// Поиск задачи по идентификатору
 Tasks* Project::findTaskById(int taskId) {
     for (auto& task : tasks) {
         if (task.getId() == taskId) {
@@ -76,6 +85,7 @@ Tasks* Project::findTaskById(int taskId) {
     return nullptr;
 }
 
+// Добавление разработчика в проект
 void Project::addDeveloper(int developerId) {
     if (std::find(developerIds.begin(), developerIds.end(), developerId) == developerIds.end()) {
         developerIds.push_back(developerId);
@@ -84,6 +94,7 @@ void Project::addDeveloper(int developerId) {
     }
 }
 
+// Удаление разработчика из проекта
 void Project::removeDeveloper(int developerId) {
     // Не позволяем удалить создателя
     if (developerId == creatorId) {
@@ -98,14 +109,17 @@ void Project::removeDeveloper(int developerId) {
     std::cout << "ВНИМАНИЕ: Не забудьте удалить проект у разработчика!" << std::endl;
 }
 
+// Проверка наличия разработчика в проекте
 bool Project::hasDeveloper(int developerId) const {
     return std::find(developerIds.begin(), developerIds.end(), developerId) != developerIds.end();
 }
 
+// Проверка, является ли разработчик создателем проекта
 bool Project::isCreator(int developerId) const {
     return developerId == creatorId;
 }
 
+// Конвертация проекта в JSON объект
 json Project::toJson() const {
     json j;
     j["id"] = id;
@@ -131,6 +145,7 @@ json Project::toJson() const {
     return j;
 }
 
+// Создание проекта из JSON объекта
 Project Project::fromJson(const json& j) {
     Project project;
     project.id = j.value("id", 0);
@@ -173,6 +188,7 @@ Project Project::fromJson(const json& j) {
     return project;
 }
 
+// Сохранение списка проектов в JSON файл
 void Project::saveProjectsToJson(const std::vector<Project>& projects, const std::string& filename) {
     json j_array = json::array();
     
@@ -188,6 +204,7 @@ void Project::saveProjectsToJson(const std::vector<Project>& projects, const std
     std::cout << "Количество сохраненных проектов: " << projects.size() << std::endl;
 }
 
+// Загрузка списка проектов из JSON файла
 std::vector<Project> Project::getProjectsFromJson(const std::string& filename) {
     std::vector<Project> projects;
     
@@ -223,6 +240,7 @@ std::vector<Project> Project::getProjectsFromJson(const std::string& filename) {
     return projects;
 }
 
+// Получение проектов по идентификатору разработчика
 std::vector<Project> Project::getProjectsByDeveloperId(const std::vector<Project>& projects, int developerId) {
     std::vector<Project> result;
     for (const auto& project : projects) {
@@ -233,10 +251,12 @@ std::vector<Project> Project::getProjectsByDeveloperId(const std::vector<Project
     return result;
 }
 
+// Проверка валидности имени проекта
 bool Project::validateName(const std::string& name) const {
     return !name.empty() && name.length() <= 100;
 }
 
+// Добавление разработчика в проект и проекта разработчику
 void Project::addDeveloperToProject(std::vector<Developer>& developers, Project& project, int developerId) {
     // Добавляем разработчика в проект
     if (std::find(project.developerIds.begin(), project.developerIds.end(), developerId) == project.developerIds.end()) {
@@ -254,6 +274,7 @@ void Project::addDeveloperToProject(std::vector<Developer>& developers, Project&
     }
 }
 
+// Удаление разработчика из проекта и проекта у разработчика
 void Project::removeDeveloperFromProject(std::vector<Developer>& developers, Project& project, int developerId) {
     // Не позволяем удалить создателя
     if (developerId == project.creatorId) {
@@ -270,7 +291,6 @@ void Project::removeDeveloperFromProject(std::vector<Developer>& developers, Pro
     for (auto& developer : developers) {
         if (developer.getId() == developerId) {
             developer.removeProject(project.getId());
-            std::cout << "Проект '" << project.name << "' удален у разработчика ID:" << developerId << std::endl;
             break;
         }
     }
