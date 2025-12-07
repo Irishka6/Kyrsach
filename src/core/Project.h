@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include "CommonType.h"
+#include "GlobalConfig.h" 
 #include "json.hpp"
 using json = nlohmann::json;
 
@@ -50,8 +51,8 @@ public:
     static Project fromJson(const json& j);
     
     // Статические методы для работы с файлами
-    static void saveProjectsToJson(const std::vector<Project>& projects, const std::string& filename = "../core/project_scrumboard.json");
-    static std::vector<Project> getProjectsFromJson(const std::string& filename = "../core/project_scrumboard.json");
+    static void saveProjectsToJson(const std::vector<Project>& projects, const std::string& filename = patf_project);
+    static std::vector<Project> getProjectsFromJson(const std::string& filename = patf_project);
     
     // Методы для поиска
     static std::vector<Project> getProjectsByDeveloperId(const std::vector<Project>& projects, int developerId);

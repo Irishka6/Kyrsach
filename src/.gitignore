@@ -1,0 +1,46 @@
+# Игнорировать папку build/ и все её содержимое
+build/
+cmake-build-debug/
+cmake-build-release/
+
+# Игнорировать сгенерированные файлы CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Игнорировать исполняемые файлы
+*.exe
+*.out
+*.app
+
+# Игнорировать объектные файлы и библиотеки
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Игнорировать отладочные файлы
+*.pdb
+*.idb
+*.ilk
+
+# Игнорировать пользовательские настройки IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Игнорировать системные файлы
+.DS_Store
+Thumbs.db
+
+# Игнорировать временные файлы
+*.tmp
+*.temp
+
+# Игнорировать логи
+*.log

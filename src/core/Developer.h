@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "json.hpp"
 #include "CommonType.h"
+#include "GlobalConfig.h" 
 
 using json = nlohmann::json;
 
@@ -48,8 +49,8 @@ private:
 };
 
 // Функции для работы с файлом разработчиков
-void saveDevelopersToJson(const std::vector<Developer>& developers, const std::string& filename = "../core/developers.json");
-std::vector<Developer> getDevelopersFromJson(const std::string& filename = "../core/developers.json");
+void saveDevelopersToJson(const std::vector<Developer>& developers, const std::string& filename = patf_developer);
+std::vector<Developer> getDevelopersFromJson(const std::string& filename = patf_developer);
 Developer* findDeveloperById(std::vector<Developer>& developers, int id);
 bool validateDeveloperCredentials(const std::vector<Developer>& developers, const std::string& login, const std::string& password);
 Developer* findDeveloperByLogin(std::vector<Developer>& developers, const std::string& login, const std::string& password);

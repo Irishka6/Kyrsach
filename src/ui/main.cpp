@@ -1,8 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "ScrumBoard.h"
+#include "../core/GlobalConfig.h" 
+
+std::string patf_developer;
+std::string patf_project;
 
 int main() {
     // Создание главного окна приложения
+    std::cout << "Enter the path to the json file with the developers" << std::endl;
+    std::cin >> patf_developer;
+    std::cout << "Enter the path to the json file with the project" << std::endl;
+    std::cin >> patf_project;
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Scrum Board - Task Management", sf::Style::Default);
     
     // Создание и инициализация доски Scrum
